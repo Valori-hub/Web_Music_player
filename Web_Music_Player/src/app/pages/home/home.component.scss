@@ -9,6 +9,7 @@
   }
 
   .home_container_side-bar {
+    padding-top: 2rem;
     background-color: black;
     height: 100vh;
     display: flex;
@@ -16,14 +17,9 @@
     justify-content: flex-start;
     align-items: center;
     color: white;
-    padding-top: 50px;
-
     .home_container_side-bar_item {
       width: 100%;
       margin: 1rem;
-      padding-left: 3.125rem;
-      min-width: 30rem;
-
       > mat-icon {
         font-size: 60px;
         display: flex;
