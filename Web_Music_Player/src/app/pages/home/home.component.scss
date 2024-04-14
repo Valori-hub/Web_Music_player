@@ -1,0 +1,42 @@
+.home_container {
+  display: flex;
+  flex-wrap: wrap;
+
+  .home_container_playlist-container {
+    background-color: #8d8d8d;
+    height: 100vh;
+    flex: auto;
+  }
+
+  .home_container_side-bar {
+    background-color: black;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    color: white;
+    padding-top: 50px;
+
+    .home_container_side-bar_item {
+      width: 100%;
+      margin: 1rem;
+      padding-left: 3.125rem;
+      min-width: 30rem;
+
+      > mat-icon {
+        font-size: 60px;
+        display: flex;
+        justify-content: left;
+        align-items: center;
+        margin-left: 2rem;
+      }
+    }
+
+    .icon_text {
+      font-size: 24px;
+      margin: 10px;
+      color: gray;
+    }
+  }
+}

@@ -1,0 +1,25 @@
+.top-navbar_container{
+  width: 100%;
+  background-color: black;
+}
+.top-navbar_right-section{
+  display: flex;
+  justify-content: end;
+  align-items: center;
+
+    >h1 {
+      margin-right: 50px;
+    }
+    
+}
+.mat-icon-button.large {
+  width: 48px;
+  height: 48px;
+  color: aliceblue;
+  .mat-icon {
+    font-size: 48px;
+    width: 48px;
+    height: 48px;
+    color: aliceblue;
+  }
+}
