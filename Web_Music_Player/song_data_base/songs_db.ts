@@ -225,4 +225,20 @@ export const songs: iSongs[] = [
     genre: 'jazz',
     link: './jazz/23.mp3'
   },
-]
+];
+export const GenreCover = [{
+  genre: 'jazz',
+  cover: "https://cdn.pixabay.com/photo/2018/03/21/13/16/saxophone-3246650_1280.jpg"
+},
+{
+  genre: 'rock',
+  cover: "https://cdn.pixabay.com/photo/2024/02/26/19/51/guitar-8598823_1280.jpg"
+},
+{
+  genre: 'electro',
+  cover: "https://cdn.pixabay.com/photo/2016/11/22/19/15/hand-1850120_1280.jpg"
+},
+{
+  genre: 'piano',
+  cover: "https://cdn.pixabay.com/photo/2014/05/21/15/47/piano-349928_1280.jpg"
+},]

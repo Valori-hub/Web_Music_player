@@ -4,10 +4,14 @@ img{
   height: 60%
 };
 .playlist_card-container{
-  width: 180px;
-  height: 200px;
+  width: 400px;
+  height: 500px;
   background-color: black;
   margin: 2rem;
   border-radius: 5%;
-
+  >h1{
+    color: white;
+    text-align: center;
+    text-transform: capitalize;
+  }  
 }

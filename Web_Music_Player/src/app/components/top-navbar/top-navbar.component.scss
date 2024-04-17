@@ -1,12 +1,13 @@
 .top-navbar_container{
   width: 100%;
   background-color: black;
+  min-width: min-content;
 }
 .top-navbar_right-section{
   display: flex;
   justify-content: end;
   align-items: center;
-
+  
     >h1 {
       margin-right: 50px;
     }
