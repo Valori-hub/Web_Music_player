@@ -2,10 +2,25 @@
   display: flex;
   flex-wrap: wrap;
 
-  .home_container_playlist-container {
+  .home_container_main-container {
     background-color: #8d8d8d;
     height: 100vh;
     flex: auto;
+  }
+  .home_container_playlist-container{
+
+
+    >h1{
+      font-size: 50px;
+      margin: 2rem;
+      color: white;
+      &:hover{
+        opacity: 70%;
+        text-decoration: underline;
+        cursor: pointer;
+      }
+    }
+
   }
 
   .home_container_side-bar {

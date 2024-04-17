@@ -1,1 +1,6 @@
-<p>playlist works!</p>
+<div *ngFor="let item of distinctValues">
+  <div class="playlist_card-container">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSkXzjbYwoWXiN5BzGn-VDO9PtzEjn4PeXF2sOGpOcx4A&s" alt="playlist-cover">
+    <h1>{{item}}</h1>  
+  </div>
+</div>

@@ -13,8 +13,14 @@
       <div class="home_container_side-bar_item">
           <mat-icon [inline]="true" aria-hidden="false" aria-label="playlist_add" fontIcon="playlist_add"><a class="icon_text">Create Playlist</a></mat-icon>
       </div>
+      <app-song-cards></app-song-cards>
   </div>
-  <div class="home_container_playlist-container">
+  <div class="home_container_main-container">
     <app-top-navbar></app-top-navbar>
+    <div class="home_container_playlist-container">
+        <h1>Music Genre</h1>
+        <app-playlist style="display: flex;"></app-playlist>
+        <h1>You may like</h1>
+    </div>
   </div>
 </div>
