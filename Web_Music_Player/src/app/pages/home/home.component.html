@@ -12,14 +12,20 @@
       <div class="home_container_side-bar_item">
           <mat-icon [inline]="true" aria-hidden="false" aria-label="playlist_add" fontIcon="playlist_add"><a class="icon_text">Create Playlist</a></mat-icon>
       </div>
-      <app-song-cards></app-song-cards>
+      <div class="home_container_side-bar_scroll" style="overflow-y: scroll; max-height: 400px; margin-bottom: 50px;">
+        <app-song-cards></app-song-cards>
+      </div>
+      
   </div>
   <div class="home_container_main-container">
     <app-top-navbar></app-top-navbar>
     <div class="home_container_playlist-container">
         <h1>Music Genre</h1>
-            <app-playlist style="display: inline-flex;"></app-playlist>
+            <div class="playlist_scroll-container">
+                <app-playlist style="display: inline-flex;"></app-playlist>
+            </div>
         <h1>You may like</h1>
+
     </div>
   </div>
 </div>

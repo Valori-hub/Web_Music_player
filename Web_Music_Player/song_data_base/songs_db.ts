@@ -228,17 +228,21 @@ export const songs: iSongs[] = [
 ];
 export const GenreCover = [{
   genre: 'jazz',
-  cover: "https://cdn.pixabay.com/photo/2018/03/21/13/16/saxophone-3246650_1280.jpg"
+  cover: "https://cdn.pixabay.com/photo/2018/03/21/13/16/saxophone-3246650_1280.jpg",
+  description: "Dive into our jazz playlist, where timeless classics and contemporary gems weave a tapestry of soulful rhythms and captivating melodies."
 },
 {
   genre: 'rock',
-  cover: "https://cdn.pixabay.com/photo/2024/02/26/19/51/guitar-8598823_1280.jpg"
+  cover: "https://cdn.pixabay.com/photo/2024/02/26/19/51/guitar-8598823_1280.jpg",
+  description: 'Rock out to our electrifying rock playlist, where powerful riffs and anthemic choruses ignite your passion and fuel your soul.'
 },
 {
   genre: 'electro',
-  cover: "https://cdn.pixabay.com/photo/2016/11/22/19/15/hand-1850120_1280.jpg"
+  cover: "https://cdn.pixabay.com/photo/2016/11/22/19/15/hand-1850120_1280.jpg",
+  description: 'Get electrified with our dynamic electro playlist, filled with vibrant beats and infectious energy to keep you grooving.'
 },
 {
   genre: 'piano',
-  cover: "https://cdn.pixabay.com/photo/2014/05/21/15/47/piano-349928_1280.jpg"
+  cover: "https://cdn.pixabay.com/photo/2014/05/21/15/47/piano-349928_1280.jpg",
+  description: 'Dive into our piano playlist, where every note resonates with soulful melodies, spanning classical to contemporary tunes, captivating your senses with its emotive charm.'
 },]

@@ -13,5 +13,5 @@ import { CommonModule } from '@angular/common';
   styleUrl: './song-cards.component.scss'
 })
 export class SongCardsComponent {
-  songs = songs;
+  Allsongs = songs;
 }

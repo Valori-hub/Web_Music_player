@@ -1,7 +1,9 @@
 .top-navbar_container{
   width: 100%;
-  background-color: black;
+  background: rgb(0,0,0);
+  background: linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 48%, rgba(0,0,0,1) 65%, rgba(0,0,0,0) 98%, rgba(0,0,0,0) 100%);
   min-width: min-content;
+  min-height: 120px;
 }
 .top-navbar_right-section{
   display: flex;
