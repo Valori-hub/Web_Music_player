@@ -1,0 +1,43 @@
+
+.login-form-flex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  >mat-card{
+    align-items: center;
+    justify-content: center;
+    padding: 2%;
+    min-height: 40vh;
+    min-width: 60vh;
+    border-radius: 50px;
+    >mat-card-title{
+      overflow: visible;
+      font-size: 60px;
+    }
+
+  }
+}
+input{
+
+  color: gray;
+  border-color: rgb(219, 219, 219);
+  border-radius: 20px;
+  border-style:solid;
+  padding: 8px;
+  min-width: 200px;
+}
+.button-flex-container {
+  width: 100%;
+  justify-content: center;
+  
+  >button{
+    color: aliceblue;
+    background-color:aquamarine ;
+    border: none;
+    width: 400px;
+    height: 50px;
+    border-radius: 30px;
+    font-size: 20px;
+  }
+}

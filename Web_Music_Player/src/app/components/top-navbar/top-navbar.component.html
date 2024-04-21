@@ -1,12 +1,7 @@
 <div class="top-navbar_container">
   <div class="top-navbar_right-section">
-    <!-- <button  mat-icon-button [matMenuTriggerFor]="menu" class="large" style="color: aliceblue;"><mat-icon [inline]="true" aria-hidden="false" style="font-size: 50px;">language</mat-icon></button>
-    <mat-menu #menu="matMenu">
-      <button mat-menu-item>Item 1</button>
-      <button mat-menu-item>Item 2</button>
-    </mat-menu> -->
-    <h1 style="color: gray;">Log in</h1>
-    <h1 style="color: aliceblue;">Sign in</h1>
-
+    <h1 style="color: gray;" routerLink="login" >Log in</h1>
+    <h1 style="color: aliceblue;" routerLink="signup">Sign up</h1>
   </div>
 </div>
+<router-outlet></router-outlet>

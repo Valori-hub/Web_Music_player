@@ -5,7 +5,7 @@ import { songs } from '../../../../song_data_base/songs_db';
 import { iSongs } from '../../../../song_data_base/songs_db';
 import { SongCardsComponent } from '../../components/song-cards/song-cards.component';
 import { PlaylistComponent } from '../../components/playlist/playlist.component';
-
+import { AudioPlayerComponent } from '../../components/audio-player/audio-player.component';
 
 @Component({
     selector: 'app-home',
@@ -16,7 +16,8 @@ import { PlaylistComponent } from '../../components/playlist/playlist.component'
         MatIconModule,
         TopNavbarComponent, 
         SongCardsComponent,
-        PlaylistComponent
+        PlaylistComponent,
+        AudioPlayerComponent
     ]
 })
 

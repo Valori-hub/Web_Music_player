@@ -12,6 +12,10 @@
   
     >h1 {
       margin-right: 50px;
+      cursor: pointer;
+    }
+    >h1:hover{
+      opacity: 70%;
     }
     
 }
