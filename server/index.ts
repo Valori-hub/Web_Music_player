@@ -1,5 +1,6 @@
 import express from 'express';
 import * as SongsRoutes from './routes/songs';
+import * as GenreInfoRoutes from './routes/genreInfo';
 import cors from 'cors';
 
 
@@ -12,6 +13,8 @@ app.get('/', (req, res) => {
 
 // Use SongsRoutes as middleware for the /songs route
 app.use('/songs', SongsRoutes.router);
+app.use('/genreInfo', GenreInfoRoutes.router);
+app.use('/genreInfo', GenreInfoRoutes.router);
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);

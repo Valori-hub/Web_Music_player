@@ -1,28 +1,28 @@
-import { Component, Input } from '@angular/core';
+// import { Component, Input } from '@angular/core';
 
 
-@Component({
-  selector: 'app-audio-player',
-  standalone: true,
-  imports: [],
-  templateUrl: './audio-player.component.html',
-  styleUrl: './audio-player.component.scss'
-})
+// @Component({
+//   selector: 'app-audio-player',
+//   standalone: true,
+//   imports: [],
+//   templateUrl: './audio-player.component.html',
+//   styleUrl: './audio-player.component.scss'
+// })
 
-export class AudioPlayerComponent {
-  @Input() src!: string;
-  audio: HTMLAudioElement;
+// export class AudioPlayerComponent {
+//   @Input() src!: string;
+//   audio: HTMLAudioElement;
 
-  constructor() {
-    this.audio = new Audio();
-  }
+//   constructor() {
+//     this.audio = new Audio();
+//   }
 
-  play() {
-    this.audio.src = this.src;
-    this.audio.play();
-  }
+//   play() {
+//     this.audio.src = this.src;
+//     this.audio.play();
+//   }
 
-  pause() {
-    this.audio.pause();
-  }
-}
+//   pause() {
+//     this.audio.pause();
+//   }
+// }

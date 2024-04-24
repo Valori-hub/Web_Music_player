@@ -1,5 +1,6 @@
-<mat-card *ngFor="let genre of distinctValues" class="playlist_card-container">
-  <img mat-card-image [src]="genreCoverUrl(genre).cover" alt="playlist-cover">
-    <mat-card-title>{{genre}}</mat-card-title>
-    <mat-card-subtitle>{{ genreCoverUrl(genre).description }}</mat-card-subtitle>
-</mat-card>
+  <mat-card *ngFor="let genre of genreInfoData" class="playlist_card-container" routerLink="playlist">
+    <img mat-card-image [src]="genre.cover" alt="playlist-cover">
+      <mat-card-title>{{genre.genre}}</mat-card-title>
+      <mat-card-subtitle>{{ genre.description }}</mat-card-subtitle>
+  </mat-card>
+

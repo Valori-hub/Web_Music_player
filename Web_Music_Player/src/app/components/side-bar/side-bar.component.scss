@@ -1,0 +1,39 @@
+.home_container_side-bar {
+  padding-top: 2rem;
+  background-color: black;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  color: white;
+  width: 200px;
+  max-width: min-content;
+  min-width: min-content;
+  .home_container_side-bar_item {
+    width: 100%;
+    margin: 1rem;
+    > mat-icon {
+      font-size: 45px;
+      display: flex;
+      justify-content: left;
+      align-items: center;
+      margin-left: 2rem;
+    }
+  }  .icon_text {
+      font-size: 20px;
+      margin: 7px;
+      color: gray;
+    }
+  }
+
+.home_container_side-bar_scroll{
+  overflow-x: scroll;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;  /* Internet Explorer 10+ */
+}
+.home_container_side-bar_scroll::-webkit-scrollbar
+{
+  width: 0;
+  height: 0;
+}

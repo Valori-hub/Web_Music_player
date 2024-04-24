@@ -5,7 +5,8 @@ import { songs } from '../../../../song_data_base/songs_db';
 import { iSongs } from '../../../../song_data_base/songs_db';
 import { SongCardsComponent } from '../../components/song-cards/song-cards.component';
 import { PlaylistComponent } from '../../components/playlist/playlist.component';
-import { AudioPlayerComponent } from '../../components/audio-player/audio-player.component';
+// import { AudioPlayerComponent } from '../../components/audio-player/audio-player.component';
+// import { SideBarComponent } from '../../components/side-bar/side-bar.component';
 
 @Component({
     selector: 'app-home',
@@ -17,7 +18,9 @@ import { AudioPlayerComponent } from '../../components/audio-player/audio-player
         TopNavbarComponent, 
         SongCardsComponent,
         PlaylistComponent,
-        AudioPlayerComponent
+        // AudioPlayerComponent,
+        
+        // SideBarComponent
     ]
 })
 

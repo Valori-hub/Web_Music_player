@@ -1,31 +1,10 @@
-<div class="home_container">
-  <div class="home_container_side-bar">
-      <div class="home_container_side-bar_item">
-          <mat-icon [inline]="true" aria-hidden="false" aria-label="home" fontIcon="home"><a class="icon_text">Home</a></mat-icon>
-      </div>
-      <div class="home_container_side-bar_item">
-          <mat-icon [inline]="true" aria-hidden="false" aria-label="search" fontIcon="search"><a class="icon_text">Search</a></mat-icon>
-      </div>
-      <div class="home_container_side-bar_item">
-          <mat-icon [inline]="true" aria-hidden="false" aria-label="library" fontIcon="library_books"><a class="icon_text">Your Library</a></mat-icon>
-      </div>
-      <div class="home_container_side-bar_item">
-          <mat-icon [inline]="true" aria-hidden="false" aria-label="playlist_add" fontIcon="playlist_add"><a class="icon_text">Create Playlist</a></mat-icon>
-      </div>
-      <div class="home_container_side-bar_scroll" style="overflow-y: scroll; max-height: 400px; margin-bottom: 50px;">
-        <app-song-cards></app-song-cards>
-      </div>
-      
-  </div>
-  <div class="home_container_main-container">
-    <app-top-navbar></app-top-navbar>
+<div class="home_container_main-container">
     <div class="home_container_playlist-container">
         <h1>Music Genre</h1>
             <div class="playlist_scroll-container">
                 <app-playlist style="display: inline-flex;"></app-playlist>
             </div>
         <h1>You may like</h1>
-        <app-audio-player [src]="'your-audio-file.mp3'"></app-audio-player>
+        <!-- <app-audio-player [src]="'your-audio-file.mp3'"></app-audio-player> -->
     </div>
-  </div>
 </div>

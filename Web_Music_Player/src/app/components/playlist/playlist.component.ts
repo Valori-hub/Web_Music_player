@@ -1,10 +1,11 @@
 import { Component, OnInit,  } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { songs, GenreCover } from '../../../../song_data_base/songs_db';
 import {MatCardModule} from '@angular/material/card';
 import { IGenreInfo } from './model/GenreInfo';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpService } from '../../http-service.service';
+import { RouterModule } from '@angular/router';
+import { IsongsByGenre } from './model/Songs';
 
 @Component({
   selector: 'app-playlist',
@@ -13,6 +14,7 @@ import { HttpService } from '../../http-service.service';
     HttpClientModule,
     CommonModule,
     MatCardModule,
+    RouterModule
     
   ],
   templateUrl: './playlist.component.html',
@@ -20,20 +22,26 @@ import { HttpService } from '../../http-service.service';
 })
 
 export class PlaylistComponent implements OnInit{
-  songsByGenre: any = undefined;
+  genreInfoData: IGenreInfo[] = [];
+  sortedByGenre: IsongsByGenre[] = [];
   constructor(private httpClient: HttpService){}
-  
-  private async loadSongsByGenre() {
+  private async SongsByGenreList(){
     this.httpClient.getSongsByGenre().subscribe(result => {
-      console.log(result);
-      this.songsByGenre = result;
+      this.sortedByGenre = result as IsongsByGenre[];
+      console.log(this.sortedByGenre);
+    })
+  }
+  private async GenreInfo() {
+    this.httpClient.getGenreInfo().subscribe(result => {
+      this.genreInfoData = result as IGenreInfo[];
     })
   }
   ngOnInit(): void {
     this.InitComponent();
   }
   private async InitComponent(){
-    await this.loadSongsByGenre();
-    
+    await this.GenreInfo();
+    await this.SongsByGenreList();
   }
+  
 }
