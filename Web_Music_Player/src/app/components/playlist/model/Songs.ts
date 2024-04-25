@@ -7,7 +7,10 @@ export interface Isongs {
   genre: string,
   link:string,
 }
-export interface IsongsByGenre {
-  _id: string,
-  songs: [Isongs]
+export interface Iplaylist {
+  id: number,
+  title: string,
+  cover?: string,
+  description?: string
+  songs: Isongs[] 
 }

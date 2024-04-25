@@ -1,20 +1,19 @@
 <div style="height: 100%; padding: 20px;">
   <div class="playlist_details-card">
-    <img src="https://hubun.pl/img/cms/blog/dog-niemiecki.jpeg" alt="Cover Image" >
+    <img [src]="playlistData[value].cover" alt="Cover Image" >
     <div class="details">
-      <h1>Playlist_name</h1>
-      <p>Artist:</p>
-      <p>Duration:</p>
-      <p>Genre:</p>
+      <h1>{{playlistData[value].title}}</h1>
+      <p>{{playlistData[value].description}}</p>
     </div>
   </div>
-  <div class="song">
-    <img [src]="" alt="Cover Image" >
-    <div class="details">
-      <h2></h2>
-      <p>Artist:</p>
-      <p>Duration:</p>
-      <p>Genre:</p>
+  <div *ngFor="let song of playlistData[value].songs">
+    <div>
+      <h3>{{ song.artist }}</h3>
+      <p>{{ song.title }}</p> <!-- Zmieniłem song.artist na song.title -->
+      <p>{{ song.duration }}</p>
+      <img [src]="song.cover" alt="Cover">
+      <p>{{ song.genre }}</p>
+      <a [href]="song.link">Odtwórz</a>
     </div>
   </div>
-</div>
+ </div>

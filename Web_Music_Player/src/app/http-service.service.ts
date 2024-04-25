@@ -13,4 +13,7 @@ getSongsByGenre(){
 getGenreInfo(){
   return this.http.get(this.url + 'genreInfo/genre_info-list');
 }
+getPlayLists(){
+  return this.http.get(this.url + 'playlists')
+}
 }
