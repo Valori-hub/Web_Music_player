@@ -1,7 +1,6 @@
 import { Component, EventEmitter, OnInit, Output,  } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {MatCardModule} from '@angular/material/card';
-import { IGenreInfo } from './model/GenreInfo';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpService } from '../../http-service.service';
 import { RouterModule } from '@angular/router';
@@ -17,7 +16,7 @@ import { Iplaylist } from './model/Songs';
     HttpClientModule,
     CommonModule,
     MatCardModule,
-    RouterModule
+    RouterModule,
   ],
   templateUrl: './playlist.component.html',
   styleUrl: './playlist.component.scss'

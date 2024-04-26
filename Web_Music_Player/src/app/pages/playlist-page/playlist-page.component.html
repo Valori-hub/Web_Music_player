@@ -6,14 +6,25 @@
       <p>{{playlistData[value].description}}</p>
     </div>
   </div>
-  <div *ngFor="let song of playlistData[value].songs">
-    <div>
-      <h3>{{ song.artist }}</h3>
-      <p>{{ song.title }}</p> <!-- Zmieniłem song.artist na song.title -->
-      <p>{{ song.duration }}</p>
-      <img [src]="song.cover" alt="Cover">
-      <p>{{ song.genre }}</p>
-      <a [href]="song.link">Odtwórz</a>
-    </div>
-  </div>
- </div>
+  <mat-list>
+    <div class="header-section">
+      <div class="left_header-section">
+        <div mat-subheader>#</div>
+        <div class="title-subehader" mat-subheader>Title</div>
+      </div>
+        <div mat-subheader>Artist</div>
+        <div mat-subheader>Duration</div>
+      </div>
+      <mat-divider></mat-divider>
+    <mat-list-item *ngFor="let song of playlistData[value].songs">
+      <div class="mat-list-item_container">
+        <div class="mat-list-item_left-section">
+          <img [src]="song.cover" alt="Cover">
+          <h3 matListItemTitle>{{song.title}}</h3> 
+        </div>
+        <h2>{{ song.artist }}</h2>
+        <p>{{ song.duration }}</p>
+      </div>
+          <mat-divider></mat-divider>
+    </mat-list-item>
+
