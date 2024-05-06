@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { songs } from '../../../../song_data_base/songs_db';
+import { songs } from '../../../assets/song_data_base/songs_db';
 import { CommonModule } from '@angular/common';
 
 

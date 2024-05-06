@@ -5,6 +5,7 @@ import { PlaylistComponent } from './components/playlist/playlist.component';
 import { SideBarComponent } from './components/side-bar/side-bar.component';
 import { TopNavbarComponent } from './components/top-navbar/top-navbar.component';
 import { PlaylistPageComponent } from './pages/playlist-page/playlist-page.component';
+import { AudioPlayerComponent } from './components/audio-player/audio-player.component';
 
 @Component({
   selector: 'app-root',
@@ -15,7 +16,8 @@ import { PlaylistPageComponent } from './pages/playlist-page/playlist-page.compo
     HttpClientModule,
     PlaylistComponent,
     SideBarComponent,
-    TopNavbarComponent
+    TopNavbarComponent,
+    AudioPlayerComponent
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'

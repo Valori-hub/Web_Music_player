@@ -1,26 +1,31 @@
-.playlist_details-card{
-  display: flex;
-  max-height: 500px; 
-  margin-top: 4px; 
-  border-radius: 10px;
-  margin: 30px;
-  >img{
-    border-radius: 20px;
-    max-width: 500px; 
-    max-height: 500px; 
-    object-fit: fill;
-  }
-  >.details{
-    >h1{
-      font-size: 55px;
-      margin: auto;
-      margin-left: 8px;
+.header-card{
+  border-radius: 40px;
+  background-color: transparent;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  margin-right: 50px;
+  >.header-card-content{
+    display: flex;
+    padding: 0;
+    >img{
+      object-fit: cover;
+      min-width: 300px;
+      min-height: 300px;
+      border-radius: 40px;
     }
-    >p{
-      font-size: 8px;
-      margin: auto;
-      margin-left: 8px;
-
+    >.header-card-content-title{
+      >mat-card-title{
+        text-transform: capitalize;
+        color: white;
+        padding: 20px;
+        font-size: 4rem;
+      }
+      >p{
+        text-transform: capitalize;
+        color: rgb(166, 166, 166);
+        padding: 20px;
+        font-size: 2rem;
+      }
     }
   }
 }

@@ -1,28 +1,21 @@
-// import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
+import {MatIconModule} from '@angular/material/icon';
+import {MatGridListModule} from '@angular/material/grid-list';
+import { MatCardModule } from '@angular/material/card';
+import {MatSliderModule} from '@angular/material/slider';
 
+@Component({
+  selector: 'app-audio-player',
+  standalone: true,
+  imports: [
+    MatIconModule,
+    MatGridListModule,
+    MatCardModule,
+    MatSliderModule,
+  ],
+  templateUrl: './audio-player.component.html',
+  styleUrl: './audio-player.component.scss'
+})
+export class AudioPlayerComponent {
 
-// @Component({
-//   selector: 'app-audio-player',
-//   standalone: true,
-//   imports: [],
-//   templateUrl: './audio-player.component.html',
-//   styleUrl: './audio-player.component.scss'
-// })
-
-// export class AudioPlayerComponent {
-//   @Input() src!: string;
-//   audio: HTMLAudioElement;
-
-//   constructor() {
-//     this.audio = new Audio();
-//   }
-
-//   play() {
-//     this.audio.src = this.src;
-//     this.audio.play();
-//   }
-
-//   pause() {
-//     this.audio.pause();
-//   }
-// }
+}
