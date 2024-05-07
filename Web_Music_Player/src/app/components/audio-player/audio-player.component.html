@@ -9,14 +9,14 @@
       <mat-icon aria-hidden="false" aria-label="Add to fav" fontIcon="add"></mat-icon>
      </div> 
       <div class="grid-2">
-        <mat-icon [inline]="true" aria-hidden="false" aria-label="Previous" fontIcon="skip_previous" (click)="pauseSong()"></mat-icon>
-        <mat-icon [inline]="true" aria-hidden="false" aria-label="Play/Pause" fontIcon="play_circle" (click)="openSong()"></mat-icon>
-        <mat-icon [inline]="true" aria-hidden="false" aria-label="Next" fontIcon="skip_next" onclick="Next()"></mat-icon>
+        <mat-icon [inline]="true" aria-hidden="false" aria-label="Previous" fontIcon="skip_previous"></mat-icon>
+        <mat-icon [inline]="true" [fontIcon]="isPlaying ? 'pause_circle' : 'play_circle'" (click)="toggleMusic()" aria-hidden="false" aria-label="Odtwórz/Zatrzymaj"></mat-icon>
+        <mat-icon [inline]="true" aria-hidden="false" aria-label="Next" fontIcon="skip_next"></mat-icon>
       </div>
       <div class="grid-3">
         <mat-icon aria-hidden="false" aria-label="Volume" fontIcon="volume_up"></mat-icon>
-        <mat-slider style="width:fit-content; overflow: visible;">
-        <input matSliderThumb>
+        <mat-slider  max='1' min='0.0' step='0.001' (change)="changeVolume(sliderValue)" style="width:fit-content; overflow: visible;">
+        <input matSliderThumb >
       </mat-slider>
       </div>
     </div>

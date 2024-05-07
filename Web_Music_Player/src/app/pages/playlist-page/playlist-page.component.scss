@@ -52,17 +52,22 @@ mat-list{
   }
   >mat-list-item{
     height: 80px;
-    }
+    color: whitesmoke
   }
+}
+    
 .mat-list-item_container{
+  color: whitesmoke;
   display: flex; 
   flex-direction: row; 
   flex-wrap: nowrap; 
   justify-content: space-between;
+  align-items: start;
     >.mat-list-item_left-section{
       display: flex; 
       flex-direction: row; 
       flex-wrap: nowrap;
+      
       >img{
         width: 60px; 
         height: 60px;
@@ -71,7 +76,7 @@ mat-list{
     }
 }
 h3[matListItemTitle]{
-  
+  color: aliceblue;
 }
 .playlist-page_container{
   overflow-x: scroll;
