@@ -2,8 +2,10 @@
 .home_container_main-container {
   background-color: #222222;
   height: 100vh;
-  display: flexbox;
-  flex-direction: column;
+  width: 100%;
+  overflow: scroll;
+  margin: 0;
+  padding: 0;
 }
 .home_container_playlist-container{
   >h1{
@@ -12,12 +14,12 @@
     color: white;
     &:hover{
       opacity: 70%;
-      cursor: pointer;
+      cursor: default;
     }
   }
 }
 .playlist_scroll-container{
-  overflow-x: scroll;
+  overflow-y: scroll;
   scrollbar-width: none; 
   -ms-overflow-style: none; 
 }

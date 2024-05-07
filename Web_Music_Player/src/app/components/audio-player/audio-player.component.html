@@ -1,22 +1,35 @@
-<mat-grid-list cols="3" rowHeight="3:1">
-  <mat-grid-tile class="current-song">
+<div class="audio-player-container">
+  <div class="grid-container">
+    <div class="grid-1">
       <img style="width: 50px;" src="https://st5.depositphotos.com/57738724/65123/v/450/depositphotos_651231898-stock-illustration-head-rooster-cock-abstract-character.jpg" alt="Cover Image" >
       <div class="details">
         <h2>Chuj</h2>
         <p>Artist:</p>
       </div>
       <mat-icon aria-hidden="false" aria-label="Add to fav" fontIcon="add"></mat-icon>
-  </mat-grid-tile>
-  <mat-grid-tile class="player-controls">
-    <mat-icon aria-hidden="false" aria-label="Previous" fontIcon="skip_previous"></mat-icon>
-    <mat-icon aria-hidden="false" aria-label="Play/Pause" fontIcon="play_circle"></mat-icon>
-    <mat-icon aria-hidden="false" aria-label="Next" fontIcon="skip_next"></mat-icon>
-  </mat-grid-tile>
-  <mat-grid-tile class="additional-controls">
-    <mat-icon aria-hidden="false" aria-label="Volume" fontIcon="volume_up"></mat-icon>
-    <mat-slider style="width:fit-content; overflow: visible;">
-      <input matSliderThumb>
-    </mat-slider>
-  </mat-grid-tile>
-</mat-grid-list>
+     </div> 
+      <div class="grid-2">
+        <mat-icon [inline]="true" aria-hidden="false" aria-label="Previous" fontIcon="skip_previous" (click)="pauseSong()"></mat-icon>
+        <mat-icon [inline]="true" aria-hidden="false" aria-label="Play/Pause" fontIcon="play_circle" (click)="openSong()"></mat-icon>
+        <mat-icon [inline]="true" aria-hidden="false" aria-label="Next" fontIcon="skip_next" onclick="Next()"></mat-icon>
+      </div>
+      <div class="grid-3">
+        <mat-icon aria-hidden="false" aria-label="Volume" fontIcon="volume_up"></mat-icon>
+        <mat-slider style="width:fit-content; overflow: visible;">
+        <input matSliderThumb>
+      </mat-slider>
+      </div>
+    </div>
 
+  <!-- </div>
+    <mat-grid-tile class="current-song">
+
+    </mat-grid-tile>
+    <mat-grid-tile class="player-controls">
+      
+    </mat-grid-tile>
+    <mat-grid-tile class="additional-controls">
+      
+    </mat-grid-tile>
+  </mat-grid-list>   -->
+</div>

@@ -1,3 +1,7 @@
+.playlist-page_container{
+  background-color: #222222;
+  height: 100vh;
+}
 .header-card{
   border-radius: 40px;
   background-color: transparent;
@@ -6,11 +10,10 @@
   margin-right: 50px;
   >.header-card-content{
     display: flex;
-    padding: 0;
     >img{
-      object-fit: cover;
-      min-width: 300px;
-      min-height: 300px;
+      height: 200px;
+      width: 200px;
+      object-fit: fill;
       border-radius: 40px;
     }
     >.header-card-content-title{
@@ -30,34 +33,52 @@
   }
 }
 
-
-
-
-.song{
-  display: flex;
-  max-height: 80px; 
-  margin-top: 4px; 
-  margin-bottom: auto;
-  align-items: center;
-  background-color: rgb(46, 46, 46);
-  border-radius: 10px;
-  >img{
-    max-width: 60px; 
-    max-height: 60px; 
-    object-fit: fill;
-  }
-  >.details{
-    justify-content: center;
-    align-items: center;
-    >h2{
-      font-size: 15px;
-      margin: auto;
-      margin-left: 8px;
-    }
-    >p{
-      font-size: 8px;
-      margin: auto;
-      margin-left: 8px;
+mat-list{
+  background-color: rgb(39, 39, 39);
+  border-radius: 20px;
+  >.header-section{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    >.left_header-section{
+      display: flex; 
+      flex-direction: row; 
+      flex-wrap: nowrap;
+      >.title-subheader{
+        
+      }
     }
   }
+  >mat-list-item{
+    height: 80px;
+    }
+  }
+.mat-list-item_container{
+  display: flex; 
+  flex-direction: row; 
+  flex-wrap: nowrap; 
+  justify-content: space-between;
+    >.mat-list-item_left-section{
+      display: flex; 
+      flex-direction: row; 
+      flex-wrap: nowrap;
+      >img{
+        width: 60px; 
+        height: 60px;
+        object-fit: fill;
+      }
+    }
+}
+h3[matListItemTitle]{
+  
+}
+.playlist-page_container{
+  overflow-x: scroll;
+  scrollbar-width: none; 
+  -ms-overflow-style: none; 
+}
+.playlist-page_container::-webkit-scrollbar {
+  width: 0;
+  height: 0;
 }

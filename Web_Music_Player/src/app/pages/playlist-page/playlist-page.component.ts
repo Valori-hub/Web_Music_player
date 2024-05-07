@@ -6,6 +6,7 @@ import { PlaylistComponent } from '../../components/playlist/playlist.component'
 import { HttpService } from '../../http-service.service';
 import { Iplaylist } from '../../components/playlist/model/Songs';
 import { PlaylistLocalService } from './service/playlist-service';
+import {MatListModule} from '@angular/material/list';
 
 @Component({
   selector: 'app-playlist-page',
@@ -14,7 +15,8 @@ import { PlaylistLocalService } from './service/playlist-service';
     HttpClientModule,
     CommonModule,
     MatCardModule,
-    PlaylistComponent
+    PlaylistComponent, 
+    MatListModule
   ],
   templateUrl: './playlist-page.component.html',
   styleUrl: './playlist-page.component.scss'

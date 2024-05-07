@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { SongCardsComponent } from '../song-cards/song-cards.component';
+import { RouterModule } from '@angular/router';
 
 
 @Component({
@@ -8,7 +9,8 @@ import { SongCardsComponent } from '../song-cards/song-cards.component';
   standalone: true,
   imports: [
     MatIconModule,
-    SongCardsComponent
+    SongCardsComponent,
+    RouterModule
   ],
   templateUrl: './side-bar.component.html',
   styleUrl: './side-bar.component.scss'
