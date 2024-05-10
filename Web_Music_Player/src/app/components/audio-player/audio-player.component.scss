@@ -33,8 +33,10 @@
   }
   >.grid-2{
     font-size: 50px;
-    display: flex;
+    display: flexbox;
+    flex-direction: row;
     justify-content: center;
+    align-items: center;
     >mat-icon:hover {
       color: rgb(182, 182, 182);
       font-size: 51px;

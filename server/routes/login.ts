@@ -6,4 +6,4 @@ router.get('/user-data', async (req, res) => {
   const result = await loginServices.validateUserLogin();
   res.send(result);
 });
-export { router }; // Export the router instance
+export { router }; 

@@ -1,7 +1,13 @@
-import express from 'express';
+import express, { Request, Response } from 'express';
 import * as SongsRoutes from './routes/songs';
 import * as PlaylistRoutes from './routes/playlists';
+import * as UserRoutes from './routes/signup'
 import cors from 'cors';
+import { userRegistartion } from './services/signup';
+
+interface User {
+
+}
 
 
 const app = express();
@@ -11,10 +17,12 @@ app.get('/', (req, res) => {
   res.send('Hello World!');
 });
 
-// Use SongsRoutes as middleware for the /songs route
 app.use('/songs', SongsRoutes.router);
 app.use('/playlists', PlaylistRoutes.router);
+app.use('/users', UserRoutes.router);
 
+
+      
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 });

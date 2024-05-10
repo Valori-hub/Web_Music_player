@@ -6,6 +6,7 @@ import { SideBarComponent } from './components/side-bar/side-bar.component';
 import { TopNavbarComponent } from './components/top-navbar/top-navbar.component';
 import { PlaylistPageComponent } from './pages/playlist-page/playlist-page.component';
 import { AudioPlayerComponent } from './components/audio-player/audio-player.component';
+import { SignupComponent } from './pages/signup/signup.component';
 
 @Component({
   selector: 'app-root',
@@ -17,7 +18,8 @@ import { AudioPlayerComponent } from './components/audio-player/audio-player.com
     PlaylistComponent,
     SideBarComponent,
     TopNavbarComponent,
-    AudioPlayerComponent
+    AudioPlayerComponent,
+    SignupComponent
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'

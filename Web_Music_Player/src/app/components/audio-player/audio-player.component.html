@@ -9,27 +9,28 @@
       <mat-icon aria-hidden="false" aria-label="Add to fav" fontIcon="add"></mat-icon>
      </div> 
       <div class="grid-2">
-        <mat-icon [inline]="true" aria-hidden="false" aria-label="Previous" fontIcon="skip_previous"></mat-icon>
-        <mat-icon [inline]="true" [fontIcon]="isPlaying ? 'pause_circle' : 'play_circle'" (click)="toggleMusic()" aria-hidden="false" aria-label="Odtwórz/Zatrzymaj"></mat-icon>
-        <mat-icon [inline]="true" aria-hidden="false" aria-label="Next" fontIcon="skip_next"></mat-icon>
+        <div style="display: flex; justify-content: center;">
+          <mat-icon [inline]="true" aria-hidden="false" aria-label="Previous" fontIcon="skip_previous"></mat-icon>
+          <mat-icon [inline]="true" [fontIcon]="isPlaying ? 'pause_circle' : 'play_circle'" (click)="toggleMusic()" aria-hidden="false" aria-label="Odtwórz/Zatrzymaj"></mat-icon>
+          <mat-icon [inline]="true" aria-hidden="false" aria-label="Next" fontIcon="skip_next"></mat-icon>
+        </div>
+        <div style="display: flex; justify-content: center;">
+          <mat-progress-bar style="width: 300px; margin: 5px;" mode="determinate" [value]="calculateProgress()"></mat-progress-bar>
+        </div>
+        
       </div>
       <div class="grid-3">
         <mat-icon aria-hidden="false" aria-label="Volume" fontIcon="volume_up"></mat-icon>
-        <mat-slider  max='1' min='0.0' step='0.001' (change)="changeVolume(sliderValue)" style="width:fit-content; overflow: visible;">
-        <input matSliderThumb >
+        <mat-slider 
+          min="0.0" 
+          max="1" 
+          step="0.001"  
+          style="width:fit-content; overflow: visible;">
+        <input
+          matSliderThumb
+          [(ngModel)]="sliderValue" 
+          (ngModelChange)="changeVolume($event)">
       </mat-slider>
       </div>
     </div>
-
-  <!-- </div>
-    <mat-grid-tile class="current-song">
-
-    </mat-grid-tile>
-    <mat-grid-tile class="player-controls">
-      
-    </mat-grid-tile>
-    <mat-grid-tile class="additional-controls">
-      
-    </mat-grid-tile>
-  </mat-grid-list>   -->
 </div>

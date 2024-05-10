@@ -1,28 +1,62 @@
-<div class="signup-form-flex">
+<div class="signup-page" style="background-color: white;">
+
   <mat-card>
-    <mat-card-title>
-      Login
-    </mat-card-title>
-    <!-- <mat-label>Gender</mat-label>
-            <mat-select>
-              <mat-option value="option1">Option 1</mat-option>
-              <mat-option value="option2">Option 2</mat-option>
-              <mat-option value="option3">Option 3</mat-option>
-            </mat-select> -->
-    <mat-card-content>
-      <mat-form-field>
-        <input matInput placeholder="User Name">
-      </mat-form-field>
-      <br/>
-      <mat-form-field>
-        <input type="password" matInput placeholder="Password"/>
-      </mat-form-field>
-            
-    </mat-card-content>
-    <mat-card-actions>
-      <div class="button-flex-container">
-        <button mat-raised-button color="primary">Sign-in</button>
+      <div class="username-container">
+        <mat-form-field>
+          <mat-label>Username</mat-label>
+          <input matInput placeholder="" [(ngModel)]="userData.username" required>
+        </mat-form-field>
+        <mat-form-field >
+          <mat-label>Enter your email</mat-label>
+          <input matInput
+                 [(ngModel)]="userData.email"
+                 placeholder="pat@example.com"
+                 [formControl]="email"
+                 (blur)="updateErrorMessage()"
+                 required>
+          @if (email.invalid) {
+            <mat-error>{{errorMessage}}</mat-error>
+          }
+        </mat-form-field>
       </div>
-    </mat-card-actions>
+      <div class="personal-details_container">
+        <mat-form-field>
+          <mat-label>Name</mat-label>
+          <input matInput placeholder="" [(ngModel)]="userData.firstName" required>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Last name</mat-label>
+          <input matInput placeholder="" [(ngModel)]="userData.lastName" required>
+        </mat-form-field>
+      </div>
+  
+      <mat-form-field>
+        <mat-label>Gender</mat-label>
+        <mat-select [(ngModel)]="userData.gender" required>
+          <mat-option value="male">Male</mat-option>
+          <mat-option value="female">Female</mat-option>
+          <mat-option value="other">Other</mat-option>
+        </mat-select>
+      </mat-form-field>
+  
+      <mat-form-field hintLabel="Min 8 characters">
+        <mat-label>Enter your password</mat-label>
+        <input matInput [type]="hide ? 'password' : 'text'" [(ngModel)]="userData.password" minlength="8" required>
+        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+          <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+      </mat-form-field>
+  
+      <mat-form-field>
+        <mat-label>Confirm your password</mat-label>
+        <input matInput [type]="hide ? 'password' : 'text'" [(ngModel)]="confirmPassword" required>
+        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+          <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+      </mat-form-field>
+  
+      <div style="display: flex;justify-content: end;">
+        <button mat-flat-button color="accent" style="width: 20%;" (click)="register()">Create</button>
+      </div>
   </mat-card>
 </div>
