@@ -8,7 +8,7 @@ import { PlaylistPageComponent } from './pages/playlist-page/playlist-page.compo
 
 export const routes: Routes = [
   {path: '', component: HomeComponent},
-  {path: 'login', component: LoginComponent},
-  {path: 'signup', component: SignupComponent},
+  {path: 'login', component: LoginComponent, outlet: 'authentication'},
+  {path: 'signup', component: SignupComponent, outlet: 'authentication'},
   {path: 'playlist', component: PlaylistPageComponent}
 ];

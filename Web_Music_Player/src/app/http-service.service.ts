@@ -16,9 +16,12 @@ getGenreInfo(){
   return this.http.get(this.url + 'genreInfo/genre_info-list');
 }
 getPlayLists(){
-  return this.http.get(this.url + 'playlists')
+  return this.http.get(this.url + 'playlists/playlists')
+}
+getPlayList(playlist_id: string){
+  return this.http.get(this.url + `playlists/playlist?playlistId=${playlist_id}`)
 }
 createUser(user: any){
-  return this.http.post<any>(this.url + 'users', user);
+  return this.http.post<any>(this.url + 'users', {userObject: user});
   }
 }

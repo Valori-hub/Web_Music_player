@@ -4,8 +4,7 @@ import {MatCardModule} from '@angular/material/card';
 import { IGenreInfo } from './model/GenreInfo';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpService } from '../../http-service.service';
-import { RouterModule } from '@angular/router';
-import { PlaylistLocalService } from '../../pages/playlist-page/service/playlist-service';
+import { Router, RouterModule } from '@angular/router';
 import { Iplaylist } from './model/Songs';
 
 
@@ -26,7 +25,7 @@ import { Iplaylist } from './model/Songs';
 export class PlaylistComponent implements OnInit {
   playlistsData: Iplaylist[] = [];
 
-  constructor(private httpClient: HttpService, public playlistService: PlaylistLocalService) {}
+  constructor(private httpClient: HttpService, private router: Router) {}
 
 
   private async getPlaylistData() {
@@ -35,15 +34,14 @@ export class PlaylistComponent implements OnInit {
     });
   }
 
+  navigatePlaylistPage(playlistId: string){
+    this.router.navigateByUrl(`/playlist?id=${playlistId}`)
+  }
   ngOnInit(): void {
     this.InitComponent();
   }
 
   private async InitComponent() {
     await this.getPlaylistData();
-  }
-
-  sendPlaylistID(id: number) {
-    this.playlistService.receivedValue = id;
   }
 }

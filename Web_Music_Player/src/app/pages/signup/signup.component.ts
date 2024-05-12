@@ -23,7 +23,8 @@ import { HttpService } from '../../http-service.service';
     ReactiveFormsModule,
     MatSelectModule,
     MatCardModule,
-    FormsModule
+    FormsModule, 
+    
   ],
   templateUrl: './signup.component.html',
   styleUrl: './signup.component.scss'

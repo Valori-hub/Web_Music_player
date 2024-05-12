@@ -8,6 +8,7 @@ export interface Isongs {
   link:string,
 }
 export interface Iplaylist {
+  _id: string;
   id: number,
   title: string,
   cover?: string,

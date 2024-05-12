@@ -2,10 +2,10 @@
   <div>
     <mat-card class="header-card">
       <mat-card-content class="header-card-content">
-        <img [src]="playlistData[value].cover" alt="Cover Image">
+        <img [src]="playlistData.cover" alt="Cover Image">
         <div class="header-card-content-title">
-          <mat-card-title>{{playlistData[value].title}}</mat-card-title>
-          <p>{{playlistData[value].description}}</p>
+          <mat-card-title>{{playlistData.title}}</mat-card-title>
+          <p>{{playlistData.description}}</p>
         </div>
       </mat-card-content>
     </mat-card>
@@ -20,7 +20,7 @@
         <div mat-subheader>Duration</div>
       </div>
       <mat-divider></mat-divider>
-    <mat-list-item *ngFor="let song of playlistData[value].songs">
+    <mat-list-item *ngFor="let song of playlistData.songs">
       <div class="mat-list-item_container">
         <div class="mat-list-item_left-section">
           <img [src]="song.cover" alt="Cover">

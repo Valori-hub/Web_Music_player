@@ -11,3 +11,13 @@ export async function getPlayLists() {
       return [];
     }
 }
+export async function getPlayList(playlist_id: string) {
+  try {
+    const documents = await db.collection('PlayLists').find({_id: new MongoDb.ObjectId(playlist_id)}).toArray();
+    console.log(documents);
+    return documents[0];
+  } catch (error) {
+    console.error('Error fetching documents:', error);
+    return [];
+  }
+}

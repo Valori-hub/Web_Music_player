@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { HttpClientModule } from  '@angular/common/http';
 import { PlaylistComponent } from './components/playlist/playlist.component';
@@ -7,6 +7,7 @@ import { TopNavbarComponent } from './components/top-navbar/top-navbar.component
 import { PlaylistPageComponent } from './pages/playlist-page/playlist-page.component';
 import { AudioPlayerComponent } from './components/audio-player/audio-player.component';
 import { SignupComponent } from './pages/signup/signup.component';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-root',
@@ -19,7 +20,8 @@ import { SignupComponent } from './pages/signup/signup.component';
     SideBarComponent,
     TopNavbarComponent,
     AudioPlayerComponent,
-    SignupComponent
+    SignupComponent, 
+    CommonModule
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'

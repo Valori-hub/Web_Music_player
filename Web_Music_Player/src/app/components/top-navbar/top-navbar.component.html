@@ -1,7 +1,7 @@
 <div class="top-navbar_container">
   <div class="top-navbar_right-section">
-    <h1 style="color: gray;" routerLink="login" >Log in</h1>
-    <h1 style="color: aliceblue;" routerLink="signup">Sign up</h1>
+    <h1 style="color: gray;" [routerLink]="[{ outlets: { authentication: ['login'] } }]" >Log in</h1>
+    <h1 style="color: aliceblue;" [routerLink]="[{ outlets: { authentication: ['signup'] } }]">Sign up</h1>
   </div>
 </div>
 <router-outlet></router-outlet>

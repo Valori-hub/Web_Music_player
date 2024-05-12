@@ -1,5 +1,5 @@
 <div style="display:flex">
-  <mat-card *ngFor="let data of playlistsData" class="playlist_card-container" routerLink="playlist" (click)="sendPlaylistID(data.id)">
+  <mat-card *ngFor="let data of playlistsData" class="playlist_card-container" routerLink="playlist" (click)="navigatePlaylistPage(data._id)" >
     <img mat-card-image [src]="data.cover" alt="playlist-cover">
       <mat-card-title>{{data.title}}</mat-card-title>
       <mat-card-subtitle>{{ data.description }}</mat-card-subtitle>
