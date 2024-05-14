@@ -3,12 +3,8 @@ import * as SongsRoutes from './routes/songs';
 import * as PlaylistRoutes from './routes/playlists';
 import * as UserRoutes from './routes/signup'
 import cors from 'cors';
-import { userRegistartion } from './services/signup';
+
 var BodyParser = require ('body-parser');
-
-interface User {
-
-}
 
 const app = express();
 const port = 3000;

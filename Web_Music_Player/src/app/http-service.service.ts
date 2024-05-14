@@ -21,7 +21,11 @@ getPlayLists(){
 getPlayList(playlist_id: string){
   return this.http.get(this.url + `playlists/playlist?playlistId=${playlist_id}`)
 }
-createUser(user: any){
+createUser(user: any ){
+  delete user.confirmPassword;
   return this.http.post<any>(this.url + 'users', {userObject: user});
   }
+loginUser(user: any){
+  return this.http.post<any>(this.url + 'users/login', {userObject: user});
+}
 }

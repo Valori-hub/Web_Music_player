@@ -4,13 +4,14 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
-import { FormControl, Validators, ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { FormControl, Validators, ReactiveFormsModule, FormsModule, FormGroup, AbstractControl, ValidatorFn } from '@angular/forms';
 import { merge } from 'rxjs';
 import {MatSelectModule} from '@angular/material/select';
 import { MatCardModule } from '@angular/material/card';
 import { HttpClient } from '@angular/common/http';
 import { HttpService } from '../../http-service.service';
-
+import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-signup',
@@ -24,49 +25,73 @@ import { HttpService } from '../../http-service.service';
     MatSelectModule,
     MatCardModule,
     FormsModule, 
-    
+    CommonModule
   ],
   templateUrl: './signup.component.html',
   styleUrl: './signup.component.scss'
+  
 })
+
 export class SignupComponent {
-  userData = { username: '', email: '', password: '', firstName: '', lastName: '', gender: '' };
-  confirmPassword = '';
-   hide = true;
-   email = new FormControl('', [Validators.required, Validators.email]);
-
   errorMessage = '';
+  hide = true;
+  validatePasswordConfirmation: ValidatorFn = (control: AbstractControl): { [key: string]: any } | null => {
+    if (!control.parent) {
+        return null;
+    }
+    const passwordControl = control.parent.get('password');
+    const confirmPasswordControl = control.parent.get('confirmPassword');
 
-  constructor(private http: HttpClient, private httpClient: HttpService) {
-    merge(this.email.statusChanges, this.email.valueChanges)
+    if (!passwordControl || !confirmPasswordControl) {
+        return null;
+    }
+
+    if (passwordControl.value !== confirmPasswordControl.value) {
+        return { 'validatePasswordConfirmation': true };
+    }
+    return null;
+};
+  registrationForm = new FormGroup({
+    username: new FormControl<string>('', [Validators.required]),
+    email: new FormControl<string>('', [Validators.required, Validators.email]),
+    password: new FormControl<string>('',  [Validators.required, Validators.minLength(8)]),
+    confirmPassword: new FormControl<string> ('', [Validators.required, this.validatePasswordConfirmation]),
+    firstName: new FormControl<string>('', [Validators.required]),
+    lastName: new FormControl<string>('', [Validators.required]),
+    gender: new FormControl<string>('', [Validators.required]),
+  });
+
+  getPasswordLabel(): string {
+    return this.registrationForm.hasError('validatePasswordConfirmation') ? 'Passwords do not match' : 'Confirm your password';
+  }
+  constructor(private httpClient: HttpService, private router: Router) {
+    merge(this.registrationForm.controls.email.statusChanges, this.registrationForm.controls.email.valueChanges)
       .pipe(takeUntilDestroyed())
       .subscribe(() => this.updateErrorMessage());
   }
  
   updateErrorMessage() {
-    if (this.email.hasError('required')) {
+    if (this.registrationForm.controls.email.hasError('required')) {
       this.errorMessage = 'You must enter a value';
-    } else if (this.email.hasError('email')) {
+    } else if (this.registrationForm.controls.email.hasError('email')) {
       this.errorMessage = 'Not a valid email';
     } else {
       this.errorMessage = '';
     }
   }
   register(): void {
-    this.httpClient.createUser(this.userData).subscribe(
-      response => {
-        console.log('Account has been created!', response, this.userData);
+        const formValues = this.registrationForm.getRawValue();
+        this.httpClient.createUser(formValues).subscribe(
+          (response: any) => {
+            if(response.data.success === true){
+              this.router.navigateByUrl('(authentication:login)')
+              console.log('zajebiscie')
+            }else if(response.data.success === false){
+              console.log('pizda wasy')
+            }
+          }
+        )
       }
-    )
-  }
-  // register(){
-  //   if(this.confirmPassword != this.userData.password)
-  //     {
-  //       console.log("passwords are not the same")
-  //     }else{
-  //       console.log(this.userData);
-  //     }
-  //     this.httpClient.createUser(this.userData);
-  // }
+    
 }
 
