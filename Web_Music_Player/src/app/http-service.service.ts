@@ -1,9 +1,12 @@
 import { HttpClient } from  '@angular/common/http';
 import { Injectable } from  '@angular/core';
+import { HttpHeaders } from '@angular/common/http';
 
 @Injectable({
 providedIn:  'root'
 })
+
+
 export class HttpService {
 private url = 'http://localhost:3000/'
 constructor(private http: HttpClient) { }
@@ -28,4 +31,5 @@ createUser(user: any ){
 loginUser(user: any){
   return this.http.post<any>(this.url + 'users/login', {userObject: user});
 }
+
 }

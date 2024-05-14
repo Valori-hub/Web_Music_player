@@ -1,9 +1,19 @@
-import express, { Request, Response } from 'express';
+import express, {Request as ExpressRequest, Response } from 'express';
 import * as users from '../services/signup'
-import { db } from '../shared/db_connection';
+import session from 'express-session';
+
+interface RequestWithSession extends ExpressRequest {
+  session: any;
+}
 const router = express.Router();
 
-router.post('', async (req: Request, res: Response) => {
+router.use(session({
+  secret: 'secret',
+  resave: false,
+  saveUninitialized: true
+}));
+
+router.post('', async (req: RequestWithSession, res: Response) => {
   try {
       const userData = req.body.userObject;
       const result = await users.userRegistartion(userData);
@@ -13,10 +23,14 @@ router.post('', async (req: Request, res: Response) => {
       res.status(500).json({ error: 'Internal server error' });
   }
 });
-router.post('/login', async (req: Request, res: Response) =>{
+router.post('/login', async (req: RequestWithSession, res: Response) =>{
   try{
     const usernameLogin = req.body.userObject;
     const result = await users.userLogin(usernameLogin);
+    if (typeof result === 'object' && 'success' in result) {
+      req.session.userId = usernameLogin.username;
+      console.log('token utworzony')
+    }
     res.status(201).json({ data: result });
   } catch(error) {
     console.error('Error finding user:', error);

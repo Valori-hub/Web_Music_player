@@ -9,7 +9,6 @@ import { MatCardModule } from '@angular/material/card';
 import { MatSelectModule } from '@angular/material/select';
 import { HttpService } from '../../http-service.service';
 import { Router } from '@angular/router';
-import { response } from 'express';
 
 @Component({
   selector: 'app-login',
@@ -42,7 +41,8 @@ export class LoginComponent {
     const formValues = this.loginForm.getRawValue();
         this.httpClient.loginUser(formValues).subscribe(
           (response:any) =>{
-            if(response.data.success === true){
+            if(response.data.success){
+              sessionStorage.setItem('sessionId', response.sessionId);
               console.log('logged in')
               this.router.navigate([''])
             }else{

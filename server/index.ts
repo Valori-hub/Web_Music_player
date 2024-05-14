@@ -2,10 +2,10 @@ import express, { Request, RequestHandler, Response } from 'express';
 import * as SongsRoutes from './routes/songs';
 import * as PlaylistRoutes from './routes/playlists';
 import * as UserRoutes from './routes/signup'
+
 import cors from 'cors';
 
 var BodyParser = require ('body-parser');
-
 const app = express();
 const port = 3000;
 app.use(BodyParser.json())

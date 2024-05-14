@@ -1,6 +1,5 @@
-<form [formGroup]="loginForm">
-  <div class="signup-page" style="background-color: white;">
-
+<div class="login-page" style="background-color: white;">
+  <form [formGroup]="loginForm">
     <mat-card>
         <div class="username-container">
           <mat-form-field>
@@ -20,5 +19,6 @@
           <button mat-flat-button color="accent" type="submit" [disabled]="!loginForm.valid" (click)="login()">Log in</button>
         </div>
     </mat-card>
-  </div>
-</form>
+  </form>
+  <div class="right-content-container"></div>
+</div>
