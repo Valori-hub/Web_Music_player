@@ -43,6 +43,7 @@ export class LoginComponent {
           (response:any) =>{
             if(response.data.success){
               sessionStorage.setItem('sessionId', response.sessionId);
+              sessionStorage.setItem('username', response.user);
               console.log('logged in')
               this.router.navigate([''])
             }else{

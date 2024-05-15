@@ -21,7 +21,7 @@ export async function userLogin(newItemData: {username: string, password: string
     const userExist = (await db.collection('Users').findOne({username: newItemData.username, password: newItemData.password}));
     console.log(userExist);
     if(userExist != null){
-      return { success: true, message: 'Logged in '};
+      return { success: true, message: 'Logged in ', userExist};
     }else{
       return { success: false, message: "Couldn't find account" };
     }

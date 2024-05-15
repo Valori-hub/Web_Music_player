@@ -83,10 +83,10 @@ export class SignupComponent {
         const formValues = this.registrationForm.getRawValue();
         this.httpClient.createUser(formValues).subscribe(
           (response: any) => {
-            if(response.data.success === true){
+            if(response.data.success){
               this.router.navigateByUrl('(authentication:login)')
               console.log('zajebiscie')
-            }else if(response.data.success === false){
+            }else if(!response.data.success){
               console.log('pizda wasy')
             }
           }

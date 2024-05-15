@@ -10,11 +10,17 @@
   align-items: center;
   
     >h1 {
-      margin-right: 50px;
+      margin-right: 2rem;
       cursor: pointer;
     }
     >h1:hover{
       opacity: 70%;
+    }
+    >mat-icon{
+      cursor: pointer;
+      color: aliceblue;
+      font-size: 3rem;
+      margin-right: 1%;
     }
     
 }

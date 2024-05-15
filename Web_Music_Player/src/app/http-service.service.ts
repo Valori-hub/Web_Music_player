@@ -1,6 +1,5 @@
 import { HttpClient } from  '@angular/common/http';
 import { Injectable } from  '@angular/core';
-import { HttpHeaders } from '@angular/common/http';
 
 @Injectable({
 providedIn:  'root'
@@ -30,6 +29,16 @@ createUser(user: any ){
   }
 loginUser(user: any){
   return this.http.post<any>(this.url + 'users/login', {userObject: user});
+}
+isLoggedIn(): boolean {
+  return !!sessionStorage.getItem('sessionId');
+}
+getUsername(): string| null{
+  return sessionStorage.getItem('username');
+}
+logout(): void {
+  sessionStorage.removeItem('sessionId');
+  sessionStorage.removeItem('username');
 }
 
 }
