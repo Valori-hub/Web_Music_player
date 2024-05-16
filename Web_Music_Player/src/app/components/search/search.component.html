@@ -1,1 +1,17 @@
-<p>search works!</p>
+<div class="main">
+  <div class="serach-input-container">
+    <mat-form-field class="example-full-width" style="width: 700px; " class="test">
+      <mat-label>Search</mat-label>
+      <input matInput [(ngModel)]="inputText" placeholder="Search your song or artist!" (input)="onSearch(inputText)" >
+    </mat-form-field>
+  </div>
+  <div class="search-results-container">
+    <div class="songs-results">
+      <span class="result-title">Songs</span>
+    </div>
+    <div class="artists-results">
+      <span class="result-title">Artists</span>
+    </div>
+
+  </div>
+</div>

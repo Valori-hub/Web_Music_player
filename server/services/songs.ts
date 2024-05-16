@@ -28,3 +28,24 @@ export async function getAllSongs() {
       return [];
     }
 }
+
+export async function searchSong(searchInput:string) {
+
+  function quotemeta(searchInput) {
+    return (searchInput + '').replace(/[.*+?^${}()|[\]\\/.\\+*?[\]^$(){}\/]/g, '\\$&');
+  }
+  const filterRegex = new RegExp(`^${quotemeta(searchInput)}`, 'i');
+  try {
+    if(filterRegex){
+      const artistResults = (await db.collection('Songs').find({artist: filterRegex}).limit(10).toArray());
+      const songsResults = (await db.collection('Songs').find({title: filterRegex}).limit(10).toArray());
+      console.log(artistResults, songsResults)
+    }else{
+      console.log('type something');
+    }
+    
+  } catch (error) {
+    console.error('Error fetching documents:', error);
+    return [];
+  }
+}

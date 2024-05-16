@@ -28,16 +28,14 @@ router.post('/login', async (req: RequestWithSession, res: Response) => {
     const usernameLogin = req.body.userObject;
     const result = await users.userLogin(usernameLogin);
     const username = usernameLogin.username;
-    let gender: string;
     if (Array.isArray(result)) {
       res.status(401).json({ error: 'Invalid credentials' });
       return;
     }else if (result.success && result.userExist) {
       req.session.userId = usernameLogin.username;
-      gender = result.userExist.gender;
       console.log('token has been created!');
     }
-    res.status(201).json({ data: result, user: username, userGender: gender });
+    res.status(201).json({ data: result, user: username});
   } catch (error) {
     console.error('Error finding user:', error);
     res.status(500).json({ error: 'Internal server error' });
