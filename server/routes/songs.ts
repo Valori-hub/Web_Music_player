@@ -6,4 +6,4 @@ router.get('/list-byGenre', async (req, res) => {
   const result = await SongsServices.getAllSongs();
   res.send(result);
 });
-export { router }; // Export the router instance
+export { router };

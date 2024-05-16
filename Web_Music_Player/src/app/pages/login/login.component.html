@@ -16,9 +16,16 @@
           </button>
         </mat-form-field>
         <div class="button-section">
-          <button mat-flat-button color="accent" type="submit" [disabled]="!loginForm.valid" (click)="login()">Log in</button>
+          <button mat-flat-button color="primary" type="submit" [disabled]="!loginForm.valid" (click)="login()">Log in</button>
         </div>
     </mat-card>
   </form>
-  <div class="right-content-container"></div>
+  <div class="right-content-container">
+    <div class="div1">
+      <span>{{this.rightSectionFirstText}}</span>
+    </div>
+    <div class="div2">
+      <span class="main-span">{{this.rightSectionSecoundText}}</span>
+    </div>
+  </div>
 </div>

@@ -1,7 +1,7 @@
-import express, { Request, RequestHandler, Response } from 'express';
+import express, { RequestHandler } from 'express';
 import * as SongsRoutes from './routes/songs';
 import * as PlaylistRoutes from './routes/playlists';
-import * as UserRoutes from './routes/signup'
+import * as UserRoutes from './routes/Authenticator'
 
 import cors from 'cors';
 

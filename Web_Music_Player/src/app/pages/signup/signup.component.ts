@@ -33,6 +33,8 @@ import { Router } from '@angular/router';
 })
 
 export class SignupComponent {
+  rightSectionFirstText: string | null = 'Sign';
+  rightSectionSecoundText: string | null = 'up';
   errorMessage = '';
   hide = true;
   validatePasswordConfirmation: ValidatorFn = (control: AbstractControl): { [key: string]: any } | null => {

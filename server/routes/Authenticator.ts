@@ -1,5 +1,5 @@
 import express, {Request as ExpressRequest, Response } from 'express';
-import * as users from '../services/signup'
+import * as users from '../services/Authenticator'
 import session from 'express-session';
 
 interface RequestWithSession extends ExpressRequest {
@@ -23,22 +23,25 @@ router.post('', async (req: RequestWithSession, res: Response) => {
       res.status(500).json({ error: 'Internal server error' });
   }
 });
-router.post('/login', async (req: RequestWithSession, res: Response) =>{
-  try{
+router.post('/login', async (req: RequestWithSession, res: Response) => {
+  try {
     const usernameLogin = req.body.userObject;
     const result = await users.userLogin(usernameLogin);
     const username = usernameLogin.username;
-    if (typeof result === 'object' && 'success' in result) {
+    let gender: string;
+    if (Array.isArray(result)) {
+      res.status(401).json({ error: 'Invalid credentials' });
+      return;
+    }else if (result.success && result.userExist) {
       req.session.userId = usernameLogin.username;
-      console.log(req.session.userId);
-      console.log('token has been created!')
-      
+      gender = result.userExist.gender;
+      console.log('token has been created!');
     }
-    res.status(201).json({ data: result, user: username });
-  } catch(error) {
+    res.status(201).json({ data: result, user: username, userGender: gender });
+  } catch (error) {
     console.error('Error finding user:', error);
     res.status(500).json({ error: 'Internal server error' });
   }
 });
 
-export { router }
+export { router };

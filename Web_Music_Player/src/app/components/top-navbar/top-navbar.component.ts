@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatButtonModule} from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { HttpService } from '../../http-service.service';
 import { CommonModule } from '@angular/common';
 
@@ -21,7 +21,7 @@ import { CommonModule } from '@angular/common';
 })
 export class TopNavbarComponent implements OnInit {
 
-  constructor(public httpClient: HttpService){}
+  constructor(public httpClient: HttpService, private router: Router){}
 
   ngOnInit(): void {
     if (this.httpClient.isLoggedIn()) {
@@ -31,5 +31,7 @@ export class TopNavbarComponent implements OnInit {
   }
   logout() {
     this.httpClient.logout();
+    this.router.navigate([''])
   }
+  
 }

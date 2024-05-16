@@ -23,7 +23,7 @@ export async function userLogin(newItemData: {username: string, password: string
     if(userExist != null){
       return { success: true, message: 'Logged in ', userExist};
     }else{
-      return { success: false, message: "Couldn't find account" };
+      return { success: false, message1: "Couldn't find", message2:  'account' };
     }
 
   } catch (error) {

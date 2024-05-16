@@ -36,6 +36,9 @@ isLoggedIn(): boolean {
 getUsername(): string| null{
   return sessionStorage.getItem('username');
 }
+getUserGender(): string | null{
+  return sessionStorage.getItem('gender');
+}
 logout(): void {
   sessionStorage.removeItem('sessionId');
   sessionStorage.removeItem('username');
