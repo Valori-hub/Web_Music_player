@@ -1,10 +1,10 @@
 .overflow {
-  height: 90%;
+  height: 100%;
   overflow-y: scroll;
   scrollbar-width: none; /* Firefox */
   -ms-overflow-style: none; /* Internet Explorer 10+ */
   > .main {
-    width: 100%;
+    max-width: 100%;
     height: 100vh;
     background-color: #222222;
     display: grid;
@@ -12,17 +12,20 @@
     grid-template-columns: 1fr;
     gap: 0;
     > .serach-input-container {
+      overflow: hidden;
       grid-area: 1 / 1 / 2 / 2;
       display: flex;
       justify-content: center;
       align-items: center;
     }
     > .search-results-container {
+      overflow: hidden;
       margin: 2rem;
       grid-area: 2 / 1 / 5 / 2;
       display: flexbox;
       > .songs-results {
         > .song-results-wrap {
+          overflow: hidden;
           display: flex;
           flex-wrap: wrap;
         }

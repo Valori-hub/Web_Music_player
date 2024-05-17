@@ -9,40 +9,39 @@
   color: white;
 }
 
-.side-bar_icons{
+.side-bar_icons {
   margin: 2%;
   display: flex;
-  flex-direction:column;
+  flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
   height: 100%;
   width: 90%;
-  >.icons{
+  > .icons {
     display: flex;
     align-items: center;
     justify-content: flex-start;
     font-size: 55px;
     overflow: visible;
-    >a{
+    > a {
       font-size: 30px;
       color: rgb(182, 182, 182);
     }
   }
-  >.icons:hover{
+  > .icons:hover {
     color: rgb(116, 116, 116);
     cursor: pointer;
   }
 }
 
-.home_container_side-bar_scroll{
+.home_container_side-bar_scroll {
   height: 100%;
   width: 90%;
   overflow-x: scroll;
   scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none;  /* Internet Explorer 10+ */
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
 }
-.home_container_side-bar_scroll::-webkit-scrollbar
-{
+.home_container_side-bar_scroll::-webkit-scrollbar {
   width: 0;
   height: 0;
 }
