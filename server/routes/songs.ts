@@ -1,5 +1,5 @@
-import * as SongsServices from '../services/songs'
-import express, {Request as ExpressRequest, Response } from 'express';
+import * as SongsServices from '../services/songs';
+import express, { Request as ExpressRequest, Response } from 'express';
 
 const router = express.Router();
 router.get('/list-byGenre', async (req, res) => {
@@ -7,16 +7,13 @@ router.get('/list-byGenre', async (req, res) => {
   res.send(result);
 });
 router.post('/search', async (req: ExpressRequest, res: Response) => {
-  
   try {
     const search = req.body.searchInput;
     const result = await SongsServices.searchSong(search);
-    if(result != null){
-      console.log('ok')
-
-      return;
-    }else{
-      res.status(401).json({ error: 'Can not find song or artist' })
+    if (result != null) {
+      res.status(201).json({ searchResults: result });
+    } else {
+      res.status(401).json({ error: 'Can not find song or artist' });
     }
   } catch (error) {
     console.error('Error:', error);

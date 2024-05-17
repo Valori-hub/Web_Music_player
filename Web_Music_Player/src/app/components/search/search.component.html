@@ -1,17 +1,55 @@
-<div class="main">
-  <div class="serach-input-container">
-    <mat-form-field class="example-full-width" style="width: 700px; " class="test">
-      <mat-label>Search</mat-label>
-      <input matInput [(ngModel)]="inputText" placeholder="Search your song or artist!" (input)="onSearch(inputText)" >
-    </mat-form-field>
-  </div>
-  <div class="search-results-container">
-    <div class="songs-results">
-      <span class="result-title">Songs</span>
+<div class="overflow">
+  <div class="main">
+    <div class="serach-input-container">
+      <mat-form-field
+        class="example-full-width"
+        style="width: 700px"
+        class="test"
+      >
+        <mat-label>Search</mat-label>
+        <input
+          matInput
+          [(ngModel)]="inputText"
+          placeholder="Search your song or artist!"
+          (input)="onSearch(inputText)"
+        />
+      </mat-form-field>
     </div>
-    <div class="artists-results">
-      <span class="result-title">Artists</span>
+    <div class="search-results-container">
+      <div class="songs-results">
+        <span class="result-title">Songs</span>
+        <div class="song-results-wrap">
+          <div class="result-card" *ngFor="let title of songsResults">
+            <div class="img-container">
+              <img class="img-cover" [src]="title.cover" alt="Cover Image" />
+            </div>
+            <div class="title-container">
+              <span class="title">{{ title.title }}</span>
+              <p class="artist">{{ title.artist }}</p>
+            </div>
+            <div class="options-container">
+              <span>{{ title.duration }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="song-results">
+        <span class="result-title">Artist</span>
+        <div style="display: flex; flex-wrap: wrap">
+          <div class="result-card" *ngFor="let song of artistResults">
+            <div class="img-container">
+              <img class="img-cover" [src]="song.cover" alt="Cover Image" />
+            </div>
+            <div class="title-container">
+              <span class="title">{{ song.title }}</span>
+              <p class="artist">{{ song.artist }}</p>
+            </div>
+            <div class="options-container">
+              <span>{{ song.duration }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-
   </div>
 </div>

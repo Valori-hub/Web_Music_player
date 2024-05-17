@@ -30,7 +30,6 @@ export async function getAllSongs() {
 }
 
 export async function searchSong(searchInput:string) {
-
   function quotemeta(searchInput) {
     return (searchInput + '').replace(/[.*+?^${}()|[\]\\/.\\+*?[\]^$(){}\/]/g, '\\$&');
   }
@@ -40,6 +39,7 @@ export async function searchSong(searchInput:string) {
       const artistResults = (await db.collection('Songs').find({artist: filterRegex}).limit(10).toArray());
       const songsResults = (await db.collection('Songs').find({title: filterRegex}).limit(10).toArray());
       console.log(artistResults, songsResults)
+      return {artistResults: artistResults, songsResults: songsResults}
     }else{
       console.log('type something');
     }
