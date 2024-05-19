@@ -1,36 +1,43 @@
-<div class="playlist-page_container">
-  <div>
-    <mat-card class="header-card">
-      <mat-card-content class="header-card-content">
-        <img [src]="playlistData.cover" alt="Cover Image">
-        <div class="header-card-content-title">
-          <mat-card-title>{{playlistData.title}}</mat-card-title>
-          <p>{{playlistData.description}}</p>
+<div class="main">
+  <div class="page-container">
+    <div class="playlist-description-container">
+      <div class="description-card">
+        <div class="img-container">
+          <img [src]="playlistData.cover" alt="Playlist Cover" />
         </div>
-      </mat-card-content>
-    </mat-card>
+        <div class="description-card-text">
+          <span class="title">{{ playlistData.title }}</span>
+          <p class="description">{{ playlistData.description }}</p>
+        </div>
+      </div>
+    </div>
+    <div class="header-table-list-grid">
+      <div class="header-list-grid">
+        <div class="numeration">#</div>
+        <div class="title">Title</div>
+        <div class="artist">Artist</div>
+        <div class="duration">
+          <mat-icon
+            aria-hidden="false"
+            aria-label="Example home icon"
+            fontIcon="timelapse"
+          ></mat-icon>
+        </div>
+      </div>
+    </div>
+    <div class="list-grid">
+      <div
+        class="card-list-grid"
+        *ngFor="let song of playlistData.songs; let i = index"
+        (click)="selectSong(song)"
+      >
+        <div class="numeration">{{ i + 1 }}</div>
+        <div class="title">
+          <img [src]="song.cover" alt="Cover" />{{ song.title }}
+        </div>
+        <div class="artist">{{ song.artist }}</div>
+        <div class="duration">{{ song.duration }}</div>
+      </div>
+    </div>
   </div>
-  <mat-list>
-    <div class="header-section">
-      <div class="left_header-section">
-        <div mat-subheader>#</div>
-        <div class="title-subehader" mat-subheader>Title</div>
-      </div>
-        <div mat-subheader>Artist</div>
-        <div mat-subheader>Duration</div>
-      </div>
-      <mat-divider></mat-divider>
-    <mat-list-item *ngFor="let song of playlistData.songs">
-      <div class="mat-list-item_container">
-        <div class="mat-list-item_left-section">
-          <img [src]="song.cover" alt="Cover">
-          <h3 matListItemTitle>{{song.title}}</h3> 
-        </div>
-        <h2>{{ song.artist }}</h2>
-        <p>{{ song.duration }}</p>
-      </div>
-          <mat-divider></mat-divider>
-    </mat-list-item>
-  </mat-list>
-</div> 
-
+</div>

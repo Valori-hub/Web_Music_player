@@ -1,23 +1,26 @@
-
-
-img{
+img {
   object-fit: cover;
   width: 100%;
-  height: 60%
-};
-.playlist_card-container{
+  height: 60%;
+}
+.playlist_card-container {
   width: 280px;
   height: 350px;
-  background-color: black;
+  background-color: #0c0c0c;
   margin: 20px;
   border-radius: 5%;
-  >mat-card-title,mat-card-subtitle{
+  -webkit-box-shadow: 0px 0px 10px 0px rgb(0, 0, 0);
+  -moz-box-shadow: 0px 0px 10px 0px rgb(0, 0, 0);
+  box-shadow: 0px 0px 10px 0px rgb(0, 0, 0);
+  transition: transform 0.5s ease;
+  > mat-card-title,
+  mat-card-subtitle {
     color: white;
     text-align: start;
     text-transform: capitalize;
     margin: 15px;
   }
-  >mat-card-subtitle{
+  > mat-card-subtitle {
     color: rgb(166, 166, 166);
     overflow: hidden;
     display: -webkit-box;
@@ -26,6 +29,10 @@ img{
     white-space: pre-wrap;
   }
 }
-mat-card-title{
+mat-card-title {
   font-size: 30px;
+}
+.playlist_card-container:hover {
+  transform: scale(1.02);
+  background-color: #131313;
 }

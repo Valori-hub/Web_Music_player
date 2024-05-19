@@ -1,0 +1,51 @@
+<div class="main">
+  <h1 mat-dialog-title>Edit details</h1>
+  <div mat-dialog-content class="content">
+    <form [formGroup]="playlistCreatorForm" class="example-form">
+      <mat-form-field class="white-backgrounded-field">
+        <mat-label>Image url</mat-label>
+        <input
+          matInput
+          placeholder=""
+          [formControl]="playlistCreatorForm.controls.imageUrl"
+        />
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width">
+        <mat-label>Playlist name</mat-label>
+        <input
+          matInput
+          placeholder=""
+          [formControl]="playlistCreatorForm.controls.playlistName"
+        />
+      </mat-form-field>
+
+      <mat-form-field hintLabel="Optional" class="example-full-width">
+        <mat-label>Describe your playlist!</mat-label>
+        <textarea
+          matInput
+          placeholder=""
+          [formControl]="playlistCreatorForm.controls.playlistDescription"
+        ></textarea>
+      </mat-form-field>
+      <button
+        mat-flat-button
+        color="accent"
+        style="width: 20%"
+        type="submit"
+        [disabled]="!playlistCreatorForm.valid"
+        [mat-dialog-close]="playlistCreatorForm.getRawValue()"
+      >
+        Save
+      </button>
+      <button
+        mat-flat-button
+        color="accent"
+        style="width: 20%"
+        (click)="onNoClick()"
+      >
+        Close
+      </button>
+    </form>
+  </div>
+</div>

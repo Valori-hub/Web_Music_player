@@ -1,0 +1,21 @@
+.main {
+  display: flex;
+  flex-direction: column;
+  min-height: 350px;
+  min-width: 350px;
+  background-color: #1f1f1f;
+  padding: 10px;
+  > h1 {
+    font-size: 30px;
+    color: rgb(229, 229, 229);
+    margin-bottom: 30px;
+  }
+  > .content {
+    > form {
+      > mat-form-field {
+        display: flex;
+        flex-direction: column;
+      }
+    }
+  }
+}

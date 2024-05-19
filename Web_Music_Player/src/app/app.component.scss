@@ -1,20 +1,26 @@
 .screen_view-grid {
   display: grid;
-  height: 100vh;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(5, 1fr);
   grid-template-rows: repeat(9, 1fr);
-  grid-column-gap: 15px;
-  grid-row-gap: 9px;
+  grid-column-gap: 0.8rem;
+  grid-row-gap: 0.8rem;
+  height: 100vh;
+  width: 100vw;
+  background-color: #0c0c0c;
 }
 .div1 {
-  grid-area: 1 / 1 / 2 / 5;
+  grid-area: 1 / 2 / 2 / 6;
+  border-radius: 0 0 10px 10px;
 }
 .div2 {
-  grid-area: 2 / 1 / 9 / 2;
+  grid-area: 1 / 1 / 9 / 2;
+  border-radius: 10px;
+  margin: 10px 0 0 10px;
 }
 .div3 {
-  grid-area: 2 / 2 / 9 / 5;
+  grid-area: 2 / 2 / 9 / 6;
+  border-radius: 10px;
 }
 .div4 {
-  grid-area: 9 / 1 / 10 / 5;
+  grid-area: 9 / 1 / 10 / 6;
 }

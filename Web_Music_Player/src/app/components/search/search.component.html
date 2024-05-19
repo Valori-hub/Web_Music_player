@@ -1,52 +1,99 @@
-<div class="overflow">
-  <div class="main">
-    <div class="serach-input-container">
-      <mat-form-field
-        class="example-full-width"
-        style="width: 700px"
-        class="test"
-      >
-        <mat-label>Search</mat-label>
-        <input
-          matInput
-          [(ngModel)]="inputText"
-          placeholder="Search your song or artist!"
-          (input)="onSearch(inputText)"
-        />
-      </mat-form-field>
-    </div>
+<div class="main">
+  <div class="serach-input-container">
+    <mat-form-field>
+      <mat-label>Search</mat-label>
+      <input
+        matInput
+        [(ngModel)]="inputText"
+        placeholder="Search your song or artist!"
+        (input)="onSearch(inputText)"
+      />
+    </mat-form-field>
+  </div>
+  <div class="overflow">
     <div class="search-results-container">
       <div class="songs-results">
-        <span class="result-title">Songs</span>
+        <span
+          class="result-title"
+          *ngIf="songsResults !== null && songsResults.length !== 0"
+          >Songs</span
+        >
         <div class="song-results-wrap">
           <div class="result-card" *ngFor="let title of songsResults">
-            <div class="img-container">
-              <img class="img-cover" [src]="title.cover" alt="Cover Image" />
+            <div class="result-card-grid" (click)="selectSong(title)">
+              <div class="img-container">
+                <img class="img-cover" [src]="title.cover" alt="Cover Image" />
+              </div>
+              <div class="title-container">
+                <span class="title">{{ title.title }}</span>
+                <p class="artist">{{ title.artist }}</p>
+              </div>
+              <div class="options-container">
+                <span>{{ title.duration }}</span>
+              </div>
             </div>
-            <div class="title-container">
-              <span class="title">{{ title.title }}</span>
-              <p class="artist">{{ title.artist }}</p>
-            </div>
-            <div class="options-container">
-              <span>{{ title.duration }}</span>
-            </div>
+            <button
+              class="result-card-button"
+              mat-icon-button
+              [matMenuTriggerFor]="songOptions"
+              [disabled]="!isLogedin()"
+            >
+              <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #songOptions="matMenu">
+              <button mat-menu-item [matMenuTriggerFor]="playlists">
+                Add to playlist
+              </button>
+            </mat-menu>
+            <mat-menu #playlists="matMenu">
+              <button mat-menu-item>Fishes</button>
+              <button mat-menu-item>Amphibians</button>
+              <button mat-menu-item>Reptiles</button>
+              <button mat-menu-item>Birds</button>
+              <button mat-menu-item>Mammals</button>
+            </mat-menu>
           </div>
         </div>
       </div>
       <div class="song-results">
-        <span class="result-title">Artist</span>
+        <span
+          class="result-title"
+          *ngIf="artistResults !== null && artistResults.length !== 0"
+          >Artist</span
+        >
         <div style="display: flex; flex-wrap: wrap">
           <div class="result-card" *ngFor="let song of artistResults">
-            <div class="img-container">
-              <img class="img-cover" [src]="song.cover" alt="Cover Image" />
+            <div class="result-card-grid" (click)="selectSong(song)">
+              <div class="img-container">
+                <img class="img-cover" [src]="song.cover" alt="Cover Image" />
+              </div>
+              <div class="title-container">
+                <span class="title">{{ song.title }}</span>
+                <p class="artist">{{ song.artist }}</p>
+              </div>
+              <div class="options-container">
+                <span>{{ song.duration }}</span>
+              </div>
             </div>
-            <div class="title-container">
-              <span class="title">{{ song.title }}</span>
-              <p class="artist">{{ song.artist }}</p>
-            </div>
-            <div class="options-container">
-              <span>{{ song.duration }}</span>
-            </div>
+            <button
+              class="result-card-button"
+              mat-icon-button
+              [matMenuTriggerFor]="songOptions"
+            >
+              <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #songOptions="matMenu">
+              <button mat-menu-item [matMenuTriggerFor]="playlists">
+                Add to playlist
+              </button>
+            </mat-menu>
+            <mat-menu #playlists="matMenu">
+              <button mat-menu-item>Fishes</button>
+              <button mat-menu-item>Amphibians</button>
+              <button mat-menu-item>Reptiles</button>
+              <button mat-menu-item>Birds</button>
+              <button mat-menu-item>Mammals</button>
+            </mat-menu>
           </div>
         </div>
       </div>

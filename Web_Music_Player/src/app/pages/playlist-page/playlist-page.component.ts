@@ -1,12 +1,12 @@
-import { Component, OnInit,  } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpService } from '../../http-service.service';
-import { Iplaylist } from '../../components/playlist/model/Songs';
-import {MatListModule} from '@angular/material/list';
+import { Iplaylist, Isongs } from '../../components/playlist/model/Songs';
+import { MatListModule } from '@angular/material/list';
 import { ActivatedRoute, Router } from '@angular/router';
-
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-playlist-page',
@@ -15,39 +15,43 @@ import { ActivatedRoute, Router } from '@angular/router';
     HttpClientModule,
     CommonModule,
     MatCardModule,
-    MatListModule
+    MatListModule,
+    MatIconModule,
   ],
   templateUrl: './playlist-page.component.html',
-  styleUrl: './playlist-page.component.scss'
+  styleUrl: './playlist-page.component.scss',
 })
-
 export class PlaylistPageComponent implements OnInit {
   value: any = undefined;
   playlistData: Iplaylist;
-  playlist_id: string = ''
-  constructor(private httpClient: HttpService, private route: ActivatedRoute, private router: Router) { }
+  playlist_id: string = '';
+  constructor(
+    private httpClient: HttpService,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {}
   private async getPlaylistData() {
-    this.httpClient.getPlayList(this.playlist_id).subscribe(result => {
+    this.httpClient.getPlayList(this.playlist_id).subscribe((result) => {
       this.playlistData = result as Iplaylist;
-      console.log
+      console.log;
     });
   }
 
   ngOnInit(): void {
-    this.InitComponent();  
+    this.InitComponent();
   }
-  
+
   private async InitComponent() {
-    this.route.queryParams.forEach(p => {
-      if(p['id'] != undefined && p['id'] != null){
+    this.route.queryParams.forEach((p) => {
+      if (p['id'] != undefined && p['id'] != null) {
         this.playlist_id = p['id'];
+      } else {
+        this.router.navigateByUrl('');
       }
-      else{
-        this.router.navigateByUrl('')
-      }
-    })
+    });
     this.getPlaylistData();
   }
-
+  selectSong(songLink: Isongs) {
+    this.httpClient.changeSong(songLink);
+  }
 }
-

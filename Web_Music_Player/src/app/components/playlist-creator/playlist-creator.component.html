@@ -1,1 +1,16 @@
-<p>playlist-creator works!</p>
+<div class="main">
+  <div class="page-container">
+    <div class="playlist-description-container">
+      <div class="description-card" (click)="openDialog()">
+        <div class="img-container">
+          <img [src]="playlist.imageUrl" alt="Playlist Cover" />
+        </div>
+        <div class="description-card-text">
+          <span class="title">{{ playlist.name }}</span>
+          <p class="description">{{ playlist.description }}</p>
+        </div>
+      </div>
+    </div>
+    <app-search></app-search>
+  </div>
+</div>

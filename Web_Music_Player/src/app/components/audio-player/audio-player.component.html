@@ -1,36 +1,62 @@
 <div class="audio-player-container">
-  <div class="grid-container">
+  <div class="grid-container" *ngIf="currentSong !== ''">
     <div class="grid-1">
-      <img style="width: 50px;" src="https://st5.depositphotos.com/57738724/65123/v/450/depositphotos_651231898-stock-illustration-head-rooster-cock-abstract-character.jpg" alt="Cover Image" >
+      <img [src]="currentSongObject.cover" alt="Cover Image" />
       <div class="details">
-        <h2>Chuj</h2>
-        <p>Artist:</p>
+        <h2>{{ currentSongObject.title }}</h2>
+        <p>{{ currentSongObject.artist }}</p>
       </div>
-      <mat-icon aria-hidden="false" aria-label="Add to fav" fontIcon="add"></mat-icon>
-     </div> 
-      <div class="grid-2">
-        <div style="display: flex; justify-content: center;">
-          <mat-icon [inline]="true" aria-hidden="false" aria-label="Previous" fontIcon="skip_previous"></mat-icon>
-          <mat-icon [inline]="true" [fontIcon]="isPlaying ? 'pause_circle' : 'play_circle'" (click)="toggleMusic()" aria-hidden="false" aria-label="Odtwórz/Zatrzymaj"></mat-icon>
-          <mat-icon [inline]="true" aria-hidden="false" aria-label="Next" fontIcon="skip_next"></mat-icon>
-        </div>
-        <div style="display: flex; justify-content: center;">
-          <mat-progress-bar style="width: 300px; margin: 5px;" mode="determinate" [value]="calculateProgress()"></mat-progress-bar>
-        </div>
-        
+      <mat-icon
+        [inline]="true"
+        class="fav-icon"
+        aria-hidden="false"
+        aria-label="Add to fav"
+        fontIcon="add_circle"
+      ></mat-icon>
+    </div>
+    <div class="grid-2">
+      <div class="player-controls-container">
+        <mat-icon
+          [inline]="true"
+          aria-hidden="false"
+          aria-label="Previous"
+          fontIcon="skip_previous"
+        ></mat-icon>
+        <mat-icon
+          [inline]="true"
+          [fontIcon]="isPlaying ? 'pause_circle' : 'play_circle'"
+          (click)="toggleMusic()"
+          aria-hidden="false"
+          aria-label="Odtwórz/Zatrzymaj"
+        ></mat-icon>
+        <mat-icon
+          [inline]="true"
+          aria-hidden="false"
+          aria-label="Next"
+          fontIcon="skip_next"
+        ></mat-icon>
       </div>
-      <div class="grid-3">
-        <mat-icon aria-hidden="false" aria-label="Volume" fontIcon="volume_up"></mat-icon>
-        <mat-slider 
-          min="0.0" 
-          max="1" 
-          step="0.001"  
-          style="width:fit-content; overflow: visible;">
-        <input
-          matSliderThumb
-          [(ngModel)]="sliderValue" 
-          (ngModelChange)="changeVolume($event)">
-      </mat-slider>
+      <div class="progress-bar-container">
+        <mat-progress-bar
+          class="progress-bar"
+          mode="determinate"
+          [value]="calculateProgress()"
+        ></mat-progress-bar>
       </div>
     </div>
+    <div class="grid-3">
+      <mat-icon
+        aria-hidden="false"
+        aria-label="Volume"
+        fontIcon="volume_up"
+      ></mat-icon>
+      <mat-slider min="0.0" max="1" step="0.001">
+        <input
+          matSliderThumb
+          [(ngModel)]="sliderValue"
+          (ngModelChange)="changeVolume($event)"
+        />
+      </mat-slider>
+    </div>
+  </div>
 </div>

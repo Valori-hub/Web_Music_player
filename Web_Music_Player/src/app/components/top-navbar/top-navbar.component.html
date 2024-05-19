@@ -1,11 +1,27 @@
 <div class="top-navbar_container">
   <div class="top-navbar_right-section" *ngIf="!httpClient.isLoggedIn()">
-    <h1 style="color: gray;" [routerLink]="[{ outlets: { authentication: ['login'] } }]" >Log in</h1>
-    <h1 style="color: aliceblue;" [routerLink]="[{ outlets: { authentication: ['signup'] } }]">Sign up</h1>
+    <h1
+      style="color: gray"
+      [routerLink]="[{ outlets: { authentication: ['login'] } }]"
+    >
+      Log in
+    </h1>
+    <h1
+      style="color: aliceblue"
+      [routerLink]="[{ outlets: { authentication: ['signup'] } }]"
+    >
+      Sign up
+    </h1>
   </div>
   <div class="top-navbar_right-section" *ngIf="httpClient.isLoggedIn()">
-    <h1 style="color: gray;">{{ httpClient.getUsername() }}</h1>
-    <mat-icon class="icons" [inline]="true" aria-hidden="false" aria-label="home" fontIcon="logout" (click)="logout()"></mat-icon>
+    <h1 style="color: gray">{{ httpClient.getUsername() }}</h1>
+    <mat-icon
+      class="icons"
+      [inline]="true"
+      aria-hidden="false"
+      aria-label="home"
+      fontIcon="logout"
+      (click)="logout()"
+    ></mat-icon>
   </div>
 </div>
-<router-outlet></router-outlet>

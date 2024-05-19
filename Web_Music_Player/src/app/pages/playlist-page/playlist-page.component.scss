@@ -1,89 +1,131 @@
-.playlist-page_container{
-  background-color: #222222;
-  height: 100vh;
-}
-.header-card{
-  border-radius: 40px;
-  background-color: transparent;
-  margin-top: 50px;
-  margin-bottom: 50px;
-  margin-right: 50px;
-  >.header-card-content{
-    display: flex;
-    >img{
-      height: 200px;
-      width: 200px;
-      object-fit: fill;
-      border-radius: 40px;
-    }
-    >.header-card-content-title{
-      >mat-card-title{
-        text-transform: capitalize;
-        color: white;
-        padding: 20px;
-        font-size: 4rem;
+.main {
+  background-color: #161616;
+  height: 100%;
+  width: 100%;
+  overflow: auto;
+  > .page-container {
+    > .playlist-description-container {
+      > .description-card {
+        display: flex;
+        height: 100%;
+        margin: 20px;
+        background-color: #161616;
+        height: 300px;
+        > .img-container {
+          width: 30%;
+          height: 100%;
+          display: flex;
+          justify-content: center;
+          > img {
+            border-radius: 30px;
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+          }
+        }
+        > .description-card-text {
+          min-width: 400px;
+          display: flex;
+          width: 70%;
+          flex-direction: column;
+          justify-content: flex-end;
+          > .title {
+            margin-left: 20px;
+            text-transform: capitalize;
+            color: white;
+            font-size: 8rem;
+            font-weight: bold;
+          }
+          > .description {
+            margin-left: 20px;
+            color: rgb(166, 166, 166);
+            font-size: 1.5rem;
+            text-wrap: pretty;
+            margin-bottom: 20px;
+          }
+        }
       }
-      >p{
-        text-transform: capitalize;
-        color: rgb(166, 166, 166);
-        padding: 20px;
-        font-size: 2rem;
+    }
+    > .header-table-list-grid {
+      width: 100%;
+      > .header-list-grid {
+        display: grid;
+        margin: 10px 30px 30px 30px;
+        grid-template-columns: repeat(12, 1fr);
+        grid-template-rows: 1fr;
+        grid-column-gap: 0px;
+        grid-row-gap: 0px;
+        color: #898989;
+        font-weight: bold;
+        > .numeration {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          grid-area: 1 / 1 / 2 / 2;
+        }
+        > .title {
+          display: flex;
+          align-items: center;
+          grid-area: 1 / 2 / 2 / 8;
+        }
+        > .artist {
+          display: flex;
+          align-items: center;
+          margin-left: 20px;
+          grid-area: 1 / 8 / 2 / 12;
+        }
+        > .duration {
+          display: flex;
+          justify-content: center;
+          grid-area: 1 / 12 / 2 / 13;
+        }
+      }
+    }
+    > .list-grid {
+      width: 100%;
+      > .card-list-grid {
+        border-radius: 5px;
+        display: grid;
+        margin: 10px 30px 10px 30px;
+        grid-template-columns: repeat(12, 1fr);
+        grid-template-rows: 1fr;
+        grid-column-gap: 0px;
+        grid-row-gap: 0px;
+        color: #f7f7f7;
+        font-weight: bold;
+        > .numeration {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          grid-area: 1 / 1 / 2 / 2;
+        }
+        > .title {
+          display: flex;
+          align-items: center;
+          grid-area: 1 / 2 / 2 / 8;
+          > img {
+            margin-right: 10px;
+            width: 50px;
+            height: 50px;
+          }
+        }
+        > .artist {
+          font-weight: 100;
+          display: flex;
+          align-items: center;
+          margin-left: 20px;
+          grid-area: 1 / 8 / 2 / 12;
+        }
+        > .duration {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          grid-area: 1 / 12 / 2 / 13;
+        }
       }
     }
   }
 }
-
-mat-list{
-  background-color: rgb(39, 39, 39);
-  border-radius: 20px;
-  >.header-section{
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    justify-content: space-between;
-    >.left_header-section{
-      display: flex; 
-      flex-direction: row; 
-      flex-wrap: nowrap;
-      >.title-subheader{
-        
-      }
-    }
-  }
-  >mat-list-item{
-    height: 80px;
-    color: whitesmoke
-  }
-}
-    
-.mat-list-item_container{
-  color: whitesmoke;
-  display: flex; 
-  flex-direction: row; 
-  flex-wrap: nowrap; 
-  justify-content: space-between;
-  align-items: start;
-    >.mat-list-item_left-section{
-      display: flex; 
-      flex-direction: row; 
-      flex-wrap: nowrap;
-      
-      >img{
-        width: 60px; 
-        height: 60px;
-        object-fit: fill;
-      }
-    }
-}
-h3[matListItemTitle]{
-  color: aliceblue;
-}
-.playlist-page_container{
-  overflow-x: scroll;
-  scrollbar-width: none; 
-  -ms-overflow-style: none; 
-}
-.playlist-page_container::-webkit-scrollbar {
-  width: 0;
-  height: 0;
+.card-list-grid:hover {
+  background-color: #292929;
 }

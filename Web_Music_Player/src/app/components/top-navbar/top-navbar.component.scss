@@ -1,28 +1,26 @@
-.top-navbar_container{
+.top-navbar_container {
   width: 100%;
-  background: rgb(0,0,0);
-  min-width: min-content;
-  min-height: 80px;
+  height: 100%;
+  background: #0c0c0c;
 }
-.top-navbar_right-section{
+.top-navbar_right-section {
   display: flex;
   justify-content: end;
   align-items: center;
-  
-    >h1 {
-      margin-right: 2rem;
-      cursor: pointer;
-    }
-    >h1:hover{
-      opacity: 70%;
-    }
-    >mat-icon{
-      cursor: pointer;
-      color: aliceblue;
-      font-size: 3rem;
-      margin-right: 1%;
-    }
-    
+
+  > h1 {
+    margin-right: 2rem;
+    cursor: pointer;
+  }
+  > h1:hover {
+    opacity: 70%;
+  }
+  > mat-icon {
+    cursor: pointer;
+    color: aliceblue;
+    font-size: 3rem;
+    margin-right: 1%;
+  }
 }
 .mat-icon-button.large {
   width: 48px;

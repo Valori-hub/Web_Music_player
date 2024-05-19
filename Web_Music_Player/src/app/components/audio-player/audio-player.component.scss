@@ -1,62 +1,90 @@
-.grid-container{
-  color: white;
-  background-color: black;
-	display: grid;
-	grid-template-columns: repeat(3, 1fr);
-	gap: 0;
-	width: 100%;
-	height: 80px;
-  justify-content: center;
-  align-items: center;
-  padding-left: 30px;
-
-  >.grid-1{
-    margin-top: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    >img{
-      width: 60px;
-      height: 60px;
-      object-fit: cover;
-    }
-    >.details{
-      margin: 10px;
-      >h2{
-        color: aliceblue;
-        font-size: 20px;
-      }
-      >p{
-        color: rgb(196, 196, 196);
-      }
-    }
-  }
-  >.grid-2{
-    font-size: 50px;
-    display: flexbox;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    >mat-icon:hover {
-      color: rgb(182, 182, 182);
-      font-size: 51px;
-    }
-  }
-  >.grid-3{
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
+.audio-player-container {
+  width: 100vw;
+  height: 100%;
+  > .grid-container {
     color: white;
-    font-size: 30px;
-    margin-right: 50px;
-    >mat-icon{
+    background-color: #0c0c0c;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    width: 100%;
+    height: 100%;
+    > .grid-1 {
+      display: flex;
+      > img {
+        margin: 0 10px 0 20px;
+        width: auto;
+        height: 80%;
+        border-radius: 5px;
+        object-fit: cover;
+      }
+      > .details {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        margin-right: 12px;
+        > h2 {
+          color: aliceblue;
+          font-size: 20px;
+          margin: 0;
+        }
+        > p {
+          margin: 0;
+          font-size: 15px;
+          color: rgb(196, 196, 196);
+        }
+      }
+      > mat-icon {
+        font-size: 20px;
+        display: flex;
+        align-items: center;
+      }
+    }
+    > .grid-2 {
+      font-size: 50px;
+      display: flexbox;
+      flex-direction: row;
+      > .player-controls-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        > mat-icon:hover {
+          color: rgb(182, 182, 182);
+        }
+      }
+      > .progress-bar-container {
+        display: flex;
+        justify-content: center;
+        > .progress-bar {
+          width: 400px;
+          margin: 5px;
+        }
+      }
+    }
+    > .grid-3 {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
       color: white;
+      font-size: 30px;
+      margin-right: 50px;
+      > mat-icon {
+        color: white;
+      }
+      > mat-slider {
+        width: fit-content;
+        overflow: visible;
+      }
+      > input[matSliderThumb] {
+        background-color: white !important;
+      }
     }
-    >mat-slider{
-      color: white !important;
-    }
-    >input[matSliderThumb]{
-      background-color: white !important;
-    }
+  }
+}
+.fav-icon-container {
+  display: flex;
+  align-items: center;
+  > .fav-icon {
+    margin-top: 50px;
   }
 }

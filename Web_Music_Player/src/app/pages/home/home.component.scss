@@ -1,29 +1,26 @@
-
 .home_container_main-container {
-  background-color: #222222;
-  height: 100vh;
+  background-color: #161616;
+  height: 100%;
   width: 100%;
-  overflow: scroll;
-  margin: 0;
-  padding: 0;
+  overflow: auto;
 }
-.home_container_playlist-container{
-  >h1{
+.home_container_playlist-container {
+  > h1 {
     font-size: 50px;
     margin: 2rem;
     color: white;
-    &:hover{
+    &:hover {
       opacity: 70%;
       cursor: default;
     }
   }
 }
-.playlist_scroll-container{
+.home_container_main-container {
   overflow-y: scroll;
-  scrollbar-width: none; 
-  -ms-overflow-style: none; 
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
-.playlist_scroll-container::-webkit-scrollbar {
+.home_container_main-container::-webkit-scrollbar {
   width: 0;
   height: 0;
 }
