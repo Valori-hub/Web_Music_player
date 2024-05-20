@@ -31,7 +31,7 @@ import { Isongs } from '../playlist/model/Songs';
   styleUrl: './audio-player.component.scss',
 })
 export class AudioPlayerComponent {
-  currentTime: number = 0;
+  currentTime: number | undefined = 0;
   duration: number = 0;
   sliderValue: number = 1;
   currentSong: string = '';

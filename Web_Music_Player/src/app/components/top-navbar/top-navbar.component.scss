@@ -1,35 +1,82 @@
-.top-navbar_container {
-  width: 100%;
-  height: 100%;
-  background: #0c0c0c;
-}
-.top-navbar_right-section {
-  display: flex;
-  justify-content: end;
-  align-items: center;
+@media screen and (min-width: 1000px) {
+  .top-navbar_container {
+    width: 100%;
+    height: 100%;
+    background: #0c0c0c;
+  }
+  .top-navbar_right-section {
+    display: flex;
+    height: 100%;
+    justify-content: end;
+    align-items: center;
 
-  > h1 {
-    margin-right: 2rem;
-    cursor: pointer;
+    > h1 {
+      margin-right: 2rem;
+      cursor: pointer;
+    }
+    > h1:hover {
+      opacity: 70%;
+    }
+    > mat-icon {
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      color: aliceblue;
+      font-size: 3rem;
+      margin-right: 1%;
+    }
   }
-  > h1:hover {
-    opacity: 70%;
-  }
-  > mat-icon {
-    cursor: pointer;
-    color: aliceblue;
-    font-size: 3rem;
-    margin-right: 1%;
-  }
-}
-.mat-icon-button.large {
-  width: 48px;
-  height: 48px;
-  color: aliceblue;
-  .mat-icon {
-    font-size: 48px;
+  .mat-icon-button.large {
     width: 48px;
     height: 48px;
     color: aliceblue;
+    .mat-icon {
+      font-size: 48px;
+      width: 48px;
+      height: 48px;
+      color: aliceblue;
+    }
+  }
+}
+
+@media screen and (min-width: 2300px) {
+  .top-navbar_container {
+    width: 100%;
+    height: 100%;
+    background: #0c0c0c;
+  }
+  .top-navbar_right-section {
+    height: 100%;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+
+    > h1 {
+      margin-right: 2rem;
+      font-size: 60px;
+      cursor: pointer;
+    }
+    > h1:hover {
+      opacity: 70%;
+    }
+    > mat-icon {
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      color: aliceblue;
+      font-size: 5rem;
+      margin-right: 1%;
+    }
+  }
+  .mat-icon-button.large {
+    width: 48px;
+    height: 48px;
+    color: aliceblue;
+    .mat-icon {
+      font-size: 48px;
+      width: 48px;
+      height: 48px;
+      color: aliceblue;
+    }
   }
 }

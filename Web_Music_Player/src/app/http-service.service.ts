@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { Isongs } from './components/playlist/model/Songs';
+import { IcreatorPlaylist } from './components/playlist-creator/model/creatorInterfaces';
 
 @Injectable({
   providedIn: 'root',
@@ -50,6 +51,13 @@ export class HttpService {
   search(searchInput: any) {
     return this.http.post<any>(this.url + 'songs/search', {
       searchInput: searchInput,
+    });
+  }
+  createPlaylist(playlistData: IcreatorPlaylist) {
+    const userId = sessionStorage.getItem('username');
+    return this.http.post<any>(this.url + 'playlist/create-playlist', {
+      playlist: playlistData,
+      userId: userId,
     });
   }
 }

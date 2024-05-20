@@ -1,16 +1,149 @@
 <div class="main">
   <div class="page-container">
     <div class="playlist-description-container">
-      <div class="description-card" (click)="openDialog()">
-        <div class="img-container">
-          <img [src]="playlist.imageUrl" alt="Playlist Cover" />
+      <div class="description-card">
+        <div class="img-container" (click)="openDialog()">
+          <img [src]="playlist.cover" alt="Playlist Cover" />
         </div>
         <div class="description-card-text">
-          <span class="title">{{ playlist.name }}</span>
+          <span class="title" (click)="openDialog()">{{ playlist.title }}</span>
           <p class="description">{{ playlist.description }}</p>
+          <div class="save-button">
+            <button
+              mat-fab
+              matTooltip="Primary"
+              color="primary"
+              aria-label="Save"
+              (click)="sendToServer()"
+            >
+              <mat-icon [inline]="true">save</mat-icon>
+            </button>
+          </div>
         </div>
       </div>
     </div>
-    <app-search></app-search>
+    <div class="header-table-list-grid">
+      <div class="header-list-grid" *ngIf="playlist.songs">
+        <div class="numeration">#</div>
+        <div class="title">Title</div>
+        <div class="artist">Artist</div>
+        <div class="duration">
+          <mat-icon
+            aria-hidden="false"
+            aria-label="duration icon"
+            fontIcon="delete"
+          ></mat-icon>
+        </div>
+      </div>
+    </div>
+    <div class="list-grid" *ngIf="playlist.songs != undefined">
+      <div
+        class="card-list-grid"
+        *ngFor="let song of playlist.songs; let i = index"
+      >
+        <div class="numeration">{{ i + 1 }}</div>
+        <div class="title">
+          <img [src]="song.cover" alt="Cover" />{{ song.title }}
+        </div>
+        <div class="artist">{{ song.artist }}</div>
+        <div class="duration">
+          <button
+            mat-mini-fab
+            color="warn"
+            aria-label="Remove"
+            (click)="removeSong(song)"
+          >
+            <mat-icon>remove</mat-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="main-search">
+      <div class="serach-input-container">
+        <mat-form-field>
+          <mat-label>Search</mat-label>
+          <input
+            matInput
+            [(ngModel)]="inputText"
+            placeholder="Search your song or artist!"
+            (input)="onSearch(inputText)"
+          />
+        </mat-form-field>
+      </div>
+      <div class="overflow">
+        <div class="search-results-container">
+          <div class="songs-results">
+            <span
+              class="result-title"
+              *ngIf="songsResults !== null && songsResults.length !== 0"
+              >Songs</span
+            >
+            <div class="song-results-wrap">
+              <div class="result-card" *ngFor="let title of songsResults">
+                <div class="result-card-grid">
+                  <div class="img-container">
+                    <img
+                      class="img-cover"
+                      [src]="title.cover"
+                      alt="Cover Image"
+                    />
+                  </div>
+                  <div class="title-container">
+                    <span class="title">{{ title.title }}</span>
+                    <p class="artist">{{ title.artist }}</p>
+                  </div>
+                  <div class="options-container">
+                    <button
+                      mat-fab
+                      matTooltip="Primary"
+                      color="primary"
+                      aria-label="Example fab with a heart icon"
+                      (click)="addSong(title)"
+                    >
+                      <mat-icon>add</mat-icon>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="song-results">
+            <span
+              class="result-title"
+              *ngIf="artistResults !== null && artistResults.length !== 0"
+              >Artist</span
+            >
+            <div style="display: flex; flex-wrap: wrap">
+              <div class="result-card" *ngFor="let song of artistResults">
+                <div class="result-card-grid">
+                  <div class="img-container">
+                    <img
+                      class="img-cover"
+                      [src]="song.cover"
+                      alt="Cover Image"
+                    />
+                  </div>
+                  <div class="title-container">
+                    <span class="title">{{ song.title }}</span>
+                    <p class="artist">{{ song.artist }}</p>
+                  </div>
+                  <div class="options-container">
+                    <button
+                      mat-fab
+                      matTooltip="Primary"
+                      color="primary"
+                      aria-label="Example fab with a heart icon"
+                      (click)="addSong(song)"
+                    >
+                      <mat-icon>add</mat-icon>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
