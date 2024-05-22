@@ -1,4 +1,4 @@
-@media screen and (min-width: 1001px) {
+@media screen and (min-width: 1px) {
   .main {
     background-color: #161616;
     height: 100%;
@@ -17,6 +17,41 @@
             height: 100%;
             display: flex;
             justify-content: center;
+            position: relative;
+            > .test {
+              border-radius: 30px;
+              opacity: 0;
+              transition-duration: 1.5s;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              position: absolute;
+              width: 100%;
+              height: 100%;
+              > button {
+                cursor: pointer;
+                background-color: rgb(174, 21, 208);
+                width: 10rem;
+                height: 10rem;
+                border-radius: 100%;
+                border: none;
+                justify-content: center;
+                display: flex;
+                align-items: center;
+                > mat-icon {
+                  color: rgb(186, 186, 186);
+                  font-size: 80px;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                }
+              }
+            }
+            > .test:hover {
+              opacity: 1;
+              background-color: #5c006351;
+            }
+
             > img {
               border-radius: 30px;
               width: 100%;
@@ -34,7 +69,7 @@
               margin-left: 20px;
               text-transform: capitalize;
               color: white;
-              font-size: 8rem;
+              font-size: 5rem;
               font-weight: bold;
             }
             > .description {
@@ -269,3 +304,27 @@
     background-color: #292929;
   }
 }
+// > .test:hover {
+//   opacity: 1;
+//   transition: 1;
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   position: absolute;
+//   width: 100%;
+//   height: 100%;
+//   > button {
+//     width: 50%;
+//     height: 50%;
+//     border-radius: 100%;
+//     justify-content: center;
+//     display: flex;
+//     align-items: center;
+//     > mat-icon {
+//       font-size: 80px;
+//       display: flex;
+//       align-items: center;
+//       justify-content: center;
+//     }
+//   }
+// }

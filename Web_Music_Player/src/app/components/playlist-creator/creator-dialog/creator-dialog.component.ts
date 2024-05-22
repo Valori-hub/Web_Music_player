@@ -32,7 +32,7 @@ export class CreatorDialogComponent {
       Validators.required,
       Validators.maxLength(16),
     ]),
-    imageUrl: new FormControl<string>('', [Validators.required]),
+    imageUrl: new FormControl<string>(''),
     playlistDescription: new FormControl<string>(''),
   });
   constructor(public dialogRef: MatDialogRef<PlaylistCreatorComponent>) {}

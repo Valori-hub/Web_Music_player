@@ -1,9 +1,12 @@
 <div class="home_container_main-container">
-    <div class="home_container_playlist-container">
-        <h1>Music Genre</h1>
-            <div class="playlist_scroll-container">
-                <app-playlist></app-playlist>
-            </div>
-        <h1>You may like</h1>
+  <div class="home_container_playlist-container">
+    <h1>Music Genre</h1>
+    <div class="playlist_scroll-container">
+      <app-playlist></app-playlist>
     </div>
+    <h1>Yours Playlists</h1>
+    <div class="playlist_scroll-container" *ngIf="isLoggedIn()">
+      <app-user-playlist></app-user-playlist>
+    </div>
+  </div>
 </div>

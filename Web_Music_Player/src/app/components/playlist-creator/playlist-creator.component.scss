@@ -23,6 +23,7 @@
             width: 30%;
             height: 80%;
             display: flex;
+            position: relative;
             justify-content: center;
             background-color: aqua;
             border-radius: 30px;
@@ -52,7 +53,6 @@
                 width: 70px;
                 height: 70px;
                 font-size: 35px;
-
                 > mat-icon {
                   display: flex;
                   align-items: center;

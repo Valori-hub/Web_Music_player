@@ -4,6 +4,11 @@
       <div class="description-card">
         <div class="img-container">
           <img [src]="playlistData.cover" alt="Playlist Cover" />
+          <div class="test">
+            <button aria-label="play" (click)="playAll(playlistData.songs)">
+              <mat-icon [inline]="true">play_arrow</mat-icon>
+            </button>
+          </div>
         </div>
         <div class="description-card-text">
           <span class="title">{{ playlistData.title }}</span>

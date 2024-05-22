@@ -6,7 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { debounceTime } from 'rxjs/operators';
 import { HttpService } from '../../http-service.service';
 import { CommonModule } from '@angular/common';
-import { Isongs } from '../playlist/model/Songs';
+import { Iplaylist, Isongs } from '../playlist/model/Songs';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -32,8 +32,9 @@ export class SearchComponent {
   inputText: string = '';
   artistResults: any = null;
   songsResults: any = null;
-
-  constructor(private httpClient: HttpService) {}
+  playlistsData: any;
+  songsQueue: Isongs[] = [];
+  constructor(private http: HttpService) {}
 
   ngOnInit() {
     this.searchSubject
@@ -41,12 +42,28 @@ export class SearchComponent {
       .subscribe((searchValue) => {
         this.performSearch(searchValue);
       });
+    this.getUsersPlaylists();
   }
+
   isLogedin() {
-    return this.httpClient.isLoggedIn();
+    return this.http.isLoggedIn();
+  }
+  addToQueue(songLink: Isongs) {
+    if (
+      !this.songsQueue.some((existingSong) => existingSong.id === songLink.id)
+    ) {
+      this.songsQueue.push(songLink);
+      this.http.changeSong(this.songsQueue);
+      console.log(this.songsQueue);
+    } else {
+      console.log('Song is already added to queue');
+    }
   }
   selectSong(songLink: Isongs) {
-    this.httpClient.changeSong(songLink);
+    this.songsQueue.length = 0;
+    this.songsQueue.push(songLink);
+    console.log(this.songsQueue);
+    this.http.changeSong(this.songsQueue);
   }
   ngOnDestroy() {
     this.searchSubject.complete();
@@ -57,7 +74,7 @@ export class SearchComponent {
   performSearch(searchValue: string) {
     if (searchValue !== '') {
       console.log('Performing search for:', searchValue);
-      this.httpClient.search(searchValue).subscribe((response: any) => {
+      this.http.search(searchValue).subscribe((response: any) => {
         this.artistResults = response.searchResults.artistResults;
         this.songsResults = response.searchResults.songsResults;
         console.log(this.artistResults, this.songsResults);
@@ -66,5 +83,16 @@ export class SearchComponent {
       this.artistResults = null;
       this.songsResults = null;
     }
+  }
+  private async getUsersPlaylists() {
+    if (this.http.isLoggedIn()) {
+      this.http.getUsersPlaylistsData().subscribe((result) => {
+        this.playlistsData = result.data.data;
+      });
+    }
+    return;
+  }
+  addToPlaylist(playlist: any, song: any) {
+    console.log(playlist, song);
   }
 }

@@ -2,10 +2,7 @@ import * as SongsServices from '../services/songs';
 import express, { Request as ExpressRequest, Response } from 'express';
 
 const router = express.Router();
-router.get('/list-byGenre', async (req, res) => {
-  const result = await SongsServices.getAllSongs();
-  res.send(result);
-});
+
 router.post('/search', async (req: ExpressRequest, res: Response) => {
   try {
     const search = req.body.searchInput;

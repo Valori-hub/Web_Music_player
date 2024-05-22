@@ -14,7 +14,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { IcreatorPlaylist, IcreatorSongs } from './model/creatorInterfaces';
-import { iSongs } from '../../../assets/song_data_base/songs_db';
+import { Route, Router } from '@angular/router';
 
 @Component({
   selector: 'app-playlist-creator',
@@ -42,9 +42,14 @@ export class PlaylistCreatorComponent {
   playlist: IcreatorPlaylist = {
     title: 'Default Name',
     description: 'Default Description',
-    cover: 'default-image-url.jpg',
+    cover:
+      'https://cdn.pixabay.com/photo/2018/04/11/19/48/music-3311599_1280.png',
   };
-  constructor(public dialog: MatDialog, private httpClient: HttpService) {}
+  constructor(
+    public dialog: MatDialog,
+    private httpClient: HttpService,
+    private router: Router
+  ) {}
   ngOnInit() {
     this.searchSubject
       .pipe(debounceTime(this.debounceTimeMs))
@@ -80,11 +85,20 @@ export class PlaylistCreatorComponent {
     dialogRef.afterClosed().subscribe((result) => {
       console.log('The dialog was closed');
       if (result) {
-        this.playlist = {
-          title: result.playlistName,
-          description: result.playlistDescription,
-          cover: result.imageUrl,
-        };
+        if (result.imageUrl === '') {
+          this.playlist = {
+            title: result.playlistName,
+            description: result.playlistDescription,
+            cover:
+              'https://cdn.pixabay.com/photo/2018/04/11/19/48/music-3311599_1280.png',
+          };
+        } else {
+          this.playlist = {
+            title: result.playlistName,
+            description: result.playlistDescription,
+            cover: result.imageUrl,
+          };
+        }
       }
     });
   }
@@ -107,10 +121,21 @@ export class PlaylistCreatorComponent {
     );
     if (!songExists) {
       this.playlist.songs.push(selectedSong);
-      console.log(this.playlist);
     }
   }
   sendToServer() {
-    this.httpClient.createPlaylist(this.playlist).subscribe((result) => {});
+    console.log(this.playlist);
+    this.httpClient.createPlaylist(this.playlist).subscribe(
+      (result: {
+        data: {
+          success: true;
+          message: string;
+        };
+      }) => {
+        if (result.data.success) {
+          this.router.navigate(['/home']);
+        }
+      }
+    );
   }
 }

@@ -7,6 +7,7 @@ import { Iplaylist, Isongs } from '../../components/playlist/model/Songs';
 import { MatListModule } from '@angular/material/list';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
+import { songs } from '../../../assets/song_data_base/songs_db';
 
 @Component({
   selector: 'app-playlist-page',
@@ -22,18 +23,32 @@ import { MatIconModule } from '@angular/material/icon';
   styleUrl: './playlist-page.component.scss',
 })
 export class PlaylistPageComponent implements OnInit {
-  value: any = undefined;
   playlistData: Iplaylist;
   playlist_id: string = '';
+  songsQueue: Isongs[] = [];
   constructor(
-    private httpClient: HttpService,
+    private http: HttpService,
     private route: ActivatedRoute,
     private router: Router
   ) {}
   private async getPlaylistData() {
-    this.httpClient.getPlayList(this.playlist_id).subscribe((result) => {
-      this.playlistData = result as Iplaylist;
-      console.log;
+    this.http.getPlayList(this.playlist_id).subscribe((result) => {
+      if (result != null) {
+        this.playlistData = result as Iplaylist;
+        console.log('playlistData after getPlaylistData:', this.playlistData);
+      } else {
+        console.log('empty result');
+      }
+    });
+  }
+  private async getPlaylistUserData() {
+    this.http.getUserPlayList(this.playlist_id).subscribe((result) => {
+      if (result != null) {
+        this.playlistData = result as Iplaylist;
+        console.log('playlistData after getPlaylistData:', this.playlistData);
+      } else {
+        console.log('empty result');
+      }
     });
   }
 
@@ -41,17 +56,37 @@ export class PlaylistPageComponent implements OnInit {
     this.InitComponent();
   }
 
-  private async InitComponent() {
-    this.route.queryParams.forEach((p) => {
-      if (p['id'] != undefined && p['id'] != null) {
-        this.playlist_id = p['id'];
+  private InitComponent() {
+    this.route.queryParams.subscribe((params) => {
+      if (params['id'] !== undefined && params['id'] !== null) {
+        this.playlist_id = params['id'];
       } else {
         this.router.navigateByUrl('');
       }
+      this.getPlaylistUserData();
+      this.getPlaylistData();
+      console.log(this.getPlaylistData);
     });
-    this.getPlaylistData();
+  }
+
+  playAll(songs: Isongs[]) {
+    this.songsQueue.length = 0;
+    songs.forEach((song) => {
+      if (
+        !this.songsQueue.some((existingSong) => existingSong.id === song.id)
+      ) {
+        this.songsQueue.push(song);
+      } else {
+        console.log('Song is already added to queue');
+      }
+    });
+    this.http.changeSong(this.songsQueue);
+    console.log('songsQueue:', this.songsQueue);
   }
   selectSong(songLink: Isongs) {
-    this.httpClient.changeSong(songLink);
+    this.songsQueue.length = 0;
+    this.songsQueue.push(songLink);
+    console.log(this.songsQueue);
+    this.http.changeSong(this.songsQueue);
   }
 }

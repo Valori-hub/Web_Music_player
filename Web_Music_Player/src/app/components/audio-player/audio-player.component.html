@@ -1,18 +1,35 @@
 <div class="audio-player-container">
   <div class="grid-container" *ngIf="currentSong !== ''">
     <div class="grid-1">
-      <img [src]="currentSongObject.cover" alt="Cover Image" />
+      <img
+        [src]="currentSongObject[currentSongIndex].cover"
+        alt="Cover Image"
+      />
       <div class="details">
-        <h2>{{ currentSongObject.title }}</h2>
-        <p>{{ currentSongObject.artist }}</p>
+        <h2>{{ currentSongObject[currentSongIndex].title }}</h2>
+        <p>{{ currentSongObject[currentSongIndex].artist }}</p>
       </div>
-      <mat-icon
-        [inline]="true"
-        class="fav-icon"
-        aria-hidden="false"
-        aria-label="Add to fav"
-        fontIcon="add_circle"
-      ></mat-icon>
+      <button
+        class="result-card-button"
+        mat-icon-button
+        [matMenuTriggerFor]="songOptions"
+      >
+        <mat-icon>more_vert</mat-icon>
+      </button>
+      <mat-menu #songOptions="matMenu">
+        <button mat-menu-item [matMenuTriggerFor]="playlists">
+          Add to playlist
+        </button>
+      </mat-menu>
+      <mat-menu #playlists="matMenu">
+        <button
+          mat-menu-item
+          *ngFor="let playlist of playlistsData"
+          (click)="addToPlaylist(currentSongObject[currentSongIndex], playlist)"
+        >
+          {{ playlist.title }}
+        </button>
+      </mat-menu>
     </div>
     <div class="grid-2">
       <div class="player-controls-container">
@@ -21,6 +38,7 @@
           aria-hidden="false"
           aria-label="Previous"
           fontIcon="skip_previous"
+          (click)="previousSong()"
         ></mat-icon>
         <mat-icon
           [inline]="true"
@@ -34,6 +52,7 @@
           aria-hidden="false"
           aria-label="Next"
           fontIcon="skip_next"
+          (click)="skipSong()"
         ></mat-icon>
       </div>
       <div class="progress-bar-container">

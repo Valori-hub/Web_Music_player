@@ -36,21 +36,29 @@
               class="result-card-button"
               mat-icon-button
               [matMenuTriggerFor]="songOptions"
-              [disabled]="!isLogedin()"
             >
               <mat-icon>more_vert</mat-icon>
             </button>
             <mat-menu #songOptions="matMenu">
-              <button mat-menu-item [matMenuTriggerFor]="playlists">
+              <button
+                mat-menu-item
+                [matMenuTriggerFor]="playlists"
+                [disabled]="!isLogedin()"
+              >
                 Add to playlist
+              </button>
+              <button mat-menu-item (click)="addToQueue(title)">
+                Add to queue
               </button>
             </mat-menu>
             <mat-menu #playlists="matMenu">
-              <button mat-menu-item>Fishes</button>
-              <button mat-menu-item>Amphibians</button>
-              <button mat-menu-item>Reptiles</button>
-              <button mat-menu-item>Birds</button>
-              <button mat-menu-item>Mammals</button>
+              <button
+                mat-menu-item
+                *ngFor="let playlist of playlistsData"
+                (click)="addToPlaylist(playlist, title)"
+              >
+                {{ playlist.title }}
+              </button>
             </mat-menu>
           </div>
         </div>
@@ -86,13 +94,18 @@
               <button mat-menu-item [matMenuTriggerFor]="playlists">
                 Add to playlist
               </button>
+              <button mat-menu-item (click)="addToQueue(song)">
+                Add to queue
+              </button>
             </mat-menu>
             <mat-menu #playlists="matMenu">
-              <button mat-menu-item>Fishes</button>
-              <button mat-menu-item>Amphibians</button>
-              <button mat-menu-item>Reptiles</button>
-              <button mat-menu-item>Birds</button>
-              <button mat-menu-item>Mammals</button>
+              <button
+                mat-menu-item
+                *ngFor="let playlist of playlistsData"
+                (click)="addToPlaylist(playlist, song)"
+              >
+                {{ playlist.title }}
+              </button>
             </mat-menu>
           </div>
         </div>
