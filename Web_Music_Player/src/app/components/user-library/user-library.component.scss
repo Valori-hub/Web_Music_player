@@ -1,0 +1,54 @@
+@media screen and (min-width: 1000px) {
+  .home_container_main-container {
+    background-color: #161616;
+    height: 100%;
+    width: 100%;
+    overflow: auto;
+    > h1 {
+      font-size: 50px;
+      margin: 2rem;
+      color: white;
+      &:hover {
+        opacity: 70%;
+        cursor: default;
+      }
+    }
+  }
+  .home_container_main-container {
+    overflow-y: scroll;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .home_container_main-container::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+  }
+}
+@media screen and (min-width: 2100px) {
+  .home_container_main-container {
+    background-color: #161616;
+    height: 100%;
+    width: 100%;
+    overflow: auto;
+  }
+  .home_container_playlist-container {
+    > h1 {
+      font-size: 80px;
+      margin: 2rem;
+      color: white;
+      &:hover {
+        opacity: 70%;
+        cursor: default;
+      }
+    }
+  }
+  .home_container_main-container {
+    overflow-y: scroll;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .home_container_main-container::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+  }
+}

@@ -108,20 +108,46 @@ export async function getUserPlaylists(user: string) {
     console.error('Error adding playlist: ', error);
   }
 }
-export async function addToPlaylist(user: string, song: Isong) {
+export async function addToPlaylist(
+  user: string,
+  song: Isong,
+  playlist: Iplaylist
+) {
   try {
-    console.log('siema');
+    console.log(user);
+    console.log('chcialbym wiedziec czemu nie dzialasz');
     const userExist = await db.collection('Users').findOne({ username: user });
     if (!userExist) {
       console.log('User not found');
-      return;
+      return { success: false, message: 'User not found' };
     } else {
-      const playlistUserData = userExist.playlists.find({ _id: song._id });
-      console.log(playlistUserData);
+      const playlistExist = userExist.playlists.find(
+        (p) => p._id.toString() === playlist._id.toString()
+      );
+      console.log(playlistExist);
+      console.log('Playlist match');
+      if (playlistExist) {
+        const songAlreadyExist = playlistExist.songs.find(
+          (p) => p._id.toString() === song._id.toString()
+        );
+        if (songAlreadyExist) {
+          console.log('song exist in this playlist');
+        } else {
+          playlistExist.songs.push(song);
+        }
+      } else {
+        console.log('couldnt find playlist');
+        return { success: false, message: 'Playlist not found' };
+      }
+      await db
+        .collection('Users')
+        .updateOne(
+          { username: user },
+          { $set: { playlists: userExist.playlists } }
+        );
       return {
         success: true,
-        message: 'Playlist added',
-        data: playlistUserData,
+        message: 'Song added',
       };
     }
   } catch (error) {

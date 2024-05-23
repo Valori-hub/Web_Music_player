@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {MatMenuModule} from '@angular/material/menu';
-import {MatButtonModule} from '@angular/material/button';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { Router, RouterModule } from '@angular/router';
 import { HttpService } from '../../http-service.service';
@@ -14,24 +14,19 @@ import { CommonModule } from '@angular/common';
     MatButtonModule,
     MatIconModule,
     RouterModule,
-    CommonModule
+    CommonModule,
   ],
   templateUrl: './top-navbar.component.html',
-  styleUrl: './top-navbar.component.scss'
+  styleUrl: './top-navbar.component.scss',
 })
 export class TopNavbarComponent implements OnInit {
+  constructor(public httpClient: HttpService, private router: Router) {}
+  isLoggedin: boolean = false;
 
-  constructor(public httpClient: HttpService, private router: Router){}
+  ngOnInit(): void {}
 
-  ngOnInit(): void {
-    if (this.httpClient.isLoggedIn()) {
-      
-    } else {
-    }
-  }
   logout() {
     this.httpClient.logout();
-    this.router.navigate([''])
+    this.router.navigate(['']);
   }
-  
 }

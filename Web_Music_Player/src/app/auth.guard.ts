@@ -5,15 +5,10 @@ import { HttpService } from './http-service.service';
 @Injectable({
   providedIn: 'root',
 })
-export class AuthGuard implements CanActivate {
-  constructor(private httpClient: HttpService, private router: Router) {}
+export class AuthGuard {
+  constructor() {}
 
-  canActivate(): boolean {
-    if (this.httpClient.isLoggedIn()) {
-      return true;
-    } else {
-      this.router.navigate(['']);
-      return false;
-    }
+  isLoggedIn(): boolean {
+    return !!sessionStorage.getItem('username');
   }
 }

@@ -10,5 +10,5 @@ export interface IcreatorPlaylist {
   title: string;
   cover?: string;
   description?: string;
-  songs?: IcreatorSongs[];
+  songs: IcreatorSongs[];
 }

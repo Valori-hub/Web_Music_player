@@ -34,7 +34,7 @@ export class SearchComponent {
   songsResults: any = null;
   playlistsData: any;
   songsQueue: Isongs[] = [];
-  constructor(private http: HttpService) {}
+  constructor(private httpClient: HttpService) {}
 
   ngOnInit() {
     this.searchSubject
@@ -46,14 +46,14 @@ export class SearchComponent {
   }
 
   isLogedin() {
-    return this.http.isLoggedIn();
+    return this.httpClient.isLoggedIn();
   }
   addToQueue(songLink: Isongs) {
     if (
       !this.songsQueue.some((existingSong) => existingSong.id === songLink.id)
     ) {
       this.songsQueue.push(songLink);
-      this.http.changeSong(this.songsQueue);
+      this.httpClient.changeSong(this.songsQueue);
       console.log(this.songsQueue);
     } else {
       console.log('Song is already added to queue');
@@ -63,7 +63,7 @@ export class SearchComponent {
     this.songsQueue.length = 0;
     this.songsQueue.push(songLink);
     console.log(this.songsQueue);
-    this.http.changeSong(this.songsQueue);
+    this.httpClient.changeSong(this.songsQueue);
   }
   ngOnDestroy() {
     this.searchSubject.complete();
@@ -74,7 +74,7 @@ export class SearchComponent {
   performSearch(searchValue: string) {
     if (searchValue !== '') {
       console.log('Performing search for:', searchValue);
-      this.http.search(searchValue).subscribe((response: any) => {
+      this.httpClient.search(searchValue).subscribe((response: any) => {
         this.artistResults = response.searchResults.artistResults;
         this.songsResults = response.searchResults.songsResults;
         console.log(this.artistResults, this.songsResults);
@@ -85,14 +85,20 @@ export class SearchComponent {
     }
   }
   private async getUsersPlaylists() {
-    if (this.http.isLoggedIn()) {
-      this.http.getUsersPlaylistsData().subscribe((result) => {
+    if (this.httpClient.isLoggedIn()) {
+      this.httpClient.getUsersPlaylistsData().subscribe((result) => {
         this.playlistsData = result.data.data;
       });
     }
     return;
   }
-  addToPlaylist(playlist: any, song: any) {
-    console.log(playlist, song);
+  addToPlaylist(playlist: Iplaylist, song: Isongs) {
+    let username = this.httpClient.getUsername();
+    console.log(username);
+    this.httpClient
+      .addToPlaylist(username, song, playlist)
+      .subscribe((results) => {
+        console.log(results);
+      });
   }
 }

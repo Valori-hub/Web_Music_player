@@ -44,6 +44,7 @@ export class PlaylistCreatorComponent {
     description: 'Default Description',
     cover:
       'https://cdn.pixabay.com/photo/2018/04/11/19/48/music-3311599_1280.png',
+    songs: [],
   };
   constructor(
     public dialog: MatDialog,
@@ -91,12 +92,14 @@ export class PlaylistCreatorComponent {
             description: result.playlistDescription,
             cover:
               'https://cdn.pixabay.com/photo/2018/04/11/19/48/music-3311599_1280.png',
+            songs: [],
           };
         } else {
           this.playlist = {
             title: result.playlistName,
             description: result.playlistDescription,
             cover: result.imageUrl,
+            songs: [],
           };
         }
       }

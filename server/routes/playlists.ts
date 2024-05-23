@@ -29,11 +29,11 @@ router.post('/user-playlists', async (req, res) => {
   const result = await playlists.getUserPlaylists(userAuth);
   res.status(201).json({ data: result });
 });
-router.post('/user-playlists-add', async (req, res) => {
-  const userAuth = req.body.name as string;
-  const song = req.body.song_id as Isong;
-
-  const result = await playlists.addToPlaylist(userAuth, song);
+router.post('/add', async (req, res) => {
+  const userAuth = req.body.username as string;
+  const song = req.body.song as Isong;
+  const playlist = req.body.playlist as Iplaylist;
+  const result = playlists.addToPlaylist(userAuth, song, playlist);
   res.status(201).json({ data: result });
 });
 export { router };

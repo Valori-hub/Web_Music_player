@@ -27,7 +27,18 @@ export class HttpService {
   }
   //Verifying if the user is logged in.
   isLoggedIn(): boolean {
-    return !!sessionStorage.getItem('sessionId');
+    let check: boolean = false;
+    let userExist: string | null;
+    if (typeof sessionStorage !== 'undefined') {
+      userExist = sessionStorage.getItem('sessionId');
+      if (userExist != null) {
+        check = true;
+      }
+    } else {
+      // sessionStorage is not available
+      console.warn('sessionStorage is not available.');
+    }
+    return check;
   }
   //Getting current logged in username from the session storage
   getUsername(): string | null {
@@ -77,10 +88,11 @@ export class HttpService {
     );
   }
   addToPlaylist(username: string | null, song: Isongs, playlist: Iplaylist) {
-    console.log(username, song, playlist);
-    return this.http.post<any>(this.url + 'playlists/user-playlists-add', {
-      name: username,
-      song_id: song,
+    console.log(username);
+    return this.http.post(this.url + 'playlists/add', {
+      username: username,
+      song: song,
+      playlist: playlist,
     });
   }
 }

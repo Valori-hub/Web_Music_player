@@ -20,11 +20,11 @@ export interface Iplaylist {
   title: string;
   description: string;
   cover: string;
-  songs: Isong[];
+  songs?: Isong[];
 }
 
 export interface Isong {
-  _id: string;
+  _id?: number;
   id: number;
   title: string;
   artist: string;

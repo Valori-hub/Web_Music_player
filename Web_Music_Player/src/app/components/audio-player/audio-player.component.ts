@@ -56,7 +56,7 @@ export class AudioPlayerComponent {
   constructor(
     @Inject(PLATFORM_ID) private platformId: Object,
     private changeDetectorRef: ChangeDetectorRef,
-    private http: HttpService
+    private httpClient: HttpService
   ) {
     if (isPlatformBrowser(this.platformId)) {
       this.audio = new Audio();
@@ -74,16 +74,17 @@ export class AudioPlayerComponent {
     this.InitComponent();
   }
   private async InitComponent() {
-    this.http.song$.subscribe((playlist) => {
+    this.httpClient.song$.subscribe((playlist) => {
+      this.currentSongIndex = 0;
       const previousIndex = this.currentSongIndex;
       const previousSource = this.currentSong;
       this.currentSongObject = playlist;
       this.currentSong = this.currentSongObject[this.currentSongIndex].link;
-
       if (
         previousIndex !== this.currentSongIndex ||
         previousSource !== this.currentSong
       ) {
+        this.audio.pause();
         this.audio.src = this.currentSong;
         this.audio.load();
         if (this.isPlaying) {
@@ -91,15 +92,15 @@ export class AudioPlayerComponent {
         }
       }
     });
-
     this.getUsersPlaylists();
   }
-  addToPlaylist(song: Isongs, playlist: Iplaylist) {
-    let username = this.http.getUsername();
-    this.http.addToPlaylist(username, song, playlist);
+  addToPlaylist(playlist: Iplaylist, song: Isongs) {
+    let username = this.httpClient.getUsername();
+    this.httpClient.addToPlaylist(username, song, playlist);
   }
   skipSong() {
     if (this.currentSongObject.length > this.currentSongIndex + 1) {
+      this.audio.pause();
       this.currentSongIndex = this.currentSongIndex + 1;
       this.currentSong = this.currentSongObject[this.currentSongIndex].link;
       this.audio.src = this.currentSong;
@@ -111,8 +112,10 @@ export class AudioPlayerComponent {
       console.log('there is nothing after :c');
     }
   }
+
   previousSong() {
     if (this.currentSongIndex >= 1) {
+      this.audio.pause();
       this.currentSongIndex = this.currentSongIndex - 1;
       this.currentSong = this.currentSongObject[this.currentSongIndex].link;
       this.audio.src = this.currentSong;
@@ -143,8 +146,8 @@ export class AudioPlayerComponent {
     return (this.audio.currentTime / this.audio.duration) * 100;
   }
   private getUsersPlaylists() {
-    if (this.http.isLoggedIn()) {
-      this.http.getUsersPlaylistsData().subscribe((result) => {
+    if (this.httpClient.isLoggedIn()) {
+      this.httpClient.getUsersPlaylistsData().subscribe((result) => {
         this.playlistsData = result.data.data;
       });
     }

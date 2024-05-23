@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { HttpClientModule } from '@angular/common/http';
@@ -65,7 +65,6 @@ export class PlaylistPageComponent implements OnInit {
       }
       this.getPlaylistUserData();
       this.getPlaylistData();
-      console.log(this.getPlaylistData);
     });
   }
 

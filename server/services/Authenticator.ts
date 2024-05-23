@@ -36,12 +36,10 @@ export async function userLogin(newItemData: {
   password: string;
 }) {
   try {
-    const userExist = await db
-      .collection('Users')
-      .findOne({
-        username: newItemData.username,
-        password: newItemData.password,
-      });
+    const userExist = await db.collection('Users').findOne({
+      username: newItemData.username,
+      password: newItemData.password,
+    });
     if (userExist != null) {
       return { success: true, message: 'Logged in ', userExist };
     } else {

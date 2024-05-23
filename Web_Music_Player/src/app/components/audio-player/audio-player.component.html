@@ -21,14 +21,17 @@
           Add to playlist
         </button>
       </mat-menu>
-      <mat-menu #playlists="matMenu">
-        <button
-          mat-menu-item
-          *ngFor="let playlist of playlistsData"
-          (click)="addToPlaylist(currentSongObject[currentSongIndex], playlist)"
-        >
-          {{ playlist.title }}
-        </button>
+      <mat-menu #playlists="matMenu"
+        ><div *ngFor="let playlist of playlistsData">
+          <button
+            mat-menu-item
+            (click)="
+              addToPlaylist(playlist, currentSongObject[currentSongIndex])
+            "
+          >
+            {{ playlist.title }}
+          </button>
+        </div>
       </mat-menu>
     </div>
     <div class="grid-2">
