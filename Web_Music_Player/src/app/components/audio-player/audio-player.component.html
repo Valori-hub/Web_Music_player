@@ -13,8 +13,9 @@
         class="result-card-button"
         mat-icon-button
         [matMenuTriggerFor]="songOptions"
+        [disabled]="!isLoggedin()"
       >
-        <mat-icon>more_vert</mat-icon>
+        <mat-icon>add_circle</mat-icon>
       </button>
       <mat-menu #songOptions="matMenu">
         <button mat-menu-item [matMenuTriggerFor]="playlists">

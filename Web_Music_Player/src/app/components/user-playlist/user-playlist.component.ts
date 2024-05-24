@@ -20,7 +20,6 @@ export class UserPlaylistComponent implements OnInit {
     if (this.httpClient.isLoggedIn()) {
       this.httpClient.getUsersPlaylistsData().subscribe((result) => {
         this.playlistsData = result.data.data;
-        console.log(this.playlistsData);
       });
     }
     return;

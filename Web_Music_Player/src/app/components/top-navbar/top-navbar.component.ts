@@ -20,13 +20,22 @@ import { CommonModule } from '@angular/common';
   styleUrl: './top-navbar.component.scss',
 })
 export class TopNavbarComponent implements OnInit {
-  constructor(public httpClient: HttpService, private router: Router) {}
-  isLoggedin: boolean = false;
+  constructor(private httpClient: HttpService, private router: Router) {}
 
   ngOnInit(): void {}
-
+  authNavigate(string: string) {
+    this.router.navigateByUrl(`(authentication:${string})`);
+  }
+  getUsername() {
+    return this.httpClient.getUsername();
+  }
+  isLoggedIn() {
+    return this.httpClient.isLoggedIn();
+  }
+  //Clearing user session storage and reloading the page
   logout() {
     this.httpClient.logout();
+    window.location.reload();
     this.router.navigate(['']);
   }
 }

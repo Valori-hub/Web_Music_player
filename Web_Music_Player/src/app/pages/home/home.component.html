@@ -4,9 +4,11 @@
     <div class="playlist_scroll-container">
       <app-playlist></app-playlist>
     </div>
-    <h1>Yours Playlists</h1>
-    <div class="playlist_scroll-container" *ngIf="isLoggedIn()">
-      <app-user-playlist></app-user-playlist>
+    <div class="user-playlists" *ngIf="isLoggedIn()">
+      <h1>Yours Playlists</h1>
+      <div class="playlist_scroll-container">
+        <app-user-playlist></app-user-playlist>
+      </div>
     </div>
   </div>
 </div>

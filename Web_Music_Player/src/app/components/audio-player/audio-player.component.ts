@@ -94,6 +94,9 @@ export class AudioPlayerComponent {
     });
     this.getUsersPlaylists();
   }
+  isLoggedin(): boolean {
+    return this.httpClient.isLoggedIn();
+  }
   addToPlaylist(playlist: Iplaylist, song: Isongs) {
     let username = this.httpClient.getUsername();
     this.httpClient.addToPlaylist(username, song, playlist);
@@ -108,8 +111,6 @@ export class AudioPlayerComponent {
       if (this.isPlaying) {
         this.audio.play();
       }
-    } else {
-      console.log('there is nothing after :c');
     }
   }
 
@@ -124,7 +125,6 @@ export class AudioPlayerComponent {
         this.audio.play();
       }
     } else {
-      console.log('there was nothing before :c');
     }
   }
   toggleMusic() {

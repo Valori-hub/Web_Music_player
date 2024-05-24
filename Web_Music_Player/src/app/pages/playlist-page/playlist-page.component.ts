@@ -7,7 +7,6 @@ import { Iplaylist, Isongs } from '../../components/playlist/model/Songs';
 import { MatListModule } from '@angular/material/list';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
-import { songs } from '../../../assets/song_data_base/songs_db';
 
 @Component({
   selector: 'app-playlist-page',
@@ -31,13 +30,13 @@ export class PlaylistPageComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router
   ) {}
+
   private async getPlaylistData() {
     this.http.getPlayList(this.playlist_id).subscribe((result) => {
       if (result != null) {
         this.playlistData = result as Iplaylist;
-        console.log('playlistData after getPlaylistData:', this.playlistData);
       } else {
-        console.log('empty result');
+        return;
       }
     });
   }
@@ -45,9 +44,8 @@ export class PlaylistPageComponent implements OnInit {
     this.http.getUserPlayList(this.playlist_id).subscribe((result) => {
       if (result != null) {
         this.playlistData = result as Iplaylist;
-        console.log('playlistData after getPlaylistData:', this.playlistData);
       } else {
-        console.log('empty result');
+        return;
       }
     });
   }
@@ -57,6 +55,7 @@ export class PlaylistPageComponent implements OnInit {
   }
 
   private InitComponent() {
+    //Getting the chosen playlist ID from query parameters in the URL and assigning it to the playlist_id.
     this.route.queryParams.subscribe((params) => {
       if (params['id'] !== undefined && params['id'] !== null) {
         this.playlist_id = params['id'];
@@ -67,7 +66,7 @@ export class PlaylistPageComponent implements OnInit {
       this.getPlaylistData();
     });
   }
-
+  //Resetting current queue and adding the whole playlist
   playAll(songs: Isongs[]) {
     this.songsQueue.length = 0;
     songs.forEach((song) => {
@@ -76,16 +75,15 @@ export class PlaylistPageComponent implements OnInit {
       ) {
         this.songsQueue.push(song);
       } else {
-        console.log('Song is already added to queue');
+        console.log('Song is already in the queue');
       }
     });
     this.http.changeSong(this.songsQueue);
-    console.log('songsQueue:', this.songsQueue);
   }
+  //Resetting current queue and adding chosen song
   selectSong(songLink: Isongs) {
     this.songsQueue.length = 0;
     this.songsQueue.push(songLink);
-    console.log(this.songsQueue);
     this.http.changeSong(this.songsQueue);
   }
 }

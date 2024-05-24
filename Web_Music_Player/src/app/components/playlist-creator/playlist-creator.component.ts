@@ -51,16 +51,24 @@ export class PlaylistCreatorComponent {
     private httpClient: HttpService,
     private router: Router
   ) {}
+
   ngOnInit() {
     this.searchSubject
       .pipe(debounceTime(this.debounceTimeMs))
       .subscribe((searchValue) => {
         this.performSearch(searchValue);
       });
+    this.isLoggedin();
   }
-  isLogedin() {
-    return this.httpClient.isLoggedIn();
+  isLoggedin() {
+    if (!this.httpClient.isLoggedIn()) {
+      this.router.navigate(['/home']);
+      return false;
+    } else {
+      return true;
+    }
   }
+
   ngOnDestroy() {
     this.searchSubject.complete();
   }
@@ -69,11 +77,9 @@ export class PlaylistCreatorComponent {
   }
   performSearch(searchValue: string) {
     if (searchValue !== '') {
-      console.log('Performing search for:', searchValue);
       this.httpClient.search(searchValue).subscribe((response: any) => {
         this.artistResults = response.searchResults.artistResults;
         this.songsResults = response.searchResults.songsResults;
-        console.log(this.artistResults, this.songsResults);
       });
     } else {
       this.artistResults = null;
@@ -84,7 +90,6 @@ export class PlaylistCreatorComponent {
     const dialogRef = this.dialog.open(CreatorDialogComponent, {});
 
     dialogRef.afterClosed().subscribe((result) => {
-      console.log('The dialog was closed');
       if (result) {
         if (result.imageUrl === '') {
           this.playlist = {
@@ -127,7 +132,6 @@ export class PlaylistCreatorComponent {
     }
   }
   sendToServer() {
-    console.log(this.playlist);
     this.httpClient.createPlaylist(this.playlist).subscribe(
       (result: {
         data: {

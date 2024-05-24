@@ -43,7 +43,7 @@
               <button
                 mat-menu-item
                 [matMenuTriggerFor]="playlists"
-                [disabled]="!isLogedin()"
+                [disabled]="!isLoggedin()"
               >
                 Add to playlist
               </button>
@@ -69,7 +69,7 @@
           *ngIf="artistResults !== null && artistResults.length !== 0"
           >Artist</span
         >
-        <div style="display: flex; flex-wrap: wrap">
+        <div class="song-results-wrap" style="display: flex; flex-wrap: wrap">
           <div class="result-card" *ngFor="let song of artistResults">
             <div class="result-card-grid" (click)="selectSong(song)">
               <div class="img-container">
@@ -91,7 +91,11 @@
               <mat-icon>more_vert</mat-icon>
             </button>
             <mat-menu #songOptions="matMenu">
-              <button mat-menu-item [matMenuTriggerFor]="playlists">
+              <button
+                mat-menu-item
+                [matMenuTriggerFor]="playlists"
+                [disabled]="!isLoggedin()"
+              >
                 Add to playlist
               </button>
               <button mat-menu-item (click)="addToQueue(song)">

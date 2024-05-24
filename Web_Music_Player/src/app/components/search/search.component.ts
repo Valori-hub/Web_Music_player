@@ -45,7 +45,7 @@ export class SearchComponent {
     this.getUsersPlaylists();
   }
 
-  isLogedin() {
+  isLoggedin() {
     return this.httpClient.isLoggedIn();
   }
   addToQueue(songLink: Isongs) {

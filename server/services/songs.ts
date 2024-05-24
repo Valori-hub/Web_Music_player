@@ -23,7 +23,7 @@ export async function searchSong(searchInput: string) {
         .toArray();
       return { artistResults: artistResults, songsResults: songsResults };
     } else {
-      console.log('type something');
+      return;
     }
   } catch (error) {
     console.error('Error fetching documents:', error);

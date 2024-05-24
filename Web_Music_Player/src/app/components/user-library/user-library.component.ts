@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { UserPlaylistComponent } from '../user-playlist/user-playlist.component';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
+import { HttpService } from '../../http-service.service';
 
 @Component({
   selector: 'app-user-library',
@@ -9,4 +11,17 @@ import { CommonModule } from '@angular/common';
   templateUrl: './user-library.component.html',
   styleUrl: './user-library.component.scss',
 })
-export class UserLibraryComponent {}
+export class UserLibraryComponent implements OnInit {
+  constructor(private router: Router, private httpClient: HttpService) {}
+  ngOnInit(): void {
+    this.isLoggedin();
+  }
+  isLoggedin() {
+    if (!this.httpClient.isLoggedIn()) {
+      this.router.navigate(['/home']);
+      return false;
+    } else {
+      return true;
+    }
+  }
+}

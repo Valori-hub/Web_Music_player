@@ -1,4 +1,4 @@
-@media screen and (min-width: 1000px) {
+@media screen and (min-width: 0px) {
   .home_container_main-container {
     background-color: #161616;
     height: 100%;
@@ -13,6 +13,17 @@
       &:hover {
         opacity: 70%;
         cursor: default;
+      }
+    }
+    > .user-playlists {
+      > h1 {
+        font-size: 50px;
+        margin: 2rem;
+        color: white;
+        &:hover {
+          opacity: 70%;
+          cursor: default;
+        }
       }
     }
   }

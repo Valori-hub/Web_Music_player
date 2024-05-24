@@ -1,31 +1,53 @@
-<div class="login-page" style="background-color: white;">
+<div class="login-page">
   <form [formGroup]="loginForm">
     <mat-card>
-        <div class="username-container">
-          <mat-form-field>
-            <mat-label>Username</mat-label>
-            <input matInput placeholder="" [formControl]="loginForm.controls.username">
-          </mat-form-field>
-        </div>
-    
+      <div class="username-container">
         <mat-form-field>
-          <mat-label>Enter your password</mat-label>
-          <input matInput [type]="hide ? 'password' : 'text'" [formControl]="loginForm.controls.password">
-          <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-          </button>
+          <mat-label>Username</mat-label>
+          <input
+            matInput
+            placeholder=""
+            [formControl]="loginForm.controls.username"
+          />
         </mat-form-field>
-        <div class="button-section">
-          <button mat-flat-button color="primary" type="submit" [disabled]="!loginForm.valid" (click)="login()">Log in</button>
-        </div>
+      </div>
+
+      <mat-form-field>
+        <mat-label>Enter your password</mat-label>
+        <input
+          matInput
+          [type]="hide ? 'password' : 'text'"
+          [formControl]="loginForm.controls.password"
+        />
+        <button
+          mat-icon-button
+          matSuffix
+          (click)="hide = !hide"
+          [attr.aria-label]="'Hide password'"
+          [attr.aria-pressed]="hide"
+        >
+          <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+        </button>
+      </mat-form-field>
+      <div class="button-section">
+        <button
+          mat-flat-button
+          color="primary"
+          type="submit"
+          [disabled]="!loginForm.valid"
+          (click)="login()"
+        >
+          Log in
+        </button>
+      </div>
     </mat-card>
   </form>
   <div class="right-content-container">
     <div class="div1">
-      <span>{{this.rightSectionFirstText}}</span>
+      <span>{{ this.rightSectionFirstText }}</span>
     </div>
     <div class="div2">
-      <span class="main-span">{{this.rightSectionSecoundText}}</span>
+      <span class="main-span">{{ this.rightSectionSecoundText }}</span>
     </div>
   </div>
 </div>

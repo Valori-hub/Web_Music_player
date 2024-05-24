@@ -1,6 +1,6 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute, CanActivate, RouterOutlet } from '@angular/router';
-import { HttpClientModule, HttpSentEvent } from '@angular/common/http';
+import { Component } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http';
 import { PlaylistComponent } from './components/playlist/playlist.component';
 import { SideBarComponent } from './components/side-bar/side-bar.component';
 import { TopNavbarComponent } from './components/top-navbar/top-navbar.component';
@@ -10,8 +10,6 @@ import { SignupComponent } from './pages/signup/signup.component';
 import { CommonModule } from '@angular/common';
 import { HttpService } from './http-service.service';
 import { Router, NavigationEnd } from '@angular/router';
-import { filter } from 'rxjs/operators';
-import { AuthGuard } from './auth.guard';
 
 @Component({
   selector: 'app-root',
@@ -33,11 +31,9 @@ import { AuthGuard } from './auth.guard';
 export class AppComponent {
   title = 'Web_Music_Player';
   showGrid: boolean = true;
-  publicRoutes = [
-    '/home(authentication:login)',
-    '/home(authentication:signup)',
-  ];
-  constructor(private router: Router, private authService: AuthGuard) {}
+  private authenticationRegex: RegExp = /\(authentication:.*?\)/;
+
+  constructor(private router: Router, private httpClient: HttpService) {}
 
   ngOnInit(): void {
     this.router.events.subscribe((event) => {
@@ -47,16 +43,19 @@ export class AppComponent {
     });
     this.canActivate();
   }
+  //If the user is logged in, there is no
+  //possibility of navigating between pages using the URL.
   canActivate(): boolean {
-    if (sessionStorage.getItem('username')) {
+    if (this.httpClient.isLoggedIn()) {
       this.router.navigate(['/home']);
       return false;
     }
     return true;
   }
+  // Disabling the grid when navigating to the login or signup route
+  //  includes every other variation that may crash the layout.
   checkRoute(url: string): void {
-    console.log(url);
-    if (this.publicRoutes.includes(url)) {
+    if (this.authenticationRegex.test(url)) {
       this.showGrid = false;
     } else {
       this.showGrid = true;

@@ -64,13 +64,11 @@ export async function createPlaylist(
   user: string
 ) {
   try {
-    console.log(user);
     const userExist = await db.collection('Users').findOne({ username: user });
     if (!userExist) {
       console.log('User not found');
       return;
     }
-    console.log(userExist);
 
     if (!userExist.playlists) {
       userExist.playlists = [];
@@ -114,8 +112,6 @@ export async function addToPlaylist(
   playlist: Iplaylist
 ) {
   try {
-    console.log(user);
-    console.log('chcialbym wiedziec czemu nie dzialasz');
     const userExist = await db.collection('Users').findOne({ username: user });
     if (!userExist) {
       console.log('User not found');
@@ -124,7 +120,6 @@ export async function addToPlaylist(
       const playlistExist = userExist.playlists.find(
         (p) => p._id.toString() === playlist._id.toString()
       );
-      console.log(playlistExist);
       console.log('Playlist match');
       if (playlistExist) {
         const songAlreadyExist = playlistExist.songs.find(
@@ -136,7 +131,6 @@ export async function addToPlaylist(
           playlistExist.songs.push(song);
         }
       } else {
-        console.log('couldnt find playlist');
         return { success: false, message: 'Playlist not found' };
       }
       await db

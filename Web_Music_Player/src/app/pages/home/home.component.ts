@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { TopNavbarComponent } from '../../components/top-navbar/top-navbar.component';
-import { SongCardsComponent } from '../../components/song-cards/song-cards.component';
 import { PlaylistComponent } from '../../components/playlist/playlist.component';
 import { PlaylistPageComponent } from '../playlist-page/playlist-page.component';
 import { UserPlaylistComponent } from '../../components/user-playlist/user-playlist.component';
@@ -18,11 +17,8 @@ import { CommonModule } from '@angular/common';
   imports: [
     MatIconModule,
     TopNavbarComponent,
-    SongCardsComponent,
     PlaylistComponent,
     PlaylistPageComponent,
-    // AudioPlayerComponent,
-    // SideBarComponent
     UserPlaylistComponent,
     CommonModule,
   ],

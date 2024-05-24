@@ -36,7 +36,6 @@ export class HttpService {
       }
     } else {
       // sessionStorage is not available
-      console.warn('sessionStorage is not available.');
     }
     return check;
   }
@@ -87,6 +86,7 @@ export class HttpService {
         `playlists/playlist-user?userId=${userId}&playlistId=${playlist_id}`
     );
   }
+  //Adding song to choosen user playlist
   addToPlaylist(username: string | null, song: Isongs, playlist: Iplaylist) {
     console.log(username);
     return this.http.post(this.url + 'playlists/add', {
