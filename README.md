@@ -44,3 +44,10 @@ Web_Music_player\server>  nodemon index.ts
 7. Run aplication:
 ```
 Web_Music_player/Web_Music_Player>  ng serve
+```
+# ✅ To do :x: 
+
+## 🔲 - remodel user current session storaging  
+## 🔲 - add responsivity to application.
+## 🔲 - write comments
+## 🔲 - implement editing functionality for playlists and user profile.
