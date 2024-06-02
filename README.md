@@ -22,11 +22,11 @@ cd ./Web-music-player
 ```
 3. Create a new Mongo database named MusicPlayer and then create collections with the same names as those in the mongoDB folder. Next, import the appropriate JSON files into the collections
 
-  ***MusicPlayer***                                            
-  * GenreInfo
-  * PlayLists
-  * Songs
-  * Users
+MusicPlayer <br/>
+&emsp;&emsp;├───GenreInfo <br/>
+&emsp;&emsp;├───PlayLists <br/>
+&emsp;&emsp;├───Songs <br/>
+&emsp;&emsp;└───Users <br/>
 5. Install node modules in the server directory:
 ```
 cd ./server
