@@ -7,7 +7,11 @@ import cors from 'cors';
 
 var BodyParser = require('body-parser');
 const app = express();
+const session = require('express-session');
+const crypto = require('crypto');
+const MongoStore = require('connect-mongo');
 const port = 3000;
+const secret = crypto.randomBytes(64).toString('hex');
 app.use(BodyParser.json());
 app.use(cors({ origin: 'http://localhost:4200' }));
 app.get('/', (req, res) => {
@@ -17,6 +21,18 @@ app.get('/', (req, res) => {
 app.use('/songs', SongsRoutes.router as RequestHandler);
 app.use('/playlists', PlaylistRoutes.router as RequestHandler);
 app.use('/users', UserRoutes.router as RequestHandler);
+app.use(
+  session({
+    secret: secret,
+    resave: false,
+    saveUninitialized: true,
+    store: MongoStore.create({
+      mongoUrl: 'mongodb://localhost:27017/MusicPlayer',
+      collectionName: 'sessions',
+    }),
+    cookie: { maxAge: 180 * 60 * 1000 }, // Session duration: 3 hours
+  })
+);
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);

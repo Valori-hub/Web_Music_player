@@ -24,10 +24,8 @@ import { CommonModule } from '@angular/common';
   ],
 })
 export class HomeComponent {
-  check: boolean = false;
   constructor(private httpClient: HttpService) {}
   isLoggedIn() {
-    this.check = this.httpClient.isLoggedIn();
-    return this.check;
+    return this.httpClient.isLoggedIn();
   }
 }

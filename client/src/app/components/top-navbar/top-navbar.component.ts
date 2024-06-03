@@ -20,22 +20,30 @@ import { CommonModule } from '@angular/common';
   styleUrl: './top-navbar.component.scss',
 })
 export class TopNavbarComponent implements OnInit {
+  username: string | null;
   constructor(private httpClient: HttpService, private router: Router) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.getSessionData();
+  }
   authNavigate(string: string) {
     this.router.navigateByUrl(`(authentication:${string})`);
   }
-  getUsername() {
-    return this.httpClient.getUsername();
+  private getSessionData() {
+    this.httpClient.getSessionData().subscribe((result) => {
+      this.username = result.username;
+    });
   }
-  isLoggedIn() {
-    return this.httpClient.isLoggedIn();
+  isLoggedIn(): boolean {
+    if (!this.httpClient.getSessionData()) {
+      return false;
+    }
+    return true;
   }
   //Clearing user session storage and reloading the page
   logout() {
     this.httpClient.logout();
-    window.location.reload();
+    // window.location.reload();
     this.router.navigate(['']);
   }
 }
