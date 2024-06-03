@@ -3,12 +3,7 @@ import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { Iplaylist, Isongs } from './components/playlist/model/Songs';
 import { IcreatorPlaylist } from './components/playlist-creator/model/creatorInterfaces';
-import { Observable } from 'rxjs';
 
-interface SessionInfo {
-  username: string | null;
-  userId: string | null;
-}
 @Injectable({
   providedIn: 'root',
 })
@@ -25,9 +20,7 @@ export class HttpService {
   //Posting new user data to the server.
   createUser(user: any) {
     delete user.confirmPassword;
-    return this.http.post<any>(this.url + 'users/register', {
-      userObject: user,
-    });
+    return this.http.post<any>(this.url + 'users', { userObject: user });
   }
   loginUser(user: any) {
     return this.http.post<any>(this.url + 'users/login', { userObject: user });
@@ -50,14 +43,10 @@ export class HttpService {
   getUsername(): string | null {
     return sessionStorage.getItem('username');
   }
-  getSessionData(): Observable<SessionInfo> {
-    return this.http.get<SessionInfo>(this.url + 'users/session-info');
-  }
   //Remove all from the session storage
-  logout() {
-    // return this.http.get(this.url + 'users/logout');
-    sessionStorage.removeItem('username');
+  logout(): void {
     sessionStorage.removeItem('sessionId');
+    sessionStorage.removeItem('username');
   }
   search(searchInput: any) {
     return this.http.post<any>(this.url + 'songs/search', {
@@ -99,6 +88,7 @@ export class HttpService {
   }
   //Adding song to choosen user playlist
   addToPlaylist(username: string | null, song: Isongs, playlist: Iplaylist) {
+    console.log(username);
     return this.http.post(this.url + 'playlists/add', {
       username: username,
       song: song,

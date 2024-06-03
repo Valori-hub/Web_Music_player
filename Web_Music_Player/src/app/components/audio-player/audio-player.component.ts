@@ -50,7 +50,7 @@ export class AudioPlayerComponent {
   currentSongIndex: number = 0;
 
   private audio!: HTMLAudioElement;
-  isPlaying: boolean;
+  isPlaying: boolean = false;
   playlistsData: any;
 
   constructor(
@@ -87,8 +87,9 @@ export class AudioPlayerComponent {
         this.audio.pause();
         this.audio.src = this.currentSong;
         this.audio.load();
-        this.audio.play();
-        this.isPlaying = true;
+        if (this.isPlaying) {
+          this.audio.play();
+        }
       }
     });
     this.getUsersPlaylists();

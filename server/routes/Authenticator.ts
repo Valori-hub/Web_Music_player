@@ -2,9 +2,20 @@ import express, { Request as ExpressRequest, Response } from 'express';
 import * as users from '../services/Authenticator';
 import session from 'express-session';
 
+interface RequestWithSession extends ExpressRequest {
+  session: any;
+}
 const router = express.Router();
 
-router.post('/register', async (req: ExpressRequest, res: Response) => {
+router.use(
+  session({
+    secret: 'secret',
+    resave: false,
+    saveUninitialized: true,
+  })
+);
+
+router.post('', async (req: RequestWithSession, res: Response) => {
   try {
     const userData = req.body.userObject;
     const result = await users.userRegistartion(userData);
@@ -14,7 +25,7 @@ router.post('/register', async (req: ExpressRequest, res: Response) => {
     res.status(500).json({ error: 'Internal server error' });
   }
 });
-router.post('/login', async (req: ExpressRequest, res: Response) => {
+router.post('/login', async (req: RequestWithSession, res: Response) => {
   try {
     const usernameLogin = req.body.userObject;
     const result = await users.userLogin(usernameLogin);
@@ -23,8 +34,7 @@ router.post('/login', async (req: ExpressRequest, res: Response) => {
       res.status(401).json({ error: 'Invalid credentials' });
       return;
     } else if (result.success && result.userExist) {
-      session.userId = result.userExist._id;
-      session.username = result.userExist.username;
+      req.session.userId = usernameLogin.username;
       console.log('token has been created!');
     }
     res.status(201).json({ data: result, user: username });
@@ -33,22 +43,5 @@ router.post('/login', async (req: ExpressRequest, res: Response) => {
     res.status(500).json({ error: 'Internal server error' });
   }
 });
-// router.get('/logout', (req, res) => {
-//   session.destroy((err) => {
-//     if (err) {
-//       return res.status(500).send('Error logging out');
-//     }
-//     res.send('User logged out successfully');
-//   });
-// });
-router.get('/session-info', (req: ExpressRequest, res: Response) => {
-  if (session.userId) {
-    res.json({
-      userId: session.userId,
-      username: session.username,
-    });
-  } else {
-    res.status(401).json({ message: 'Not authenticated' });
-  }
-});
+
 export { router };

@@ -4,7 +4,7 @@
     <h1 style="color: aliceblue" (click)="authNavigate('signup')">Sign up</h1>
   </div>
   <div class="top-navbar_right-section" *ngIf="isLoggedIn()">
-    <h1 style="color: gray">{{ username }}</h1>
+    <h1 style="color: gray">{{ getUsername() }}</h1>
     <mat-icon
       class="icons"
       [inline]="true"
