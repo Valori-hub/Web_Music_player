@@ -15,6 +15,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatSelectModule } from '@angular/material/select';
 import { HttpService } from '../../http-service.service';
 import { Router } from '@angular/router';
+import { authService } from '../../auth-service.service';
 
 @Component({
   selector: 'app-login',
@@ -44,23 +45,25 @@ export class LoginComponent {
       Validators.minLength(8),
     ]),
   });
-  constructor(private httpClient: HttpService, private router: Router) {}
+  constructor(
+    private httpClient: HttpService,
+    private router: Router,
+    private auth: authService
+  ) {}
 
   login() {
     const formValues = this.loginForm.getRawValue();
     this.httpClient.loginUser(formValues).subscribe((response: any) => {
-      if (response.data.success) {
-        sessionStorage.setItem('sessionId', response.sessionId);
-        sessionStorage.setItem('username', response.user);
-        sessionStorage.setItem('gender', response.userGender);
+      if (response.result.success) {
+        this.auth.getSessionData();
         this.rightSectionFirstText = 'Welcome';
-        this.rightSectionSecoundText = response.data.userExist.firstName;
+        this.rightSectionSecoundText = response.result.userExist.firstName;
         setTimeout(() => {
           this.router.navigate(['']);
         }, 3000);
       } else {
-        this.rightSectionFirstText = response.data.message1;
-        this.rightSectionSecoundText = response.data.message2;
+        this.rightSectionFirstText = response.result.message1;
+        this.rightSectionSecoundText = response.result.message2;
       }
     });
   }

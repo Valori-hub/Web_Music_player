@@ -5,6 +5,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { Router, RouterModule } from '@angular/router';
 import { HttpService } from '../../http-service.service';
 import { CommonModule } from '@angular/common';
+import { authService } from '../../auth-service.service';
+import { Isongs } from '../playlist/model/Songs';
+import { AudioPlayerComponent } from '../audio-player/audio-player.component';
 
 @Component({
   selector: 'app-top-navbar',
@@ -21,29 +24,29 @@ import { CommonModule } from '@angular/common';
 })
 export class TopNavbarComponent implements OnInit {
   username: string | null;
-  constructor(private httpClient: HttpService, private router: Router) {}
-
-  ngOnInit(): void {
-    this.getSessionData();
+  constructor(
+    private httpClient: HttpService,
+    private router: Router,
+    private auth: authService,
+    private player: AudioPlayerComponent
+  ) {}
+  getUsername() {
+    return this.auth.getUsername();
   }
+  ngOnInit(): void {}
+
   authNavigate(string: string) {
     this.router.navigateByUrl(`(authentication:${string})`);
   }
-  private getSessionData() {
-    this.httpClient.getSessionData().subscribe((result) => {
-      this.username = result.username;
-    });
-  }
   isLoggedIn(): boolean {
-    if (!this.httpClient.getSessionData()) {
-      return false;
-    }
-    return true;
+    return this.auth.isLoggedIn();
   }
   //Clearing user session storage and reloading the page
   logout() {
-    this.httpClient.logout();
-    // window.location.reload();
+    this.httpClient.logout().subscribe((result) => {
+      result;
+    });
+    window.location.reload();
     this.router.navigate(['']);
   }
 }

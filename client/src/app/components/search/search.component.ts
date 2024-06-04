@@ -10,6 +10,7 @@ import { Iplaylist, Isongs } from '../playlist/model/Songs';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { authService } from '../../auth-service.service';
 
 @Component({
   selector: 'app-search',
@@ -29,12 +30,13 @@ import { MatIconModule } from '@angular/material/icon';
 export class SearchComponent {
   private searchSubject = new Subject<string>();
   private readonly debounceTimeMs = 400;
+  username = this.auth.username;
   inputText: string = '';
   artistResults: any = null;
   songsResults: any = null;
   playlistsData: any;
   songsQueue: Isongs[] = [];
-  constructor(private httpClient: HttpService) {}
+  constructor(private httpClient: HttpService, private auth: authService) {}
 
   ngOnInit() {
     this.searchSubject
@@ -46,7 +48,7 @@ export class SearchComponent {
   }
 
   isLoggedin() {
-    return this.httpClient.isLoggedIn();
+    return this.auth.isLoggedIn();
   }
   addToQueue(songLink: Isongs) {
     if (
@@ -54,15 +56,12 @@ export class SearchComponent {
     ) {
       this.songsQueue.push(songLink);
       this.httpClient.changeSong(this.songsQueue);
-      console.log(this.songsQueue);
     } else {
-      console.log('Song is already added to queue');
     }
   }
   selectSong(songLink: Isongs) {
     this.songsQueue.length = 0;
     this.songsQueue.push(songLink);
-    console.log(this.songsQueue);
     this.httpClient.changeSong(this.songsQueue);
   }
   ngOnDestroy() {
@@ -73,11 +72,9 @@ export class SearchComponent {
   }
   performSearch(searchValue: string) {
     if (searchValue !== '') {
-      console.log('Performing search for:', searchValue);
       this.httpClient.search(searchValue).subscribe((response: any) => {
         this.artistResults = response.searchResults.artistResults;
         this.songsResults = response.searchResults.songsResults;
-        console.log(this.artistResults, this.songsResults);
       });
     } else {
       this.artistResults = null;
@@ -85,20 +82,21 @@ export class SearchComponent {
     }
   }
   private async getUsersPlaylists() {
-    if (this.httpClient.isLoggedIn()) {
-      this.httpClient.getUsersPlaylistsData().subscribe((result) => {
-        this.playlistsData = result.data.data;
-      });
+    if (this.auth.isLoggedIn()) {
+      this.httpClient
+        .getUsersPlaylistsData(this.username)
+        .subscribe((result) => {
+          if (!result) {
+            this.playlistsData = result.data.data;
+          }
+        });
     }
     return;
   }
   addToPlaylist(playlist: Iplaylist, song: Isongs) {
-    let username = this.httpClient.getUsername();
-    console.log(username);
+    let username = this.auth.getUsername();
     this.httpClient
       .addToPlaylist(username, song, playlist)
-      .subscribe((results) => {
-        console.log(results);
-      });
+      .subscribe((results) => {});
   }
 }

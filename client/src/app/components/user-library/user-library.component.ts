@@ -3,6 +3,7 @@ import { UserPlaylistComponent } from '../user-playlist/user-playlist.component'
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { HttpService } from '../../http-service.service';
+import { authService } from '../../auth-service.service';
 
 @Component({
   selector: 'app-user-library',
@@ -12,12 +13,16 @@ import { HttpService } from '../../http-service.service';
   styleUrl: './user-library.component.scss',
 })
 export class UserLibraryComponent implements OnInit {
-  constructor(private router: Router, private httpClient: HttpService) {}
+  constructor(
+    private router: Router,
+    private httpClient: HttpService,
+    private auth: authService
+  ) {}
   ngOnInit(): void {
     this.isLoggedin();
   }
   isLoggedin() {
-    if (!this.httpClient.isLoggedIn()) {
+    if (!this.auth.isLoggedIn()) {
       this.router.navigate(['/home']);
       return false;
     } else {

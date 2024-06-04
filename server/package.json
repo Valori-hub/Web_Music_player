@@ -21,6 +21,7 @@
     "typescript": "^5.4.5"
   },
   "devDependencies": {
-    "@types/cors": "^2.8.17"
+    "@types/cors": "^2.8.17",
+    "@types/express-session": "^1.18.0"
   }
 }

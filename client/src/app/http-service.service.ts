@@ -20,7 +20,7 @@ export class HttpService {
   constructor(private http: HttpClient) {}
   //Sending new audio src to the audio-player component
   changeSong(songUrl: Isongs[]) {
-    this.songSource.next(songUrl);
+    this.songSource?.next(songUrl);
   }
   //Posting new user data to the server.
   createUser(user: any) {
@@ -30,34 +30,24 @@ export class HttpService {
     });
   }
   loginUser(user: any) {
-    return this.http.post<any>(this.url + 'users/login', { userObject: user });
-  }
-  //Verifying if the user is logged in.
-  isLoggedIn(): boolean {
-    let check: boolean = false;
-    let userExist: string | null;
-    if (typeof sessionStorage !== 'undefined') {
-      userExist = sessionStorage.getItem('sessionId');
-      if (userExist != null) {
-        check = true;
-      }
-    } else {
-      // sessionStorage is not available
-    }
-    return check;
-  }
-  //Getting current logged in username from the session storage
-  getUsername(): string | null {
-    return sessionStorage.getItem('username');
-  }
-  getSessionData(): Observable<SessionInfo> {
-    return this.http.get<SessionInfo>(this.url + 'users/session-info');
+    return this.http.post<any>(
+      this.url + 'users/login',
+      { userObject: user },
+      { withCredentials: true }
+    );
   }
   //Remove all from the session storage
   logout() {
-    // return this.http.get(this.url + 'users/logout');
-    sessionStorage.removeItem('username');
-    sessionStorage.removeItem('sessionId');
+    return this.http.post(
+      this.url + 'users/logout',
+      {},
+      { withCredentials: true }
+    );
+  }
+  getSessionData(): Observable<SessionInfo> {
+    return this.http.get<SessionInfo>(this.url + 'users/session-info', {
+      withCredentials: true,
+    });
   }
   search(searchInput: any) {
     return this.http.post<any>(this.url + 'songs/search', {
@@ -65,11 +55,10 @@ export class HttpService {
     });
   }
   // Sending the created playlist data to the currently logged-in user.
-  createPlaylist(playlistData: IcreatorPlaylist) {
-    const userId = sessionStorage.getItem('username');
+  createPlaylist(playlistData: IcreatorPlaylist, username: string | null) {
     return this.http.post<any>(this.url + 'playlists/create-playlist', {
       playlist: playlistData,
-      userId: userId,
+      userId: username,
     });
   }
   // Getting global playlists and displaying it as a card on the home page.
@@ -77,10 +66,9 @@ export class HttpService {
     return this.http.get(this.url + 'playlists/playlists');
   }
   // Getting all user playlists and displaying it as a card on the home page.
-  getUsersPlaylistsData() {
-    const userId = sessionStorage.getItem('username');
+  getUsersPlaylistsData(username: string | null) {
     return this.http.post<any>(this.url + 'playlists/user-playlists', {
-      userId: userId,
+      username: username,
     });
   }
   // Getting global playlist data and displaying it on the playlist page.
@@ -90,11 +78,10 @@ export class HttpService {
     );
   }
   // Getting user playlist data and displaying it on the playlist page.
-  getUserPlayList(playlist_id: string) {
-    const userId = sessionStorage.getItem('username');
+  getUserPlayList(playlist_id: string, username: string | null) {
     return this.http.get(
       this.url +
-        `playlists/playlist-user?userId=${userId}&playlistId=${playlist_id}`
+        `playlists/playlist-user?username=${username}&playlistId=${playlist_id}`
     );
   }
   //Adding song to choosen user playlist

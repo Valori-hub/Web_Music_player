@@ -3,6 +3,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { Router, RouterModule } from '@angular/router';
 import { HttpService } from '../../http-service.service';
 import { CommonModule } from '@angular/common';
+import { authService } from '../../auth-service.service';
 
 @Component({
   selector: 'app-side-bar',
@@ -12,5 +13,12 @@ import { CommonModule } from '@angular/common';
   styleUrl: './side-bar.component.scss',
 })
 export class SideBarComponent {
-  constructor(public httpClient: HttpService, private router: Router) {}
+  constructor(
+    private httpClient: HttpService,
+    private router: Router,
+    private auth: authService
+  ) {}
+  isLoggedIn(): boolean {
+    return this.auth.isLoggedIn();
+  }
 }
