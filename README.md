@@ -47,7 +47,7 @@ Web_Music_player/Web_Music_Player>  ng serve
 ```
 # ✅ To do :x: 
 
-## 🔲 - remodel user current session storaging  //work in progress
+## ✅ - remodel user current session storaging
 ## 🔲 - add responsivity to application.
 ## 🔲 - write comments
 ## 🔲 - implement editing functionality for playlists and user profile.
