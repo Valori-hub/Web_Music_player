@@ -14,7 +14,7 @@ router.get('/playlist', async (req, res) => {
 });
 router.get('/playlist-user', async (req, res) => {
   const playlist_id = req.query.playlistId as string;
-  const userAuth = req.query.userId as string | null;
+  const userAuth = req.query.username as string;
   const result = await playlists.getUserPlayList(playlist_id, userAuth);
   res.send(result);
 });
@@ -25,12 +25,13 @@ router.post('/create-playlist', async (req, res) => {
   res.status(201).json({ data: result });
 });
 router.post('/user-playlists', async (req, res) => {
-  const userAuth = req.body.userId as string;
+  const userAuth = req.body.username as string | null;
   const result = await playlists.getUserPlaylists(userAuth);
   res.status(201).json({ data: result });
 });
 router.post('/add', async (req, res) => {
-  const userAuth = req.body.username as string;
+  const userAuth = req.body.username as string | null;
+  console.log(userAuth + 'add button');
   const song = req.body.song as Isong;
   const playlist = req.body.playlist as Iplaylist;
   const result = playlists.addToPlaylist(userAuth, song, playlist);

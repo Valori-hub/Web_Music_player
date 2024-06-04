@@ -4,6 +4,7 @@ import { MatCardModule } from '@angular/material/card';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpService } from '../../http-service.service';
 import { Router, RouterModule } from '@angular/router';
+import { authService } from '../../auth-service.service';
 
 @Component({
   selector: 'app-user-playlist',
@@ -14,13 +15,22 @@ import { Router, RouterModule } from '@angular/router';
 })
 export class UserPlaylistComponent implements OnInit {
   playlistsData: any;
-  constructor(private httpClient: HttpService, private router: Router) {}
+  username = this.auth.username;
+  constructor(
+    private httpClient: HttpService,
+    private router: Router,
+    private auth: authService
+  ) {}
 
   private async getUsersPlaylists() {
-    if (this.httpClient.isLoggedIn()) {
-      this.httpClient.getUsersPlaylistsData().subscribe((result) => {
-        this.playlistsData = result.data.data;
-      });
+    if (this.auth.isLoggedIn()) {
+      this.httpClient
+        .getUsersPlaylistsData(this.username)
+        .subscribe((result) => {
+          if (result !== undefined) {
+            this.playlistsData = result.data.data;
+          }
+        });
     }
     return;
   }

@@ -18,5 +18,9 @@
     "mongodb": "^6.5.0",
     "nodemon": "^3.1.0",
     "typescript": "^5.4.5"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.17",
+    "@types/express-session": "^1.18.0"
   }
 }

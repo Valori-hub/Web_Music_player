@@ -23,7 +23,7 @@
     </div>
     <div class="side-bar_grid2">
       <mat-icon
-        *ngIf="httpClient.isLoggedIn() === true"
+        *ngIf="isLoggedIn()"
         class="icons"
         [inline]="true"
         aria-hidden="false"
@@ -33,7 +33,7 @@
         ><a class="icon_text">Your Library</a></mat-icon
       >
       <mat-icon
-        *ngIf="httpClient.isLoggedIn() === true"
+        *ngIf="isLoggedIn()"
         class="icons"
         [inline]="true"
         aria-hidden="false"

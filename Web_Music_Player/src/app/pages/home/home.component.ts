@@ -6,6 +6,7 @@ import { PlaylistPageComponent } from '../playlist-page/playlist-page.component'
 import { UserPlaylistComponent } from '../../components/user-playlist/user-playlist.component';
 import { HttpService } from '../../http-service.service';
 import { CommonModule } from '@angular/common';
+import { authService } from '../../auth-service.service';
 // import { AudioPlayerComponent } from '../../components/audio-player/audio-player.component';
 // import { SideBarComponent } from '../../components/side-bar/side-bar.component';
 
@@ -24,10 +25,8 @@ import { CommonModule } from '@angular/common';
   ],
 })
 export class HomeComponent {
-  check: boolean = false;
-  constructor(private httpClient: HttpService) {}
+  constructor(private httpClient: HttpService, private auth: authService) {}
   isLoggedIn() {
-    this.check = this.httpClient.isLoggedIn();
-    return this.check;
+    return this.auth.isLoggedIn();
   }
 }

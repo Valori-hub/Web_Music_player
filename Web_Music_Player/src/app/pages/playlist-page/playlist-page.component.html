@@ -1,7 +1,7 @@
 <div class="main">
   <div class="page-container">
     <div class="playlist-description-container">
-      <div class="description-card">
+      <div class="description-card" *ngIf="playlistData">
         <div class="img-container">
           <img [src]="playlistData.cover" alt="Playlist Cover" />
           <div class="test">
@@ -33,7 +33,7 @@
     <div class="list-grid">
       <div
         class="card-list-grid"
-        *ngFor="let song of playlistData.songs; let i = index"
+        *ngFor="let song of playlistData?.songs; let i = index"
         (click)="selectSong(song)"
       >
         <div class="numeration">{{ i + 1 }}</div>

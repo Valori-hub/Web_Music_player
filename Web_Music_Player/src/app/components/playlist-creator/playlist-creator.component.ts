@@ -15,6 +15,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { IcreatorPlaylist, IcreatorSongs } from './model/creatorInterfaces';
 import { Route, Router } from '@angular/router';
+import { authService } from '../../auth-service.service';
 
 @Component({
   selector: 'app-playlist-creator',
@@ -36,6 +37,7 @@ import { Route, Router } from '@angular/router';
 export class PlaylistCreatorComponent {
   private searchSubject = new Subject<string>();
   private readonly debounceTimeMs = 400;
+  username: string | null = this.auth.username;
   inputText: string = '';
   artistResults: any = null;
   songsResults: any = null;
@@ -49,7 +51,8 @@ export class PlaylistCreatorComponent {
   constructor(
     public dialog: MatDialog,
     private httpClient: HttpService,
-    private router: Router
+    private router: Router,
+    private auth: authService
   ) {}
 
   ngOnInit() {
@@ -61,7 +64,7 @@ export class PlaylistCreatorComponent {
     this.isLoggedin();
   }
   isLoggedin() {
-    if (!this.httpClient.isLoggedIn()) {
+    if (!this.auth.isLoggedIn()) {
       this.router.navigate(['/home']);
       return false;
     } else {
@@ -132,7 +135,7 @@ export class PlaylistCreatorComponent {
     }
   }
   sendToServer() {
-    this.httpClient.createPlaylist(this.playlist).subscribe(
+    this.httpClient.createPlaylist(this.playlist, this.username).subscribe(
       (result: {
         data: {
           success: true;

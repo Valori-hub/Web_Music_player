@@ -3,6 +3,7 @@ import {
   Inject,
   PLATFORM_ID,
   ChangeDetectorRef,
+  Injectable,
 } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
@@ -18,7 +19,10 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
-
+import { authService } from '../../auth-service.service';
+@Injectable({
+  providedIn: 'root',
+})
 @Component({
   selector: 'app-audio-player',
   standalone: true,
@@ -42,6 +46,7 @@ import { MatButtonModule } from '@angular/material/button';
   styleUrl: './audio-player.component.scss',
 })
 export class AudioPlayerComponent {
+  username = this.auth.username;
   currentTime: number | undefined = 0;
   duration: number = 0;
   sliderValue: number = 1;
@@ -56,7 +61,8 @@ export class AudioPlayerComponent {
   constructor(
     @Inject(PLATFORM_ID) private platformId: Object,
     private changeDetectorRef: ChangeDetectorRef,
-    private httpClient: HttpService
+    private httpClient: HttpService,
+    private auth: authService
   ) {
     if (isPlatformBrowser(this.platformId)) {
       this.audio = new Audio();
@@ -95,10 +101,10 @@ export class AudioPlayerComponent {
     this.getUsersPlaylists();
   }
   isLoggedin(): boolean {
-    return this.httpClient.isLoggedIn();
+    return this.auth.isLoggedIn();
   }
   addToPlaylist(playlist: Iplaylist, song: Isongs) {
-    let username = this.httpClient.getUsername();
+    let username = this.auth.getUsername();
     this.httpClient.addToPlaylist(username, song, playlist);
   }
   skipSong() {
@@ -113,7 +119,6 @@ export class AudioPlayerComponent {
       }
     }
   }
-
   previousSong() {
     if (this.currentSongIndex >= 1) {
       this.audio.pause();
@@ -146,10 +151,12 @@ export class AudioPlayerComponent {
     return (this.audio.currentTime / this.audio.duration) * 100;
   }
   private getUsersPlaylists() {
-    if (this.httpClient.isLoggedIn()) {
-      this.httpClient.getUsersPlaylistsData().subscribe((result) => {
-        this.playlistsData = result.data.data;
-      });
+    if (this.auth.isLoggedIn()) {
+      this.httpClient
+        .getUsersPlaylistsData(this.username)
+        .subscribe((result) => {
+          this.playlistsData = result.data.data;
+        });
     }
     return;
   }

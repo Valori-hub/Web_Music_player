@@ -7,6 +7,7 @@ import { Iplaylist, Isongs } from '../../components/playlist/model/Songs';
 import { MatListModule } from '@angular/material/list';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
+import { authService } from '../../auth-service.service';
 
 @Component({
   selector: 'app-playlist-page',
@@ -24,16 +25,18 @@ import { MatIconModule } from '@angular/material/icon';
 export class PlaylistPageComponent implements OnInit {
   playlistData: Iplaylist;
   playlist_id: string = '';
+  username = this.auth.username;
   songsQueue: Isongs[] = [];
   constructor(
     private http: HttpService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private auth: authService
   ) {}
 
   private async getPlaylistData() {
     this.http.getPlayList(this.playlist_id).subscribe((result) => {
-      if (result != null) {
+      if (result) {
         this.playlistData = result as Iplaylist;
       } else {
         return;
@@ -41,13 +44,15 @@ export class PlaylistPageComponent implements OnInit {
     });
   }
   private async getPlaylistUserData() {
-    this.http.getUserPlayList(this.playlist_id).subscribe((result) => {
-      if (result != null) {
-        this.playlistData = result as Iplaylist;
-      } else {
-        return;
-      }
-    });
+    this.http
+      .getUserPlayList(this.playlist_id, this.username)
+      .subscribe((result) => {
+        if (result) {
+          this.playlistData = result as Iplaylist;
+        } else {
+          return;
+        }
+      });
   }
 
   ngOnInit(): void {
@@ -74,8 +79,6 @@ export class PlaylistPageComponent implements OnInit {
         !this.songsQueue.some((existingSong) => existingSong.id === song.id)
       ) {
         this.songsQueue.push(song);
-      } else {
-        console.log('Song is already in the queue');
       }
     });
     this.http.changeSong(this.songsQueue);
