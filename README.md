@@ -34,7 +34,7 @@ npm i
 ```
 5. Install node modules in the client directory:
 ```
-cd ./Web_Music_Player
+cd ./client
 npm i
 ```
 6. Run server:
