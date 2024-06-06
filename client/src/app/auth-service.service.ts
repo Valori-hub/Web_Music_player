@@ -1,5 +1,7 @@
+import { catchError, throwError } from 'rxjs';
 import { HttpService } from './http-service.service';
 import { Injectable } from '@angular/core';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root',

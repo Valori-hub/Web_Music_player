@@ -1,6 +1,6 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
+import { Subject, catchError, throwError } from 'rxjs';
 import { Iplaylist, Isongs } from './components/playlist/model/Songs';
 import { IcreatorPlaylist } from './components/playlist-creator/model/creatorInterfaces';
 import { Observable } from 'rxjs';
@@ -45,9 +45,17 @@ export class HttpService {
     );
   }
   getSessionData(): Observable<SessionInfo> {
-    return this.http.get<SessionInfo>(this.url + 'users/session-info', {
-      withCredentials: true,
-    });
+    return this.http
+      .get<SessionInfo>(this.url + 'users/session-info', {
+        withCredentials: true,
+      })
+      .pipe(
+        catchError((error: HttpErrorResponse) => {
+          if (error.status === 401) {
+          }
+          return throwError(error);
+        })
+      );
   }
   search(searchInput: any) {
     return this.http.post<any>(this.url + 'songs/search', {

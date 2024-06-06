@@ -4,6 +4,8 @@ import {
   PLATFORM_ID,
   ChangeDetectorRef,
   Injectable,
+  OnDestroy,
+  OnInit,
 } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
@@ -11,7 +13,6 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatCardModule } from '@angular/material/card';
 import { MatSliderModule } from '@angular/material/slider';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { HttpService } from '../../http-service.service';
 import { Iplaylist, Isongs } from '../playlist/model/Songs';
@@ -20,6 +21,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
 import { authService } from '../../auth-service.service';
+import { FormsModule } from '@angular/forms';
+import { Subscription } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
@@ -30,14 +33,12 @@ import { authService } from '../../auth-service.service';
     MatIconModule,
     MatGridListModule,
     MatCardModule,
+    FormsModule,
     MatSliderModule,
     CommonModule,
-    FormsModule,
     MatProgressBarModule,
     MatFormFieldModule,
     MatInputModule,
-    FormsModule,
-    CommonModule,
     MatMenuModule,
     MatButtonModule,
     MatIconModule,
@@ -45,7 +46,7 @@ import { authService } from '../../auth-service.service';
   templateUrl: './audio-player.component.html',
   styleUrl: './audio-player.component.scss',
 })
-export class AudioPlayerComponent {
+export class AudioPlayerComponent implements OnInit, OnDestroy {
   username = this.auth.username;
   currentTime: number | undefined = 0;
   duration: number = 0;
@@ -76,27 +77,38 @@ export class AudioPlayerComponent {
       };
     }
   }
+  private subscriptions: Subscription = new Subscription();
+  ngOnDestroy() {
+    if (this.audio) {
+      this.currentSongObject.length = 0;
+      this.audio.pause();
+      this.audio.onended = null;
+    }
+    this.subscriptions.unsubscribe();
+  }
   ngOnInit() {
     this.InitComponent();
   }
   private async InitComponent() {
-    this.httpClient.song$.subscribe((playlist) => {
-      this.currentSongIndex = 0;
-      const previousIndex = this.currentSongIndex;
-      const previousSource = this.currentSong;
-      this.currentSongObject = playlist;
-      this.currentSong = this.currentSongObject[this.currentSongIndex].link;
-      if (
-        previousIndex !== this.currentSongIndex ||
-        previousSource !== this.currentSong
-      ) {
-        this.audio.pause();
-        this.audio.src = this.currentSong;
-        this.audio.load();
-        this.audio.play();
-        this.isPlaying = true;
-      }
-    });
+    this.subscriptions.add(
+      this.httpClient.song$.subscribe((playlist) => {
+        this.currentSongIndex = 0;
+        const previousIndex = this.currentSongIndex;
+        const previousSource = this.currentSong;
+        this.currentSongObject = playlist;
+        this.currentSong = this.currentSongObject[this.currentSongIndex].link;
+        if (
+          previousIndex !== this.currentSongIndex ||
+          previousSource !== this.currentSong
+        ) {
+          this.audio.pause();
+          this.audio.src = this.currentSong;
+          this.audio.load();
+          this.audio.play();
+          this.isPlaying = true;
+        }
+      })
+    );
     this.getUsersPlaylists();
   }
   isLoggedin(): boolean {
