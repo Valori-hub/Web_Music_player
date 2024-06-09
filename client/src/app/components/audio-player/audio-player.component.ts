@@ -47,17 +47,16 @@ import { Subscription } from 'rxjs';
   styleUrl: './audio-player.component.scss',
 })
 export class AudioPlayerComponent implements OnInit, OnDestroy {
-  username = this.auth.username;
+  username: string | null;
   currentTime: number | undefined = 0;
   duration: number = 0;
   sliderValue: number = 1;
   currentSong: string = '';
   currentSongObject: Isongs[] = [];
   currentSongIndex: number = 0;
-
+  playlistsData: any;
   private audio!: HTMLAudioElement;
   isPlaying: boolean;
-  playlistsData: any;
 
   constructor(
     @Inject(PLATFORM_ID) private platformId: Object,
@@ -77,6 +76,23 @@ export class AudioPlayerComponent implements OnInit, OnDestroy {
       };
     }
   }
+  getUsername() {
+    return this.auth.getUsername();
+  }
+  private async getUsersPlaylists() {
+    await this.auth.getSessionData();
+    this.username = this.getUsername();
+    if (this.auth.isLoggedIn()) {
+      this.httpClient
+        .getUsersPlaylistsData(this.username)
+        .subscribe((result) => {
+          if (result !== undefined) {
+            this.playlistsData = result.data.data;
+          }
+        });
+    }
+    return;
+  }
   private subscriptions: Subscription = new Subscription();
   ngOnDestroy() {
     if (this.audio) {
@@ -90,6 +106,7 @@ export class AudioPlayerComponent implements OnInit, OnDestroy {
     this.InitComponent();
   }
   private async InitComponent() {
+    await this.getUsersPlaylists();
     this.subscriptions.add(
       this.httpClient.song$.subscribe((playlist) => {
         this.currentSongIndex = 0;
@@ -109,7 +126,6 @@ export class AudioPlayerComponent implements OnInit, OnDestroy {
         }
       })
     );
-    this.getUsersPlaylists();
   }
   isLoggedin(): boolean {
     return this.auth.isLoggedIn();
@@ -160,15 +176,5 @@ export class AudioPlayerComponent implements OnInit, OnDestroy {
   }
   calculateProgress(): number {
     return (this.audio.currentTime / this.audio.duration) * 100;
-  }
-  private getUsersPlaylists() {
-    if (this.auth.isLoggedIn()) {
-      this.httpClient
-        .getUsersPlaylistsData(this.username)
-        .subscribe((result) => {
-          this.playlistsData = result.data.data;
-        });
-    }
-    return;
   }
 }

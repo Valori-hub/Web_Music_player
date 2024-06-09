@@ -34,11 +34,7 @@ export class AppComponent {
   showGrid: boolean = true;
   private authenticationRegex: RegExp = /\(authentication:.*?\)/;
 
-  constructor(
-    private router: Router,
-    private httpClient: HttpService,
-    private auth: authService
-  ) {}
+  constructor(private router: Router, private auth: authService) {}
 
   ngOnInit(): void {
     this.auth.getSessionData();

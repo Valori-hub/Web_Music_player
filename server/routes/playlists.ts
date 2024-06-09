@@ -25,12 +25,12 @@ router.post('/create-playlist', async (req, res) => {
   res.status(201).json({ data: result });
 });
 router.post('/user-playlists', async (req, res) => {
-  const userAuth = req.body.username as string | null;
+  const userAuth = req.body.username as string;
   const result = await playlists.getUserPlaylists(userAuth);
   res.status(201).json({ data: result });
 });
 router.post('/add', async (req, res) => {
-  const userAuth = req.body.username as string | null;
+  const userAuth = req.body.username as string;
   console.log(userAuth + 'add button');
   const song = req.body.song as Isong;
   const playlist = req.body.playlist as Iplaylist;

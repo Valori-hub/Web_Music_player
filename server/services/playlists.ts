@@ -24,10 +24,7 @@ export async function getPlayList(playlist_id: string) {
     return [];
   }
 }
-export async function getUserPlayList(
-  playlist_id: string,
-  userAuth: string | null
-) {
+export async function getUserPlayList(playlist_id: string, userAuth: string) {
   try {
     const userMatch = await db
       .collection('Users')
@@ -55,7 +52,6 @@ export async function getUserPlayList(
       console.log(`Playlist with ID ${playlist_id} not found.`);
       return null;
     }
-
     return playlist;
   } catch (error) {
     console.error('Error retrieving playlist:', error);
@@ -97,6 +93,7 @@ export async function getUserPlaylists(user: string) {
       return;
     } else {
       const playlistUserData = userExist.playlists;
+      console.log(playlistUserData);
       return {
         success: true,
         message: 'Playlist added',

@@ -30,7 +30,7 @@ import { authService } from '../../auth-service.service';
 export class SearchComponent {
   private searchSubject = new Subject<string>();
   private readonly debounceTimeMs = 400;
-  username = this.auth.username;
+  username: string | null;
   inputText: string = '';
   artistResults: any = null;
   songsResults: any = null;
@@ -44,9 +44,11 @@ export class SearchComponent {
       .subscribe((searchValue) => {
         this.performSearch(searchValue);
       });
-    this.getUsersPlaylists();
+    this.InitComponent();
   }
-
+  async InitComponent() {
+    await this.getUsersPlaylists();
+  }
   isLoggedin() {
     return this.auth.isLoggedIn();
   }
@@ -81,12 +83,17 @@ export class SearchComponent {
       this.songsResults = null;
     }
   }
+  getUsername() {
+    return this.auth.getUsername();
+  }
   private async getUsersPlaylists() {
+    await this.auth.getSessionData();
+    this.username = this.getUsername();
     if (this.auth.isLoggedIn()) {
       this.httpClient
         .getUsersPlaylistsData(this.username)
         .subscribe((result) => {
-          if (!result) {
+          if (result !== undefined) {
             this.playlistsData = result.data.data;
           }
         });

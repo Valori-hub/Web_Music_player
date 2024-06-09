@@ -27,8 +27,7 @@ export class TopNavbarComponent implements OnInit {
   constructor(
     private httpClient: HttpService,
     private router: Router,
-    private auth: authService,
-    private player: AudioPlayerComponent
+    private auth: authService
   ) {}
   getUsername() {
     return this.auth.getUsername();
