@@ -34,7 +34,7 @@ router.post('/login', async (req: ExpressRequest, res: Response) => {
         return;
       }
       if (!result.userExist) {
-        console.error('User does not exist');
+        console.error("User doesn't exist");
         res.status(401).json({ error: 'User does not exist' });
         return;
       }
@@ -42,8 +42,6 @@ router.post('/login', async (req: ExpressRequest, res: Response) => {
       req.session.userId = result.userExist._id;
       req.session.username = result.userExist.username;
       const username = req.session.username;
-      console.log(req.session.userId);
-      console.log('Token has been created!');
       res.status(201).json({ username: username, result: result });
     } else {
       res.status(401).json({ error: 'Invalid credentials' });

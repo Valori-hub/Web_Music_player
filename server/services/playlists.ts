@@ -93,7 +93,6 @@ export async function getUserPlaylists(user: string) {
       return;
     } else {
       const playlistUserData = userExist.playlists;
-      console.log(playlistUserData);
       return {
         success: true,
         message: 'Playlist added',

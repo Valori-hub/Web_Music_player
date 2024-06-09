@@ -72,28 +72,15 @@ export class AudioPlayerComponent implements OnInit, OnDestroy {
         this.duration = this.audio.duration;
       });
       this.audio.onended = () => {
-        this.skipSong();
+        console.log(this.currentSongIndex, this.currentSongObject.length);
+        if (this.currentSongIndex < this.currentSongObject.length - 1) {
+          this.skipSong();
+        } else {
+          this.currentSong = '';
+        }
       };
     }
   }
-  getUsername() {
-    return this.auth.getUsername();
-  }
-  private async getUsersPlaylists() {
-    await this.auth.getSessionData();
-    this.username = this.getUsername();
-    if (this.auth.isLoggedIn()) {
-      this.httpClient
-        .getUsersPlaylistsData(this.username)
-        .subscribe((result) => {
-          if (result !== undefined) {
-            this.playlistsData = result.data.data;
-          }
-        });
-    }
-    return;
-  }
-  private subscriptions: Subscription = new Subscription();
   ngOnDestroy() {
     if (this.audio) {
       this.currentSongObject.length = 0;
@@ -106,7 +93,7 @@ export class AudioPlayerComponent implements OnInit, OnDestroy {
     this.InitComponent();
   }
   private async InitComponent() {
-    await this.getUsersPlaylists();
+    this.getUsersPlaylists();
     this.subscriptions.add(
       this.httpClient.song$.subscribe((playlist) => {
         this.currentSongIndex = 0;
@@ -127,12 +114,31 @@ export class AudioPlayerComponent implements OnInit, OnDestroy {
       })
     );
   }
+  private async getUsersPlaylists() {
+    await this.auth.getSessionData();
+    this.username = this.getUsername();
+    if (this.auth.isLoggedIn()) {
+      this.httpClient
+        .getUsersPlaylistsData(this.username)
+        .subscribe((result) => {
+          if (result !== undefined) {
+            this.playlistsData = result.data.data;
+          }
+        });
+    }
+    return;
+  }
+  private subscriptions: Subscription = new Subscription();
+  getUsername() {
+    return this.auth.getUsername();
+  }
   isLoggedin(): boolean {
     return this.auth.isLoggedIn();
   }
   addToPlaylist(playlist: Iplaylist, song: Isongs) {
     let username = this.auth.getUsername();
-    this.httpClient.addToPlaylist(username, song, playlist);
+    console.log(username, playlist, song);
+    this.httpClient.addToPlaylist(username, song, playlist).subscribe(() => {});
   }
   skipSong() {
     if (this.currentSongObject.length > this.currentSongIndex + 1) {

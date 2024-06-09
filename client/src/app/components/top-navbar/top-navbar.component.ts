@@ -41,11 +41,11 @@ export class TopNavbarComponent implements OnInit {
     return this.auth.isLoggedIn();
   }
   //Clearing user session storage and reloading the page
-  logout() {
+  async logout() {
     this.httpClient.logout().subscribe((result) => {
       result;
     });
+    await this.router.navigate(['']);
     window.location.reload();
-    this.router.navigate(['']);
   }
 }
