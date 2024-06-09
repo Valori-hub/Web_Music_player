@@ -51,3 +51,5 @@ Web_Music_player/Web_Music_Player>  ng serve
 ## 🔲 - add responsivity to application.
 ## 🔲 - write comments
 ## 🔲 - implement editing functionality for playlists and user profile.
+
+I know about the issue with adding songs to playlists
